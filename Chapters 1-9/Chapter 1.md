@@ -240,3 +240,18 @@ Even though the supporting machines can't handle as many inbound connections at 
 
 Just as a topographical map is a type of map that shows the shape of the terrain, the physical topology of a network is also a type of map.
 
+It defines the specific characteristics of a network, such as where all the workstations and other devices are located and the precise arrangement of all the physical media such as cables.
+
+A network's physical topology gives you the lay of the land, and the logical topology shows how a digital signal or data navigates through that layout.
+
+Here are the topologies you're most likely to run into these days:
+
+- Bus
+- Star/hub-and-spoke
+- Ring
+- Mesh
+- Point-to-point
+- Point-to-multipoint
+- Hybrid
+
+### Bus Topology
