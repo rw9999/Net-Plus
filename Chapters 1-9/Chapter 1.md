@@ -255,3 +255,121 @@ Here are the topologies you're most likely to run into these days:
 - Hybrid
 
 ### Bus Topology
+
+The bus topology consists of two distinct and terminated ends, with each of its computers connecting to one unbroken cable running its entire length.
+
+Back in the day, we used to attach computers to that main cable with wire taps, but this didn't work all that well so we began using drop cables in their place. If we were dealing with 10Base2 Ethernet, we would slip a connector called a “T” into the main cable anywhere we wanted to connect a device to it instead of using drop cables.
+
+![image](https://github.com/user-attachments/assets/378f57ad-7250-4242-9457-c5d57634088f)
+
+Even though all the computers on this kind of network see all the data flowing through the cable, only the one computer, which the data is specifically addressed to, actually gets the data.
+
+Some of the benefits of using a bus topology are that it's easy to install, and it's not very expensive, partly because it doesn't require as much cable as the other types of physical topologies.
+
+But it also has some drawbacks: For instance, it's hard to troubleshoot, change, or move, and it really doesn't offer much in the way of fault tolerance because everything is connected to that single cable. This means that any fault in the cable would basically bring down the whole network.
+
+**Fault tolerance** is the capability of a computer or a network system to respond to a condition automatically, often resolving it, which reduces the impact on the system. If faulttolerance measures have been implemented correctly on a network, it's highly unlikely that any of that network's users will know that a problem ever existed at all.
+
+### Star topology
+
+A star (hub-and-spoke) topology's computers are connected to a central point with their own individual cables or wireless connections. You'll often find that central spot inhabited by a device like a hub, a switch, or an access point.
+
+Star topology offers lots of advantages over bus topology, making it more widely used even though it obviously requires more physical media.
+
+One of its best features is that because each computer or network segment is connected to the central device individually, if the cable fails, it brings down only the machine or network segment related to the point of failure. This makes the network much more fault-tolerant as well as a lot easier to troubleshoot.
+
+Another great thing about a star topology is that it's a lot more scalable—all you have to do if you want to add to it is run a new cable and connect to the machine at the core of the star.
+
+![image](https://github.com/user-attachments/assets/8027008c-94ed-4a3c-a963-319b0461c3ee)
+
+Although it is called a star (hub-and-spoke) topology, it also looks a lot like a bike wheel with spokes connecting to the hub in the middle of the wheel and extending outward to connect to the rim. And just as with that bike wheel, it's the hub device, actually more often a switch today, at the center of a star topology network that can give you the most grief if something goes wrong with it. If that central hub or switch happens to fail, down comes the whole network,
+
+And here's a list of benefits you gain by going with it:
+
+- New stations can be added or moved easily and quickly.
+
+- A single cable failure won't bring down the entire network.
+
+- It's relatively easy to troubleshoot.
+
+And here are the disadvantages to using a star topology:
+
+- The total installation cost can be higher because of the larger number of cables, even though prices have become more competitive.
+
+- It has a single point of failure—the hub or other central device such as a switch.
+
+There are two more sophisticated implementations of a star topology. The first is called a **point-to-point link**, where you have not only the device in the center of the spoke acting as a hub but also the device on the other end, which extends the network. This is still a star-wired topology, but as I'm sure you can imagine, it gives you a lot more scalability.
+
+Another refined version is the wireless version, access points are pretty much just wireless hubs or switches that behave like their wired counterparts. They create a point-by-point connection to endpoints and other wireless access points.
+
+### Ring Topology
+
+In this type of topology, each computer is directly connected to other computers within the same network.
+
+![image](https://github.com/user-attachments/assets/6e2e7266-fd2f-4cd4-b273-f828414aed20)
+
+You can see that the network's data flows from computer to computer back to the source, with the network's primary cable forming a ring.
+
+The problem is, the ring topology has a lot in common with the bus topology because if you want to add to the network, you have no choice but to break the cable ring, which is likely to bring down the entire network
+
+This is one big reason that ring topology isn't very popular—you just won't run into it a lot as I did in the 1980s and early 1990s. It's also pricey because you need several cables to connect each computer, it's really hard to reconfigure, and as you've probably guessed, it's not fault-tolerant.
+
+But even with all that being said, if you work at an Internet service provider (ISP), you may still find a physical ring topology in use for a technology called SONET or some other WAN technology. However, you won't find any LANs in physical rings anymore.
+
+Although the ring topology is not used in LANs today, you will see the ring topology implemented with WAN providers.
+
+### Mesh Topology
+
+In this type of topology, you'll find that there's a path from every machine to every other one in the network.
+
+You won't find it used in LANs very often, if ever, these days, but you will find a modified version of it known as a hybrid mesh used in a restrained manner on WANs, including the Internet.
+
+Often, hybrid mesh topology networks will have quite a few connections between certain places to create redundancy (backup). And other types of topologies can sometimes be found in the mix too, which is another reason it's dubbed **hybrid**.
+
+Just remember that it isn't a full-on mesh topology if there isn't a connection between all devices in the network.
+
+![image](https://github.com/user-attachments/assets/7d274e85-d9cc-46db-ace3-dbd16848eda5)
+
+A full mesh physical topology is least likely to have a collision, which happens when the data from two hosts trying to communicate simultaneously “collides” and gets lost.
+
+This is also the reason you'll usually find the hybrid version in today's WANs. In fact, the mesh topology is actually pretty rare now, but it's still used because of the robust fault tolerance it offers. Because you have a multitude of connections, if one goes on the blink, computers and other network devices can simply switch to one of the many redundant connections that are up and running. AAAll that cabling in the mesh topology makes it a very pricey implementation.
+
+You can make your network management much less insane than it is with mesh by using what's known as a partial mesh topology solution instead. You may lose a little fault tolerance, but if you go the partial mesh route, you still get to use the same technology between all the network's devices. Just remember that with partial mesh, not all devices will be interconnected, so it's important to choose the ones that will be wisely.
+
+### Point-to-Point Topology
+
+As its name implies, in a point-to-point topology you have a direct connection between two routers or switches, giving you one communication path.
+
+The routers in a point-to-point topology can be linked by a serial cable, making it a physical network, or if they're located far apart and connected only via a circuit within a Frame Relay or MPLS network, it's a logical network instead.
+
+![image](https://github.com/user-attachments/assets/2e24a4b7-e63e-4517-9e21-558ef668adf7)
+
+The two round things radiating arrows represent our network's two routers, and that lightning bolt represents a WAN link.
+
+The second part of the diagram shows two computers connected by a cable—a point-to-point link.
+
+You'll usually find point-to-point networks within many of today's WANs, and as you can see in the third part. A link from a computer to a hub or switch is also a valid point-to-point connection. A common version of this setup consists of a direct wireless link between two wireless bridges that's used to connect computers in two different buildings together.
+
+### Point-to-Multipoint Topology
+
+A point-to-multipoint topology consists of a succession of connections between an interface on one router and multiple destination routers—one point of connection to multiple points of connection. Each of the routers and every one of their interfaces involved in the point-to-multipoint connection are part of the same network.
+
+![image](https://github.com/user-attachments/assets/55b6f1c7-bf4e-4df8-972b-1d09690cbad3)
+
+The picture above shows a WAN and demonstrates a point-to-multipoint network. You can clearly see a single, corporate router connecting to multiple branches.
+
+![image](https://github.com/user-attachments/assets/b869edaf-41b2-4b23-a0d0-7c5734562260)
+
+The picture above shows another prime example of a point-to-multipoint network: a college or corporate campus.'
+
+### Hybrid Topology
+
+Hybrid topology means just that—a combination of two or more types of physical or logical network topologies working together within the same network.
+
+![image](https://github.com/user-attachments/assets/345dff77-3653-4665-86a0-ec938b656dbd)
+
+The picture above depicts a hybrid network topology; it shows a few LANs connected by switches in a star topology configuration. The LANs are connected in a full mesh, which is connected to a router and a WAN link on a counter-rotating ring network.
+
+## Topology Selection, Backbones, and Segments
+
+
