@@ -372,4 +372,129 @@ The picture above depicts a hybrid network topology; it shows a few LANs connect
 
 ## Topology Selection, Backbones, and Segments
 
+It better be solid quality, and it better be scalable because that network will grow and change over the years.
 
+### Selecting the Right Topology
+
+First, how much cash do you have? How much fault tolerance and security do you really need? In other words, how scalable does your network need to be?
+
+Here's a list of things to keep in mind when you're faced with coming up with the right topology for the right network:
+
+- Cost
+- Ease of installation
+- Ease of maintenance
+- Fault-tolerance requirement
+- Security requirement
+
+### The Network Backbone
+
+We divide networks into different parts called backbones and segments.
+
+![image](https://github.com/user-attachments/assets/a86077ce-c071-4787-a76a-8c514765f308)
+
+The backbone must use some kind of seriously fast, robust technology—often Gigabit Ethernet or faster. And to optimize network performance—its speed and efficiency—it follows that you would want to connect all of the network's servers and segments directly to the network's backbone.
+
+### Network Segments
+
+When we refer to a segment, we can mean any small section of the network that may be connected to, but isn't actually a piece of, the backbone. 
+
+The network's workstations and servers organized into segments connect to the network backbone, which is the common connecting point for all segments.
+
+### Service-Related Entry Points
+
+In the networking world, clearly defined boundaries exist where one entity hands off a connection to another. These are common when connecting to a service provider's or carrier's WAN circuit.
+
+The service entry point defines the point of responsibility. The common term used is the **demarcation point**, or **demarc** for short. A carrier will  usually terminate with a piece of equipment called a smart jack that allows them to run diagnostics up to the physical point where the customer's network connects.
+
+### Service Provider Links
+
+Service providers are ISPs and cable and telephone companies that provide networking services. There are many different technologies used to provide these services such as satellite links for earth station to satellite connections.
+
+Service providers are ISPs and cable and telephone companies that provide networking services. There are many different technologies used to provide these services such as satellite links for earth station to satellite connections.
+
+Cable companies now offer data and Internet services over their hybrid fiber/coax networks in addition to their traditional video offerings. A cable modem is installed at the customer's site and provides data, video, and voice services off the cable network.
+
+Another common link is the leased line. When the provider installs a **leased line**, it is either a copper or fiber termination that interconnects two endpoints and is exclusive to the customer; there is no shared bandwidth, and leased lines are very secure as they are dedicated for the customer's use.
+
+### Virtual Networking
+
+It is now common to provide networking services without deploying a hardware switch or router; it is all done in software.
+
+Companies such as VMware offer virtual switch (vSwitch) technology that provides the Ethernet switched and routing functions on the hypervisor, eliminating the need for external networking hardware.
+
+A vSwitch can operate and be configured the same as an external hardware appliance; just remember, a vSwitch is similar to software virtualization.
+
+Virtualized servers do not have the means for inserting a hardware network interface card since they exist only in software. A **virtual network interface card (vNIC)** is installed to connect the virtual device to the hypervisor and, from there, out to the LAN.
+
+**Network function virtualization (NFV)** is the process of taking networking functions such as routers, switches, firewalls, load balancers, and controllers and virtualizing them. This process allows all of these functions to run on a single device.
+
+The magic behind all of the virtual networking popularity is the hypervisor. The hypervisor is software that is installed directly on a bare-metal server and allows for many virtual machines (VMs) to run, thinking they are using the server's hardware directly. This allows for many servers and virtual network devices to run on a single piece of computing hardware.
+
+### Three-Tiered Model
+
+![image](https://github.com/user-attachments/assets/271c8b74-0d3c-4d6d-86fd-71d0c6053b18)
+
+In today's small to midsize network designs, the collapsed-core model has been adopted to save the expense of additional network switching.
+
+**Core Layer** 
+
+The core layer is also considered the backbone of the network. 
+
+It is where you will find connectivity between geographic areas with WAN lines. 
+
+It should be designed for high availability and only provides routing and switching of the entire network. Nothing should be done at the core layer to slow it down.
+
+**Distribution Layer**
+
+The distribution layer is often referred to as the workgroup layer or the aggregation layer because it allows for connectivity to multiple access layer switches.
+
+The distribution layer is where the control plane is located and is where packet filtering, security policies, routin
+between VLANs, and defining of broadcast domains are performed.
+
+You can think of it as the distribution of switching from the core to the access layer.
+
+**Access Layer**
+
+The access layer is often referred to as the edge switching layer, and it connects the end-user hosts.
+
+The access layer provides local switching and the creation of collision domains.
+
+It is simply designed for access to the network and it is where support begins for quality of service (QoS), power over Ethernet (PoE), and security.
+
+The collapsed-core model was adopted to save cost and complexity in networks. With the powerful switching of today, we can support both the core layer and the distribution layer on the same piece of network switching equipment. It still performs the same functions as the core and distribution layer; it is just collapsed into one piece of switching equipment.
+
+### Spine and Leaf
+
+Spine-leaf switching creates a two-tier circuitswitched network.
+
+With the expansion of both private and public data centers and the adoption of virtualization, a switching technology was needed that didn't fit the classic three-tier model.
+
+When we talk about virtualization, we should be open-minded that it could mean the virtualization of servers, clients, storage, applications, and just about anything you can think of that can be partitioned over many hosts.
+
+The classic three-tier and collapsed-core models work well in physical campus networks and enterprise networks; access switches provide a star topology to connect hosts on a one-to-one computer to port basis (sometimes two-to-one, if you employ VoIP phones, but I digress). 
+
+This classic model does not do well in the data center.
+
+Spine and leaf switching provides extremely fast networking switching, and it is almost exclusively used in data center network architecture.
+
+The concept is simple: Create a very fast and redundant backbone (spline) that is used only to connect leaf switches. The leaf switches in turn connect the hosts (servers) in the data center. A leaf switch will never directly talk to another leaf switch; it will always need to talk through the backbone or spine of the network. Servers will never be connected to the spine of the network directly. Servers are always connected through a leaf switch.
+
+![image](https://github.com/user-attachments/assets/2bea158d-1931-4163-ae15-ce0ef80692b6)
+
+A switch is connected to every leafswitch, and the Spine B switch is connected to every leaf switch. This allows extremely fast switching between Leaf 1 and Leaf 4 as well as any other leaf switch. Switching between two leaf switches is always two hops away no matter where they are in the network. It will traverse to the spine switch and then to the destination leaf switch.
+
+### Traffic Flow
+
+![image](https://github.com/user-attachments/assets/d03552e1-2e58-4894-ab6f-86aea15abb97)
+
+The picture shows the two essential points in your network to verify traffic flow, and both flows are important to understand so you know where you'll secure your data. The locations are north-south traffic flow and east-west traffic flow.
+
+At first, the most important point for security will be the north-south traffic because data is flowing to and from your enterprise network to the outside Internet. However, this doesn't mean you should not take east-west traffic security seriously.
+
+**North-South** 
+
+We can see the traffic found here entering and leaving your internal network. Tight security in this location is essential. The southbound traffic enters through a firewall and routers. Northbound traffic is routed from your internal network to the Internet.
+
+**East-West** 
+
+East-west traffic is still important to understand that many types of attacks, particularly from the inside, must be taken seriously. You need to inspect the lateral traffic coming between server farms and data centers. There is a large amount of traffic here, and some examples of east-west data transfer are database replication, file transfers, and interprocess communication.
