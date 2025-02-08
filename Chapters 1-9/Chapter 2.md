@@ -98,3 +98,81 @@ It's important to remember that the Application layer acts as an interface betwe
 
 The Presentation layer gets its name from its purpose: It presents data to the Application layer and is responsible for data translation and code formatting.
 
+A successful data-transfer technique is to adapt the data into a standard format before transmission. 
+
+Computers are configured to receive this generically formatted data and then convert it into its native format for reading—for example, from EBCDIC to ASCII or from Unicode to ASCII, just to name a few.
+
+By providing translation services, the Presentation layer ensures that the data transferred from one system's Application layer can be read and understood by the Application layer on another system.
+
+The OSI has protocol standards that define how standard data should be formatted. 
+
+Tasks like data compression, decompression, encryption, and decryption are all associated with this layer.
+
+Some Presentation layer standards are even involved in multimedia operations.
+
+### The Session Layer
+
+The Session layer is responsible for setting up, managing, and then tearing down sessions between Presentation layer entities.
+
+This layer also provides dialogue control between devices, or nodes. It coordinates communication between systems and serves to organize their communication by offering three different modes: one direction (**simplex**); both directions, but only one direction at a time (**half-duplex**); and bidirectional (**full-duplex**).
+
+To sum up, the Session layer basically keeps an application's data separate from other applications' data. For a good example, the Session layer allows multiple web browser sessions on your desktop at the same time.
+
+### The Transport Layer
+
+The Transport layer segments and reassembles data into a data stream. 
+
+Services located in the Transport layer handle data from upper-layer applications and unite it into the same data stream.
+
+They provide end-to-end data transport services and can establish a logical connection between the sending host and destination host on the internetwork.
+
+The Transport layer provides the mechanisms for multiplexing upper-layer applications, establishing virtual connections, and tearing down virtual circuits. It also hides the many and sundry details of any network-dependent information from the higher layers, facilitating data transfer.
+
+You also know that TCP is a reliable service and UDP is not. These two protocols give application developers more options because they have a choice between them when they're working with TCP/IP protocols.
+
+The term reliable networking relates to the Transport layer and means that acknowledgments, sequencing, and flow control will be used.
+
+The Transport layer can be connectionless or connection-oriented, but it's especially important for you to really understand the connection-oriented portion of the Transport layer.
+
+**Connection-Oriented Communication**
+
+Before a transmitting host starts to send segments down the OSI layered model, the sender's TCP process contacts the destination's TCP process to establish a connection
+
+The resulting creation is known as a **virtual circuit**.
+
+This type of communication is called **connection-oriented**.
+
+During this initial **handshake**, the two TCP processes also agree on the amount of information that will be sent in either direction before the respective recipient's TCP sends back an acknowledgment. 
+
+With everything agreed on in advance, the path is paved for reliable communication to take place.
+
+![image](https://github.com/user-attachments/assets/cc4ee741-1f8c-4038-879c-c049b25dd84c)
+
+Both of the hosts' application programs begin by notifying their individual operating systems that a connection is about to be initiated.
+
+The two operating systems communicate by sending messages over the network confirming that the transfer is approved and that both sides are ready for it to take place.
+
+After all of this required synchronization occurs, a connection is fully established, and the data transfer begins. 
+
+This virtual circuit setup is called **overhead**.
+
+While the information is being transferred between hosts, the two machines periodically check in with each other, communicating through their protocol software to ensure that all is going well and that data is being received properly.
+
+Let me sum up the steps in the connection-oriented session—the TCP threeway handshake:
+
+1. The first “connection agreement” segment is a request for synchronization.
+
+3. The next segments acknowledge the request and establish connection parameters—the rules—between hosts. These segments request that the receiver's sequencing is synchronized here as well so that a bidirectional connection is formed.
+
+5. The final segment is also an acknowledgment. It notifies the destination host that the connection agreement has been accepted and that the connection has been established. Data transfer can now begin.
+
+You can refer to this entire process as the “TCP three-way handshake” I already mentioned, known as SYN, SYN/ACK, ACK or synchronize, synchronize-acknowledgment, acknowledgment.
+
+That sounds pretty simple, but things don't always flow so well. Sometimes congestion can occur during a transfer because a high-speed computer is generating data traffic a lot faster than the network can handle transferring it.
+
+A bunch of computers simultaneously sending datagrams through a single gateway or to a destination can also clog things up. In the latter case, a gateway or destination can become congested even though no single source caused the problem.
+
+Either way, the problem is like a freeway bottleneck—too much traffic for too small a capacity. It's not usually one car that's the problem; it's that there are just too many cars on that particular route.
+
+**Flow Control**
+
