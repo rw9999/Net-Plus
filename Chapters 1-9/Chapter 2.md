@@ -176,3 +176,75 @@ Either way, the problem is like a freeway bottleneck—too much traffic for too 
 
 **Flow Control**
 
+Data integrity is ensured at the Transport layer by maintaining flow control and by allowing users to request reliable data transport between systems.
+
+Flow control provides a means for the receiver to govern the amount of data sent by the sender. It prevents a sending host on one side of the connection from overflowing the buffers in the receiving host—an event that can result in lost data.
+
+Reliable data transport employs a connection-oriented communications session between systems, and the protocols involved ensure that the following will be achieved:
+
+1. The segments delivered are acknowledged back to the sender upon their reception.
+
+2. Any segments not acknowledged are retransmitted.
+
+3. Segments are sequenced back into their proper order upon arrival at their destination.
+
+4. A manageable data flow is maintained in order to avoid congestion, overloading, and data loss.
+
+So what happens when a machine receives a flood of datagrams too quickly for it to process? It stores them in a memory section called a **buffer**.
+
+But this buffering tactic can solve the problem only if the datagrams are part of a small burst. If not and if the datagram deluge continues, a device's memory will eventually be exhausted, its flood capacity will be exceeded, and it will react by discarding any additional datagrams that arrive like a dam spilling over.
+
+Instead of just dumping resources and allowing data to be lost, the transport can issue a “not ready” or “Stop” indicator to the sender, or source, of the flood.
+
+![image](https://github.com/user-attachments/assets/529a7a45-6929-4468-81e5-237d7c9d00a8)
+
+During fundamental, reliable, connection-oriented data transfer, datagrams are delivered to the receiving host in exactly the same sequence they're transmitted. So if any data segments are lost, duplicated, or damaged along the way, a failure notice is transmitted. This error is corrected by making sure the receiving host acknowledges it has received each and every data segment, and in the correct order.
+
+To summarize, a service is considered connection-oriented if it has the following characteristics:
+
+- A virtual circuit is set up (such as a three-way handshake).
+
+- It uses sequencing.
+
+- It uses acknowledgments.
+
+- It uses flow control.
+
+**Windowing**
+
+Ideally, data throughput happens quickly and efficiently. And as you can imagine, it would be slow if the transmitting machine had to wait for anacknowledgment after sending each segment. But because time is available after the sender transmits the data segment and before it finishes processing acknowledgments from the receiving machine, the sender uses the break as an opportunity to transmit more data.
+
+The quantity of data segments (measured in bytes) that the transmitting machine is allowed to send without receiving an acknowledgment is represented by something called a window.
+
+Windows are used to control the amount of outstanding, unacknowledged data segments.
+
+It's important to understand that the size of the window controls how much information is transferred from one end to the other. Although some protocols quantify information by observing the number of packets, TCP/IP measures it by counting the number of bytes.
+
+![image](https://github.com/user-attachments/assets/153e8cd5-f7cb-4ba6-a962-bcb9115ab567)
+
+The pic shows two window sizes—one set to 1 on the receiver and one set to 3 on the sender. In this simplified example, both the sending and receiving machines are workstations.
+
+When you've configured a window size of 1, the sending machine waits for an acknowledgment for each data segment it transmits before transmitting another. If you've configured a window size of 3, the sending machine is allowed to transmit three data segments before an acknowledgment is received. In reality, the window size actually delimits the number of bytes that can be sent at a time.
+
+If a receiving host fails to receive all the segments that it should acknowledge, the host can improve the communication session by decreasing the window size.
+
+**Acknowledgments**
+
+Reliable data delivery ensures the integrity of a data stream being sent from one machine to the other through a fully functional data link. It guarantees that the data won't be duplicated or lost.
+
+This is achieved through something called **positive acknowledgment with retransmission**—a technique that requires a receiving machine to communicate with the transmitting source by sending an acknowledgment message back to the sender when it receives data.
+
+The sender documents each segment it sends and waits for this acknowledgment before sending the next segment. When it sends a segment, the transmitting machine starts a timer and retransmits if it expires before an acknowledgment is returned from the receiving end.
+
+![image](https://github.com/user-attachments/assets/5c280628-6a23-4100-a583-2a208429df9d)
+
+In the picture, the sending machine transmits segments 1, 2, and 3. The receiving node acknowledges it has received them by requesting segment 4. When it receives the acknowledgment, the sender then transmits segments 4, 5, and 6. If segment 5 doesn't make it to the destination, the receiving node acknowledges that event with a request for the segment to be re-sent. The sending machine will then re-send the lost segment and wait for an acknowledgment, which it must receive in order to move on to the transmission of segment 7.
+
+The Transport layer doesn't need to use a connection-oriented service. That choice is up to the application developer. It's safe to say that if you're connection-oriented, meaning that you've created a virtual circuit, you're using TCP. If you aren't setting up a virtual circuit, then you're using UDP and are considered connectionless.
+
+### The Network Layer
+
+The Network layer manages logical device addressing, tracks the location of devices on the network, and determines the best way to move data. This means that the Network layer must transport traffic between devices that aren't locally attached.
+
+Routers are layer 3 devices that are specified at the Network layer and provide the routing services within an internetwork.
+
