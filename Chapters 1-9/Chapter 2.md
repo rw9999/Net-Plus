@@ -248,3 +248,59 @@ The Network layer manages logical device addressing, tracks the location of devi
 
 Routers are layer 3 devices that are specified at the Network layer and provide the routing services within an internetwork.
 
+First, when a packet is received on a router interface, the destination IP address is checked. 
+
+If the packet isn't destined for that particular router, the router looks up the destination network address in the routing table. 
+
+Once the router chooses an exit interface, the packet is sent to that interface to be framed and sent out on the local network. 
+
+If the router can't find an entry for the packet's destination network in the routing table, the router drops the packet.
+
+Two types of packets are used at the Network layer:
+
+**Data Packets** These are used to transport user data through the internetwork. Protocols used to support data traffic are called routed protocols. Two examples of routed protocols are Internet Protocol (IP) and Internet Protocol version 6 (IPv6)
+
+**Route-Update Packets** These are used to update neighboring routers about the networks connected to all routers within the internetwork. Protocols that send route-update packets are called routing protocols, and some common ones are Routing Information Protocol (RIP), RIPv2, Enhanced Interior Gateway Routing Protocol (EIGRP), and Open Shortest Path First (OSPF). Route-update packets are used to help build and maintain routing tables on each router.
+
+![image](https://github.com/user-attachments/assets/a1b0fe32-6b32-45e1-8a55-0ea38239b1b6)
+
+**Network Addresses** These are protocol-specific network addresses. A router must maintain a routing table for individual routing protocols because each routing protocol keeps track of a network that includes different addressing schemes, like IP and IPv6. Think of it as a street sign in each of the different languages spoken by the residents who live on a particular street.
+
+**Interface** This is the exit interface a packet will take when destined for a specific network.
+
+**Metric** This value equals the distance to the remote network. Different routing protocols use different ways of computing this distance. For now, know that some routing protocols, namely, RIP, use a hop count—the number of routers a packet passes through en route to a remote network. Other routing protocols alternatively use bandwidth, delay of the line, and even something known as a tick count, which equals 1/18 of a second, to make routing decisions.
+
+Routers break up broadcast domains, which means that by default,broadcasts aren't forwarded through a router. This is a good thing because it reduces traffic on the network. Routers also break up collision domains, but this can be accomplished using layer 2 (Data Link layer) switches as well.
+
+Because each interface in a router represents a separate network, it must be assigned unique network identification numbers, and each host on the network connected to that router must use the same network number.
+
+![image](https://github.com/user-attachments/assets/439d01bb-765c-4dbc-b431-0f7d92410ff7)
+
+Here are some key points about routers that you really should commit to memory:
+
+- Routers, by default, won't forward any broadcast or multicast packets.
+
+- Routers use the logical address in a Network layer header to determine the next-hop router to forward the packet to.
+
+- Routers can use access lists, created by an administrator, to control security on the types of packets that are allowed to enter or exit an interface.
+
+- Routers can provide layer 2 bridging functions if needed and can simultaneously route through the same interface.
+
+- Layer 3 devices (routers, in this case) provide connections between virtual LANs (VLANs).
+
+- Routers can provide quality of service (QoS) for specific types of network traffic.
+
+A router can also be referred to as a layer 3 switch. These terms are interchangeable.
+
+## The Data Link Layer
+
+The Data Link layer provides the physical transmission of the data and handles error notification, network topology, and flow control.
+
+This means the Data Link layer ensures that messages are delivered to the proper device on a LAN using hardware (MAC) addresses and translates messages from the Network layer into bits for the Physical layer to transmit.
+
+The Data Link layer formats the message into pieces, each called a **data frame**, and adds a customized header containing the destination and source hardware addresses
+
+It's important for you to understand that routers, which work at the Network layer, don't care about where a particular host is located. They're concerned only about where networks are located and the best way to reach them— including remote ones.
+
+The Data Link layer is responsible for the unique identification of each device that resides on a local network.
+
