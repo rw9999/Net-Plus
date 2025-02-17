@@ -56,3 +56,84 @@ An advantage of using coax cable is the braided shielding that provides resistan
 
 ### Twisted-Pair Cable
 
+Twinaxial cabling is used for short-distance high-speed connections such as 10 and 40G Ethernet connections in a data center.
+
+Twinaxial is also known as **twinax**.
+
+The advantage of using twinaxial cable is that there are significant cost savings over fiber-optic cabling since twinaxial cables are copper-based. If your distance is 10 meters or less, using these cables can be a considerable cost savings.
+
+Also in the twinaxial family is direct attach copper (DAC) cable. DAC has connectors at either end of a fixed-length ~26-28 AWG twinaxial copper cable that allows direct communication between devices over copper wire. Like shielded twisted pair (SSTP), DAC uses electromagnetic shielding around the copper cable to increase speeds and to keep communication reliable.
+
+### Ethernet Cable Descriptions
+
+Ethernet cable types are described using a code that follows this format: N <Signaling> X.
+
+The N refers to the signaling rate in megabits per second.
+
+<Signaling> stands for the signaling type—either baseband or broadband.
+
+The X is a unique identifier for a specific Ethernet cabling scheme.
+
+Here's a common example: 100BaseX. The 100 tells us that the transmission speed is 100 Mb, or 100 megabits. The X value can mean several different things; for example, a T is short for twisted-pair. This is the standard for running 100-megabit Ethernet over two pairs (four wires) of Category 5, 5e, 6, 6a, 7, and 8 UTP.
+
+So why are the wires in this cable type twisted? Because when electromagnetic signals are conducted on copper wires in close proximity—like inside a cable—it causes interference called **crosstalk**. Twisting two wires together as a pair minimizes interference and even protects against interference from outside sources.
+
+This cable type is the most common today for the following reasons:
+
+- It's cheaper than other types of cabling.
+
+- It's easy to work with.
+
+- It allows transmission rates that were impossible 10 years ago.
+
+Category is often shortened to Cat. Today, any cable installed should be a minimum of Cat 5e because some cable is now certified to carry bandwidth signals of 350 MHz or beyond. This allows unshielded twisted-pair cables to exceed speeds of 1 Gbps—fast enough to carry broadcast-quality video over a network.
+
+UTP cable is rated in these categories:
+
+**Category 1** Two twisted wire pairs (four wires). It's the oldest type and is only voice grade—it isn't rated for data communication. People refer to it as plain old telephone service (POTS). Before 1983, this was the standard cable used throughout the North American telephone system. POTS cable still exists in parts of the public switched telephone network (PSTN) and supports signals limited to the 1 MHz frequency range.
+
+**Category 2** Four twisted wire pairs (eight wires). It handles up to 4 Mbps, with a frequency limitation of 10 MHz, and is now obsolete.
+
+**Category 3** Four twisted wire pairs (eight wires) with three twists per foot. This type can handle transmissions up to 16 MHz. It was popular in the mid-1980s for up to 10 Mbps Ethernet, but it's now limited to telecommunication equipment and, again, is obsolete for networks.
+
+**Category 4** Four twisted wire pairs (eight wires), rated for 20 MHz; also obsolete.
+
+**Category 5** Four twisted wire pairs (eight wires), used for 100BaseTX (two pair wiring) and rated for 100 MHz. But why use Cat 5 when you can use Cat 5e for the same price? I am not sure you can even buy plain Cat 5 anymore! Using Cat 6 is an option, but it's slightly harder to install due to its size compared to 5e.
+
+**Category 5e (Enhanced)** Four twisted wire pairs (eight wires), recommended for 1000BaseT (four pair wiring) and rated for 100 MHz but capable of handling the disturbance on each pair that's caused by transmitting on all four pairs at the same time—a feature that's needed for Gigabit Ethernet. Any category below 5e shouldn't be used in today's network environments.
+
+![image](https://github.com/user-attachments/assets/feb21ad4-26d3-4c32-b3e9-86138d24fb50)
+
+**Category 6** Four twisted wire pairs (eight wires), used for 1000BaseTX (two pair wiring) and rated for 250 MHz. Cat 6 became a standard in June 2002. You would usually use it as riser cable to connect floors. If you're installing a new network in a new building, there's no reason to use anything but Category 6 UTP cabling and running fiber runs between floors.
+
+**Category 6A (Augmented)** Characterized to 500 MHz with improved crosstalk characteristics, which allows 10GBaseT to be run for up to 100 meters (basic Cat 6 cable has a reduced maximum length when used for 10GBaseT). The most important point is a performance difference between Electronic Industries Alliance and Telecommunications Industry Association (EIA/TIA) component specifications for the NEXT (near-end crosstalk) transmission parameter. Running at a frequency of 500 MHz, an ISO/IEC Cat 6A connector provides double the power (3db) of a Cat 6A connector that conforms with the EIA/TIA specification. Note that 3 dB equals a 100 percent increase of a near-end crosstalk noise reduction.
+
+**Category 7** Allows 10 Gigabit Ethernet over 100 meters of copper cabling. The cable contains four twisted copper wire pairs, just like the earlier standards.
+
+**Category 8** Developed to address the ever-increasing speed of Ethernet and added support for 25G and 40G transmission with a distance of 30 meters, which is perfect for data center deployments.
+
+### Connecting UTP
+
+BNC connectors won't fit very well on UTP cable, so you need to use a **registered jack (RJ)** connector, which you're familiar with because most telephones connect with them.
+
+The connector used with UTP cable is called RJ-11 for phones that use four wires; RJ-45 has four pairs (eight wires)
+
+![image](https://github.com/user-attachments/assets/3175e3ba-c091-4af5-aae3-53c1fc450db6)
+
+Most of the time, UTP uses RJ connectors, and you use a crimper to attach them to a cable, just as you would with BNC connectors. The only difference is that the die that holds the connector is a different shape.
+
+Higher-quality crimping tools have interchangeable dies for both types of cables. We don't use RJ-11 for LANs, but we do use them for our home Digital Subscriber Line (DSL) connections.
+
+![image](https://github.com/user-attachments/assets/787609ba-4b34-4bfd-a496-4158470a0bd2)
+
+RJ-11 uses two wire pairs, and RJ-45 uses four wire pairs.
+
+There's one other type of copper connector, called the RJ-48c, which looks exactly like an RJ-45 connector. This plug is similar to the RJ-45 in that it has four wire pairs, but they are wired differently and used for different circumstances.
+
+RJ-45 is mainly used in LANs with short distances (typically up to 100 meters), where the RJ-48c wiring type would be used with a T1 connection, which is a long-distance wide area network (WAN).
+
+In addition, to protect the signal in an RJ-48c, the wires are typically shielded, whereas the RJ-45 uses unshielded wiring.
+
+### Fiber-Optic Cable
+
+
