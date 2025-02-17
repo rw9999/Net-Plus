@@ -292,7 +292,7 @@ Here are some key points about routers that you really should commit to memory:
 
 A router can also be referred to as a layer 3 switch. These terms are interchangeable.
 
-## The Data Link Layer
+### The Data Link Layer
 
 The Data Link layer provides the physical transmission of the data and handles error notification, network topology, and flow control.
 
@@ -304,3 +304,95 @@ It's important for you to understand that routers, which work at the Network lay
 
 The Data Link layer is responsible for the unique identification of each device that resides on a local network.
 
+For a host to send packets to individual hosts on a local network as well as transmit packets between routers, the Data Link layer uses hardware addressing, specifically MAC addresses.
+
+Each time a packet is sent between routers, it's framed with control information at the Data Link layer.
+
+However, that information is stripped off at the receiving router, and only the original packet is left completely intact. This framing of the packet continues for each hop until the packet is finally delivered to the correct receiving host. 
+
+It's important to understand that the packet itself is never altered along the route; it's only encapsulated with the type of control information required for it to be properly passed on to the different media types.
+
+![image](https://github.com/user-attachments/assets/88a8612b-efd9-4e01-a2f9-ea9b58216f45)
+
+The picture shows the Data Link layer with the Ethernet and Institute of Electrical and Electronics Engineers (IEEE) specifications.
+
+When you check it out, notice that the IEEE 802.2 standard is not only used in conjunction with the other IEEE standards, but it also adds functionality to those standards.
+
+The IEEE Ethernet Data Link layer has two sublayers:
+
+**Media Access Control (MAC)** Defines how packets are placed on the media. Contention media access is “first come, first served” access, where everyone shares the same bandwidth. Physical addressing is defined here, as are logical topologies. What's a logical topology? It's the signal path through a physical topology. Line discipline, error notification (not correction), ordered delivery of frames, and optional flow control can also be used at this sublayer.
+
+**Logical Link Control (LLC)** Responsible for identifying Network layer protocols and then encapsulating them, an LLC header tells the Data Link layer what to do with a packet once a frame is received. It works like this: A host receives a frame and looks in the LLC header to find out where the packet is destined—say, the IP protocol at the Network layer. The LLC can also provide flow control and sequencing of control bits.
+
+### PROJECT 802
+
+One of the major components of the Data Link layer is the result of the IEEE's 802 subcommittees and their work on standards for local area and metropolitan area networks (LANs/MANs). The committee met in February 1980, so they used the 80 from 1980 and the 2 from the second month to create the name Project 802. The designation for an 802 standard always includes a dot (.) followed by either a single or a double digit. These numeric digits specify particular categories within the 802 standard.
+
+These standards are listed in the following table:
+
+![image](https://github.com/user-attachments/assets/ce46f43d-e3d4-4705-9bd1-d2aa1c9309c7)
+![image](https://github.com/user-attachments/assets/081740c4-4ff8-45a3-9335-90be97696a4d)
+
+Note that 802.1, 802.3, 802.11, and 802.15 are the only Active 802 standards. The others are either Disbanded or Hibernating. 
+
+The takeaway is to remember that 802.3 calls out anything having to do with Ethernet, and 802.11 is anything wireless.
+
+### The Physical Layer
+
+The Physical layer does two important things: It sends bits and receives bits.
+
+Bits come only in values of 1 or 0. The Physical layer communicates directly with the various types of actual communication media. Different kinds of media represent these bit values in different ways.
+
+Some use audio tones, and others employ **state transitions**—changes in voltage from high to low and low to high. Specific protocols are needed for each type of media to describe the proper bit patterns to be used, how data is encoded into media signals, and the various qualities of the physical media's attachment interface.
+
+The Physical layer specifies the electrical, mechanical, procedural, and functional requirements for activating, maintaining, and deactivating a physical link between end systems
+
+This layer is also where you identify the interface between the **data terminal equipment (DTE)** and the **data communication equipment (DCE)**.
+
+The DCE is usually located at the customer, whereas the DTE is the attached device. The services available to the DTE are most often accessed via the DCE device, which is a modem or **channel service unit/data service unit (CSU/DSU)**.
+
+The Physical layer's connectors and different physical topologies are defined by the standards, allowing disparate systems to communicate.
+
+The Physical layer specifies the layout of the transmission media, otherwise known as its topology. A physical topology describes the way the cabling is physically laid out, as opposed to the logical topology that we just talked about in the section “The Data Link Layer.” The various physical topologies include bus, star, ring, and mesh
+
+## Introduction to Encapsulation
+
+When a host transmits data across a network to another device, the data goes through encapsulation: It's wrapped with protocol information at each layer of the OSI model. Each layer communicates only with its peer layer on the receiving device.
+
+To communicate and exchange information, each layer uses **protocol data units (PDUs)**. These hold the control information attached to the data at each layer of the model. They're usually attached to the header in front of the data field but can also be in the trailer, or end, of it.
+
+At a transmitting device, the data-encapsulation method works like this:
+
+1. User information is converted to data for transmission on the network.
+
+2. Data is converted to segments, and a reliable connection is set up between the transmitting and receiving hosts.
+
+3. Segments are converted to packets or datagrams, and a logical address is placed in the header so each packet can be routed through an internetwork. A packet carries a segment of data.
+
+4. Packets or datagrams are converted to frames for transmission on the local network. Hardware (Ethernet) addresses are used to uniquely identify hosts on a local network segment. Frames carry packets.
+
+5. Frames are converted to bits, and a digital encoding and clocking scheme is used.
+
+![image](https://github.com/user-attachments/assets/2473ff81-0515-4247-8895-1fee7f9fc278)
+
+How does step 5 work when frames are converted to bits and an encoding and clocking scheme is used? This is a modulation technique.
+
+## Modulation Techniques
+
+In networks, modulation is the process of varying one or more waveform properties, called the **carrier signal**, with a signal that typically contains information to be transmitted.
+
+Modulation of a waveform transforms a baseband (Ethernet or wireless) message signal into a passband signal. (A passband, also known as a bandpass filtered signal, is the range of frequencies or wavelengths that can pass through a filter without attenuation.)
+
+In current networks, modulation takes a digital or analog signal and puts it in another signal that can be physically transmitted.
+
+A modulator is a device that performs modulation of a signal, and a demodulator is a device that performs demodulation, the inverse of modulation. We typically call these modems (from modulator– demodulator), which can perform both operations.
+
+The purpose of digital modulation is to transfer a digital bit stream over an analog bandpass channel. (A good example would be data transmitting over the public switched telephone network, where a bandpass filter limits the frequency range to 300–3400 Hz, or over a limited radio frequency band.) 
+
+The purpose of an analog modulation is to transfer an analog baseband (or lowpass) signal (for example, an audio signal, wireless network, or TV signal) over an analog bandpass channel at a different frequency.
+
+Analog and digital modulation use something called frequency-division multiplexing (FDM), where several low-pass information signals are transferred simultaneously over the same shared physical network using separate passband channels (several different frequencies).
+
+The digital baseband modulation methods found in our Ethernet networks, also known as line coding, are used to transfer a digital bit stream over a baseband channel. Baseband means that the signal being modulated uses the complete available bandwidth.
+
+Time-division multiplexing (TDM) is a method of transmitting and receiving many independent signals over a common signal path using synchronized network devices at each end of the transmission line so that each signal appears on the line only a fraction of the time in an alternating pattern. The receiving end demultiplexes the signal back to its original form.
