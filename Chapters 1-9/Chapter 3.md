@@ -136,4 +136,142 @@ In addition, to protect the signal in an RJ-48c, the wires are typically shielde
 
 ### Fiber-Optic Cable
 
+Because fiber-optic cable transmits digital signals using light impulses rather than electricity, it's immune to EMI and RFI.
+
+Fiber cable allows light impulses to be carried on either a glass or a plastic core. Glass can carry the signal a greater distance, but plastic costs less.
+
+Whichever the type of core, it's surrounded by a glass or plastic cladding with a different refraction index that reflects the light back into the core. Around this is a layer of flexible plastic buffer that can be wrapped in an armor coating that's usually Kevlar, which is then sheathed in PVC or plenum.
+
+The cable itself comes in either single-mode fiber or multimode fiber; the difference between them is in the number of light rays (the number of signals) they can carry.
+
+Multimode fiber is most often used for shorter distance applications and single-mode fiber for spanning longer distances.
+
+Pros of fiber-optic cable:
+
+- It's completely immune to EMI and RFI.
+- It can transmit up to 40 kilometers (about 25 miles).
+
+Cons of fiber-optic cable:
+
+-  It's difficult to install.
+
+- It's more expensive than twisted-pair.
+
+- Troubleshooting equipment is more expensive than twisted-pair test equipment.
+
+- It's harder to troubleshoot.
+
+### Single-Mode Fiber
+
+Single-mode fiber-optic cable (SMF) is a very high-speed, long-distance media that consists of a single strand—sometimes two strands—of glass fiber that carries the signals.
+
+Light-emitting diodes (LEDs) and laser are the light sources used with SMF.
+
+The light source is transmitted from end to end and pulsed to create communication. This is the type of fiber cable employed to span really long distances because it can transmit data up to 90 times farther than multimode fiber at a faster rate. That is 40 to 80 kilometers depending on the transceiver being used.
+
+Clearly, because the transmission media is glass, the installation of SMF can be a bit tricky. Yes, there are outer layers protecting the glass core, but the cable still shouldn't be crimped or pinched around any tight corners.
+
+### Multimode Fiber
+
+Multimode fiber-optic cable (MMF) also uses light to communicate a signal, but with it, the light is dispersed on numerous paths as it travels through the core and is reflected back.
+
+A special material called **cladding** is used to line the core and focus the light back onto it.
+
+MMF provides high bandwidth at high speeds over medium distances (up to about 3,000 feet), but beyond that it can be really inconsistent. This is why MMF is most often used within a smaller area of one building; SMF can be used between buildings.
+
+MMF is available in glass or in a plastic version that makes installation a lot easier and increases the installation's flexibility.
+
+## Fiber Connectors
+
+Each fiber connector has a benefit or purpose in a fiberoptic installation. It is important to know the visual differences between the fiber connectors and their respective names.
+
+### Straight Tip (ST)
+
+![image](https://github.com/user-attachments/assets/75ebfef7-cef8-4004-83af-f08dce87946d)
+
+The straight tip (ST) connector was originally designed by AT&T for fiber-optic cables. It is commonly used with single-mode fiber.
+
+The connector is one of the most popular connectors to date with fiber optics for WAN connectivity on SMF. The cable connector can be found in both SMF and MMF cable installations.
+
+The cable operates similar to a BNC connector; it is a bayonet-style mechanism that you twist and lock into position. The benefit to this cable is that it will not come loose over time because of the positive locking mechanism.
+
+### Subscriber Connector (SC)
+
+The subscriber (or square) connector (SC) is a square connector with a floating ferrule that contains the fiber-optic cable.
+
+![image](https://github.com/user-attachments/assets/778d81d3-ef2a-4f22-a611-fd1ba9db58e6)
+
+The cable comes with a plastic clip that holds the transmit and receive cables secure for insertion.
+
+These clips generally allow you to disassemble the cable ends so transmit and receive can be swapped.
+
+It can be found in SMF and MMF installations, but it is most popular with MMF installations. 
+
+The SC connector is larger than most modern connectors, so it is starting to be replaced in new installations. 
+
+The cable operates with a push-on/pull-off mating mechanism.
+
+### Small Form Factor Fiber-Optic Connectors
+
+Another fiber-optic connector is the small form factor (SFF) style of connector, which allows more fiber-optic terminations in the same amount of space than its standard-sized counterparts.
+
+The three most popular versions are the mechanical transfer registered jack (MT-RJ or MTRJ), designed by AMP, the local connector (LC), designed by Lucent, and the multi-fiber push on (MPO) developed and licensed by NTT Group.
+
+The MT-RJ fiber-optic connector was the first small form factor fiber-optic connector to be widely used, and it's only one-third the size of the SC and ST connectors it most often replaces.
+
+It offers these benefits:
+
+- Small size
+- TX and RX strands in one connector
+- Keyed for single polarity
+- Pre-terminated ends that require no polishing or epoxy
+- Easy to use
+
+![image](https://github.com/user-attachments/assets/55fe5e83-3d1a-4735-8cfb-df7fc97a82d2)
+
+A sample MT-RJ fiber-optic connector ^
+
+The local connector (LC) resembles an RJ-style connector; it has a springloaded detent similar to the RJ connector that allows it to be held in place.
+
+The LC connector has become a popular cable connector because of its size; this allows greater density of ports on a switch. The connector is commonly found on MMF and SMF optic cables.
+
+The cable cannot be disassembled like the SC connector, so transmit and receive fiber lines cannot be swapped side to side.
+
+LC is a newer style of SFF fiber-optic connector that's pulling ahead of the MT-RJ. It's especially popular for use with Fibre Channel adapters (FCs) and is a standard used for fast storage area networks and Gigabit Ethernet adapters.
+
+FC is a very high-speed data transfer protocol (usually running at 2 Gbps, 4 Gbps, 8 Gbps, 16 Gbps, and 32 Gbps) that is different than any other type of storage transfer protocol. 
+
+FC delivers what is called raw black date, in order and lossless. FC connects data storage called storage area networks (SANs).
+
+What is interesting about Fibre Channel networks is that the FC switches create a large, switched fabric, and the switches in an FC network operate in unison as one big switch.
+
+FC transceivers and Ethernet optical modules use different protocols. The FC transceiver belongs to the Fibre Channel protocol, which does not follow the OSI model. Ethernet optical modules use the IEEE 802.3 standard for packet-based physical communication in an LAN.
+
+![image](https://github.com/user-attachments/assets/1ebb8774-3816-4d93-ab9c-bb78360a74e4)
+
+A sample LC fiber-optic connector ^
+
+The LC fiber-optic connector has similar advantages to MT-RJ and other SFF-type connectors, but it's easier to terminate. It uses a ceramic insert just as standard-sized fiber-optic connectors do.
+
+The multi-fiber push on connector is yet another SFF high-density fiberoptic connector that provides 2, 8, 12, or 24 fiber-optic connections in a single connector.
+
+![image](https://github.com/user-attachments/assets/17f80318-46a2-4b0d-ac81-284927414790)
+
+The MPO connector typically fans out from a single connector to multiple LC connectors to provide 10 Gbps to 100 Gbps for each connection. This provides a single interface from a fiber distribution panel to multiple transceivers in a network switch.
+
+### APC vs. UPC
+
+The **angled physical contact (APC)** and **ultra physical contact (UPC)** is a not a connector; it is a finish on the end of the connector to curtain optical decibel loss.
+
+The choice between APC and UPC can make a pretty big difference on how your network will perform.
+
+![image](https://github.com/user-attachments/assets/812c0435-b91c-432b-9125-101372f96cd7)
+
+The ultra-polished connector looks like what you'd expect to find in a fiberoptic end. The cut is perfectly straight.
+
+With the UPC, the light is reflected back down to the core of the fiber cable, which causes a loss of decibels called a return loss because the angled connector causes the light to reflect into the cladding—the thick sides of the glass instead of the core. But the APC doesn't cause nearly as much decibel loss when using this type of connector.
+
+You can tell the difference between an APC and UPC connector finish by looking at the color of the plastic that composes the connector. A green connector has an APC finish on the connector end, and a blue connector has a UPC finish on the connector end.
+
+### Fiber Distribution Panel
 
