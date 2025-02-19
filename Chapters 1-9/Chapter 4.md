@@ -42,8 +42,8 @@ Next, check out Sally's response:
 
     Time         Source         Destination     Protocol Info
     5.153403     192.168.0.3    192.168.0.2     ARP      192.168.0.3 is 00:0b:db:99:d3:5e
-    5.53.89317   192.168.0.3    192.168.0.2     NBNS     Name
-    query response NB 192.168.0.3
+    5.53.89317   192.168.0.3    192.168.0.2     NBNS     
+    Name query response NB 192.168.0.3
 
 Sweet—Bob now has both Sally's IP address and her MAC address (00:0b:db:99:d3:5e). These are both listed as the source address at this point because this information was sent from Sally back to Bob.
 
