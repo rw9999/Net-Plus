@@ -58,3 +58,6 @@ Ethernet is popular because it's readily scalable, meaning that it's comparative
 Ethernet uses both Data Link and Physical layer specifications.
 
 ### Collision Domain
+
+The term collision domain is an Ethernet term that refers to a particular network scenario wherein one device sends a packet out on a network segment and thereby forces every other device on that same physical network segment to pay attention to it.
+
