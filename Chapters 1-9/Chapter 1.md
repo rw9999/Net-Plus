@@ -10,6 +10,8 @@ A computer network means two or more connected computers that can share resource
 
 The figure above shoesd a basic network made up of only two hosts comptuters connected; they share resources such as files and even a printer hooked up to one of the hosts. These two hosts "talk" to eaach other using a computer language called **binary code**, which consists of 1s and 0s in a specific order that describes exaacly what they want to "say".
 
+##
+
 ### The Local Area Network
 
 A local area network **(LAN)** is usually retricted to spanning a particular geographoc location such as an office building, a single department within a corporate office, or even a home office.
@@ -46,6 +48,8 @@ Now, you might be thinking that we really don't need the router—that we could 
 
 This is because with smaller, individual-yet-connected groups, the users on each LAN enjoy much faster response times when accessing resources, and administrative tasks are a lot easier too. Larger workgroups run more slowly because there's a legion of hosts within them that are all trying to get to the same resources simultaneously.
 
+##
+
 ### Common Network Components
 
 There are a lot of different machines, devices, and media that make up our networks. Let's talk about three of the most common:
@@ -53,6 +57,8 @@ There are a lot of different machines, devices, and media that make up our netwo
 - Workstations
 - Servers
 - Hosts
+
+##
 
 ### Workstations
 
@@ -66,6 +72,8 @@ A **client machine** is any device on the network that can ask for access to res
 
 The term **host** is used to describe pretty much anything that takes an IP address.
 
+##
+
 ### Servers
 
 Servers are also powerful computers. They get their name because they truly are “at the service” of the network and run specialized software known as the network operating system to maintain and control the network.
@@ -76,15 +84,21 @@ Not always, though—sometimes they have more than one job. But whether servers 
 
 I want to make sure you know that servers must have considerably superior CPUs, hard-drive space, and memory—a lot more than a simple client's capacity—because they serve many client machines and provide any resources they require. Because they're so important, you should always put your servers in a very secure area. My company's servers are in a locked server room because not only are they really pricey workhorses, they also store huge amounts of important and sensitive company data, so they need to be kept safe from any unauthorized access.
 
+##
+
 ### Hosts
 
 This can be kind of confusing because when people refer to hosts, they really can be referring to almost any type of networking devices—including workstations and servers.
 
 You'll find that usually this term comes up when people are talking about resources and jobs that have to do with Transmission Control Protocol/Internet Protocol (TCP/IP). The scope of possible machines and devices is so broad because, in TCP/IPspeak, host means any network device with an IP address.
 
+##
+
 ## Network Types
 
 When we refer to parts of our network, we classify the sections of the network with a type. This designation of a particular type helps us generalize its use and function. Some of these designation types can use various technologies for connectivity, and some use specific technologies.
+
+##
 
 ### Metropolitan Area Network
 
@@ -93,6 +107,8 @@ A **metropolitan area network (MAN)** is just as it sounds, a network covering a
 Think of a MAN as a concentrated WAN. MANs typically offer high-speed interconnections using in-ground fiber optics and can be very cost effective for high-speed interconnects.
 
 A carrier provider network is typically a leased network connection. These providers will lease lines between two or more networks to provide connectivity.
+
+##
 
 ### Wide Area Network
 
@@ -126,6 +142,8 @@ The Internet is a prime example of what's known as a **distributed WAN**—an in
 
 There's another kind of WAN, referred to as **centralized**, that's composed of a main, centrally located computer or location that remote computers and devices can connect to.
 
+##
+
 ### Personal Area Network
 
 For close proximity connections there are PANs, or personal area networks.
@@ -144,6 +162,8 @@ A campus area network is between a LAN and WAN in scope. They are larger than a 
 
 Most CANs offer Internet connectivity as well as access to data center resources.
 
+##
+
 ### Storage Area Network
 
 A storage area network (SAN) is designed for, and used exclusively by, storage systems.
@@ -158,6 +178,8 @@ The network hardware is different from LAN switches and routers and is designed 
 
 Fibre Channel over Ethernet (FCoE) is a technology that encapsulates Fibre Channel over Ethernet. The protocol is typically used as a transitional technology until the next generation of equipment can support iSCSI. The sweet spot to FCoE is that you can use existing Ethernet infrastructure.
 
+##
+
 ### Software-Defined Wide Area Network
 
 A software-defined wide area network (SDWAN) is a virtual WAN architecture that uses software to manage connectivity, devices, and services and can make changes in the network based on current operations.
@@ -165,6 +187,8 @@ A software-defined wide area network (SDWAN) is a virtual WAN architecture that 
 SDWANs integrate any type of transport architectures such as MPLS, LTE, and broadband Internet services to securely connect users to applications.
 
 The SDWAN controller can make changes in real time to add or remove bandwidth or route around failed circuits. SDWANs can simplify wide area networking management and operations by decoupling the networking hardware from its control mechanism.
+
+##
 
 ### Multiprotocol Label Switching
 
@@ -187,6 +211,8 @@ MPLS is a switching mechanism that imposes labels (numbers) to data and then use
 The labels are assigned on the edge of the MPLS network, and forwarding inside the MPLS network (cloud) is done solely based on labels through virtual links instead of physical links.
 
 Prioritizing data is a huge advantage; for example, voice data could have priority over basic data based on the labels. And since there are multiple paths for the data to be forwarded through the MPLS cloud, there's even some redundancy provided as well.
+
+##
 
 ### Multipoint Generic Routing Encapsulation
 
@@ -217,6 +243,8 @@ Keep in mind that peer-to-peer networks definitely present security-oriented cha
 Backing up all your critical data may be tough, but it's vital.
 
 Haven't all of us forgotten where we've put an important file? And then there's that glaring security issue to tangle with. Because security is not centrally governed, each and every user has to remember and maintain a list of users and passwords on each and every machine. Worse, some of those all-important passwords for the same users change on different machines—even for accessing different resources.
+
+##
 
 ### Client-Server Networks
 
@@ -254,6 +282,8 @@ Here are the topologies you're most likely to run into these days:
 - Point-to-multipoint
 - Hybrid
 
+##
+
 ### Bus Topology
 
 The bus topology consists of two distinct and terminated ends, with each of its computers connecting to one unbroken cable running its entire length.
@@ -269,6 +299,8 @@ Some of the benefits of using a bus topology are that it's easy to install, and 
 But it also has some drawbacks: For instance, it's hard to troubleshoot, change, or move, and it really doesn't offer much in the way of fault tolerance because everything is connected to that single cable. This means that any fault in the cable would basically bring down the whole network.
 
 **Fault tolerance** is the capability of a computer or a network system to respond to a condition automatically, often resolving it, which reduces the impact on the system. If faulttolerance measures have been implemented correctly on a network, it's highly unlikely that any of that network's users will know that a problem ever existed at all.
+
+##
 
 ### Star topology
 
@@ -302,6 +334,8 @@ There are two more sophisticated implementations of a star topology. The first i
 
 Another refined version is the wireless version, access points are pretty much just wireless hubs or switches that behave like their wired counterparts. They create a point-by-point connection to endpoints and other wireless access points.
 
+##
+
 ### Ring Topology
 
 In this type of topology, each computer is directly connected to other computers within the same network.
@@ -317,6 +351,8 @@ This is one big reason that ring topology isn't very popular—you just won't ru
 But even with all that being said, if you work at an Internet service provider (ISP), you may still find a physical ring topology in use for a technology called SONET or some other WAN technology. However, you won't find any LANs in physical rings anymore.
 
 Although the ring topology is not used in LANs today, you will see the ring topology implemented with WAN providers.
+
+##
 
 ### Mesh Topology
 
@@ -336,6 +372,8 @@ This is also the reason you'll usually find the hybrid version in today's WANs. 
 
 You can make your network management much less insane than it is with mesh by using what's known as a partial mesh topology solution instead. You may lose a little fault tolerance, but if you go the partial mesh route, you still get to use the same technology between all the network's devices. Just remember that with partial mesh, not all devices will be interconnected, so it's important to choose the ones that will be wisely.
 
+##
+
 ### Point-to-Point Topology
 
 As its name implies, in a point-to-point topology you have a direct connection between two routers or switches, giving you one communication path.
@@ -350,6 +388,8 @@ The second part of the diagram shows two computers connected by a cable—a poin
 
 You'll usually find point-to-point networks within many of today's WANs, and as you can see in the third part. A link from a computer to a hub or switch is also a valid point-to-point connection. A common version of this setup consists of a direct wireless link between two wireless bridges that's used to connect computers in two different buildings together.
 
+##
+
 ### Point-to-Multipoint Topology
 
 A point-to-multipoint topology consists of a succession of connections between an interface on one router and multiple destination routers—one point of connection to multiple points of connection. Each of the routers and every one of their interfaces involved in the point-to-multipoint connection are part of the same network.
@@ -361,6 +401,8 @@ The picture above shows a WAN and demonstrates a point-to-multipoint network. Yo
 ![image](https://github.com/user-attachments/assets/b869edaf-41b2-4b23-a0d0-7c5734562260)
 
 The picture above shows another prime example of a point-to-multipoint network: a college or corporate campus.'
+
+##
 
 ### Hybrid Topology
 
@@ -386,6 +428,8 @@ Here's a list of things to keep in mind when you're faced with coming up with th
 - Fault-tolerance requirement
 - Security requirement
 
+##
+
 ### The Network Backbone
 
 We divide networks into different parts called backbones and segments.
@@ -394,11 +438,15 @@ We divide networks into different parts called backbones and segments.
 
 The backbone must use some kind of seriously fast, robust technology—often Gigabit Ethernet or faster. And to optimize network performance—its speed and efficiency—it follows that you would want to connect all of the network's servers and segments directly to the network's backbone.
 
+##
+
 ### Network Segments
 
 When we refer to a segment, we can mean any small section of the network that may be connected to, but isn't actually a piece of, the backbone. 
 
 The network's workstations and servers organized into segments connect to the network backbone, which is the common connecting point for all segments.
+
+##
 
 ### Service-Related Entry Points
 
@@ -416,6 +464,8 @@ Cable companies now offer data and Internet services over their hybrid fiber/coa
 
 Another common link is the leased line. When the provider installs a **leased line**, it is either a copper or fiber termination that interconnects two endpoints and is exclusive to the customer; there is no shared bandwidth, and leased lines are very secure as they are dedicated for the customer's use.
 
+##
+
 ### Virtual Networking
 
 It is now common to provide networking services without deploying a hardware switch or router; it is all done in software.
@@ -429,6 +479,8 @@ Virtualized servers do not have the means for inserting a hardware network inter
 **Network function virtualization (NFV)** is the process of taking networking functions such as routers, switches, firewalls, load balancers, and controllers and virtualizing them. This process allows all of these functions to run on a single device.
 
 The magic behind all of the virtual networking popularity is the hypervisor. The hypervisor is software that is installed directly on a bare-metal server and allows for many virtual machines (VMs) to run, thinking they are using the server's hardware directly. This allows for many servers and virtual network devices to run on a single piece of computing hardware.
+
+##
 
 ### Three-Tiered Model
 
@@ -463,6 +515,8 @@ It is simply designed for access to the network and it is where support begins f
 
 The collapsed-core model was adopted to save cost and complexity in networks. With the powerful switching of today, we can support both the core layer and the distribution layer on the same piece of network switching equipment. It still performs the same functions as the core and distribution layer; it is just collapsed into one piece of switching equipment.
 
+##
+
 ### Spine and Leaf
 
 Spine-leaf switching creates a two-tier circuitswitched network.
@@ -482,6 +536,8 @@ The concept is simple: Create a very fast and redundant backbone (spline) that i
 ![image](https://github.com/user-attachments/assets/2bea158d-1931-4163-ae15-ce0ef80692b6)
 
 A switch is connected to every leafswitch, and the Spine B switch is connected to every leaf switch. This allows extremely fast switching between Leaf 1 and Leaf 4 as well as any other leaf switch. Switching between two leaf switches is always two hops away no matter where they are in the network. It will traverse to the spine switch and then to the destination leaf switch.
+
+##
 
 ### Traffic Flow
 
