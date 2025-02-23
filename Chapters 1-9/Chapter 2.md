@@ -2,6 +2,8 @@
 
 The OSI model has seven hierarchical layers that were developed to enable different networks to communicate reliably between disparate systems.
 
+##
+
 ### Internetworking Models
 
 In the late 1970s, the Open Systems Interconnection (OSI) reference model was created by the International Organization for Standardization (ISO) to break through this barrier.
@@ -9,6 +11,8 @@ In the late 1970s, the Open Systems Interconnection (OSI) reference model was cr
 The OSI model was meant to help vendors create interoperable network devices and software in the form of protocols, or standards so that different vendors' networks could become compatible and work together.
 
 The OSI model is the primary architectural model for networks. It describes how data and network information are communicated from an application on one computer through the network media to an application on another computer. The OSI reference model breaks this approach into layers.
+
+##
 
 ### The Layered Approach
 
@@ -19,6 +23,8 @@ Software developers can use a reference model to understand computer communicati
 In other words, if I need to develop a protocol for a certain layer, I need to focus only on that specific layer's functions. I don't need to be concerned with those of any other layer because different protocols will be in place to meet the different layers'needs. 
 
 The technical term for this idea is **binding**. The communication processes that are related to each other are bound, or grouped together, at a particular layer.
+
+##
 
 ### Advantages of Reference Models
 
@@ -70,6 +76,8 @@ Lower layers
 
 The four bottom layers define how data is transferred through physical media, switches, and routers. These bottom layers also determine how to rebuild a data stream from a transmitting host to a destination host's application.
 
+##
+
 ### The Application Layer
 
 The Application layer of the OSI model marks the spot where users actually communicate or interact with the computer.
@@ -94,6 +102,8 @@ Many network applications provide services for communication over enterprise net
 
 It's important to remember that the Application layer acts as an interface between application programs. For instance, Microsoft Word doesn't reside at the Application layer; it interfaces with the Application layer protocols.
 
+##
+
 ### The Presentation Layer
 
 The Presentation layer gets its name from its purpose: It presents data to the Application layer and is responsible for data translation and code formatting.
@@ -110,6 +120,8 @@ Tasks like data compression, decompression, encryption, and decryption are all a
 
 Some Presentation layer standards are even involved in multimedia operations.
 
+##
+
 ### The Session Layer
 
 The Session layer is responsible for setting up, managing, and then tearing down sessions between Presentation layer entities.
@@ -117,6 +129,8 @@ The Session layer is responsible for setting up, managing, and then tearing down
 This layer also provides dialogue control between devices, or nodes. It coordinates communication between systems and serves to organize their communication by offering three different modes: one direction (**simplex**); both directions, but only one direction at a time (**half-duplex**); and bidirectional (**full-duplex**).
 
 To sum up, the Session layer basically keeps an application's data separate from other applications' data. For a good example, the Session layer allows multiple web browser sessions on your desktop at the same time.
+
+##
 
 ### The Transport Layer
 
@@ -242,6 +256,8 @@ In the picture, the sending machine transmits segments 1, 2, and 3. The receivin
 
 The Transport layer doesn't need to use a connection-oriented service. That choice is up to the application developer. It's safe to say that if you're connection-oriented, meaning that you've created a virtual circuit, you're using TCP. If you aren't setting up a virtual circuit, then you're using UDP and are considered connectionless.
 
+##
+
 ### The Network Layer
 
 The Network layer manages logical device addressing, tracks the location of devices on the network, and determines the best way to move data. This means that the Network layer must transport traffic between devices that aren't locally attached.
@@ -292,6 +308,8 @@ Here are some key points about routers that you really should commit to memory:
 
 A router can also be referred to as a layer 3 switch. These terms are interchangeable.
 
+##
+
 ### The Data Link Layer
 
 The Data Link layer provides the physical transmission of the data and handles error notification, network topology, and flow control.
@@ -324,6 +342,8 @@ The IEEE Ethernet Data Link layer has two sublayers:
 
 **Logical Link Control (LLC)** Responsible for identifying Network layer protocols and then encapsulating them, an LLC header tells the Data Link layer what to do with a packet once a frame is received. It works like this: A host receives a frame and looks in the LLC header to find out where the packet is destined—say, the IP protocol at the Network layer. The LLC can also provide flow control and sequencing of control bits.
 
+##
+
 ### PROJECT 802
 
 One of the major components of the Data Link layer is the result of the IEEE's 802 subcommittees and their work on standards for local area and metropolitan area networks (LANs/MANs). The committee met in February 1980, so they used the 80 from 1980 and the 2 from the second month to create the name Project 802. The designation for an 802 standard always includes a dot (.) followed by either a single or a double digit. These numeric digits specify particular categories within the 802 standard.
@@ -336,6 +356,8 @@ These standards are listed in the following table:
 Note that 802.1, 802.3, 802.11, and 802.15 are the only Active 802 standards. The others are either Disbanded or Hibernating. 
 
 The takeaway is to remember that 802.3 calls out anything having to do with Ethernet, and 802.11 is anything wireless.
+
+##
 
 ### The Physical Layer
 
