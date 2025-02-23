@@ -185,3 +185,11 @@ Remember that half-duplex Ethernet shares a collision domain and provides a lowe
 
 ## Ethernet at the Data Link Layer
 
+Ethernet at the Data Link layer is responsible for Ethernet addressing, commonly referred to as **hardware addressing** or **MAC addressing**.
+
+Ethernet is also responsible for framing packets received from the Network layer and preparing them for transmission on the local network.
+
+Ethernet MAC addresses are made up of hexadecimal addresses.
+
+### Binary to Decimal and Hexadecimal Conversion
+
