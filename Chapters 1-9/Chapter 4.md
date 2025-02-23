@@ -61,3 +61,5 @@ Ethernet uses both Data Link and Physical layer specifications.
 
 The term collision domain is an Ethernet term that refers to a particular network scenario wherein one device sends a packet out on a network segment and thereby forces every other device on that same physical network segment to pay attention to it.
 
+This is bad because if two devices on one physical segment transmit at the same time, a **collision event**—a situation where each device's digital signals interfere with another on the wire—occurs and forces the devices to retransmit later. Collisions have a dramatically negative effect on network performance.
+
