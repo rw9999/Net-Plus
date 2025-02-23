@@ -57,17 +57,23 @@ Ethernet is popular because it's readily scalable, meaning that it's comparative
 
 Ethernet uses both Data Link and Physical layer specifications.
 
+##
+
 ### Collision Domain
 
 The term collision domain is an Ethernet term that refers to a particular network scenario wherein one device sends a packet out on a network segment and thereby forces every other device on that same physical network segment to pay attention to it.
 
 This is bad because if two devices on one physical segment transmit at the same time, a **collision event**—a situation where each device's digital signals interfere with another on the wire—occurs and forces the devices to retransmit later. Collisions have a dramatically negative effect on network performance.
 
+##
+
 ### Broadcast Domain
 
 A broadcast domain refers to the set of all devices on a network segment that hear all the broadcasts sent on that segment.
 
 Even though a broadcast domain is typically a boundary delimited by physical media like switches and repeaters, it can also reference a logical division of a network segment where all hosts can reach each other via a Data Link layer (hardware address) broadcast.
+
+##
 
 ### CSMA / CD
 
@@ -127,6 +133,8 @@ In the 1970s and 1980s, we used the term baud rate a lot, but that was replaced 
 
 One baud is one electronic state change per second—for example, from 0.2 volts to 3 volts or from binary 0 to 1. However, since a single state change can involve more than a single bit of data, the bps unit of measurement has replaced it as a more accurate definition of how much data you're transmitting or receiving.
 
+##
+
 ### Wavelength
 
 With electromagnetic radiation, radio waves, light waves, or even infrared (heat) waves make characteristic patterns as they travel through space.
@@ -138,6 +146,8 @@ Each wave pattern has a certain shape and length.
 The distance between peaks (high points) is called **wavelength**.
 
 If two wave patterns are different, we would say they're not on the same wavelength, and that is the way we tell different kinds of electromagnetic energy apart. We can use this to our advantage in electronics by sending traffic on different wavelengths at the same time.
+
+##
 
 ### Half- and Full-Duplex Ethernet
 
@@ -182,6 +192,8 @@ Remember that half-duplex Ethernet shares a collision domain and provides a lowe
 - A dedicated switch port is required for each full-duplex host.
 
 - The host network card and the switch port must be capable of operating in full-duplex mode.
+
+##
 
 ## Ethernet at the Data Link Layer
 
