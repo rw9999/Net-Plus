@@ -10,6 +10,8 @@ Most of us rely on wireless networking methods that work using technologies such
 
 - Fiber optic
 
+##
+
 ### Coaxial Cable
 
 Coaxial cable, referred to as coax, contains a center conductor made of copper that's surrounded by a plastic jacket with a braided shield over it.
@@ -48,11 +50,15 @@ You don't have to know much about most coax cable types in networks anymore, esp
 
 The picture lists some specifications for the different types of coaxial cable, but understand that we use only RG-59 and RG-6 in today's world.
 
+##
+
 ### F-type
 
 The F connector, or F-type connector, is a form of coaxial connector that is used for cable TV. It has an end that screws to tighten the connector to the interface. It resembles the RG-58 mentioned earlier in this section.
 
 An advantage of using coax cable is the braided shielding that provides resistance to electronic pollution like **electromagnetic interference (EMI)**, **radio frequency interference (RFI)**, and other types of stray electronic signals that can make their way onto a network cable and cause communication problems.
+
+##
 
 ### Twisted-Pair Cable
 
@@ -63,6 +69,8 @@ Twinaxial is also known as **twinax**.
 The advantage of using twinaxial cable is that there are significant cost savings over fiber-optic cabling since twinaxial cables are copper-based. If your distance is 10 meters or less, using these cables can be a considerable cost savings.
 
 Also in the twinaxial family is direct attach copper (DAC) cable. DAC has connectors at either end of a fixed-length ~26-28 AWG twinaxial copper cable that allows direct communication between devices over copper wire. Like shielded twisted pair (SSTP), DAC uses electromagnetic shielding around the copper cable to increase speeds and to keep communication reliable.
+
+##
 
 ### Ethernet Cable Descriptions
 
@@ -112,6 +120,8 @@ UTP cable is rated in these categories:
 
 **Category 8** Developed to address the ever-increasing speed of Ethernet and added support for 25G and 40G transmission with a distance of 30 meters, which is perfect for data center deployments.
 
+##
+
 ### Connecting UTP
 
 BNC connectors won't fit very well on UTP cable, so you need to use a **registered jack (RJ)** connector, which you're familiar with because most telephones connect with them.
@@ -133,6 +143,8 @@ There's one other type of copper connector, called the RJ-48c, which looks exact
 RJ-45 is mainly used in LANs with short distances (typically up to 100 meters), where the RJ-48c wiring type would be used with a T1 connection, which is a long-distance wide area network (WAN).
 
 In addition, to protect the signal in an RJ-48c, the wires are typically shielded, whereas the RJ-45 uses unshielded wiring.
+
+##
 
 ### Fiber-Optic Cable
 
@@ -161,6 +173,8 @@ Cons of fiber-optic cable:
 
 - It's harder to troubleshoot.
 
+##
+
 ### Single-Mode Fiber
 
 Single-mode fiber-optic cable (SMF) is a very high-speed, long-distance media that consists of a single strand—sometimes two strands—of glass fiber that carries the signals.
@@ -170,6 +184,8 @@ Light-emitting diodes (LEDs) and laser are the light sources used with SMF.
 The light source is transmitted from end to end and pulsed to create communication. This is the type of fiber cable employed to span really long distances because it can transmit data up to 90 times farther than multimode fiber at a faster rate. That is 40 to 80 kilometers depending on the transceiver being used.
 
 Clearly, because the transmission media is glass, the installation of SMF can be a bit tricky. Yes, there are outer layers protecting the glass core, but the cable still shouldn't be crimped or pinched around any tight corners.
+
+##
 
 ### Multimode Fiber
 
@@ -181,9 +197,13 @@ MMF provides high bandwidth at high speeds over medium distances (up to about 3,
 
 MMF is available in glass or in a plastic version that makes installation a lot easier and increases the installation's flexibility.
 
+##
+
 ## Fiber Connectors
 
 Each fiber connector has a benefit or purpose in a fiberoptic installation. It is important to know the visual differences between the fiber connectors and their respective names.
+
+##
 
 ### Straight Tip (ST)
 
@@ -194,6 +214,8 @@ The straight tip (ST) connector was originally designed by AT&T for fiber-optic 
 The connector is one of the most popular connectors to date with fiber optics for WAN connectivity on SMF. The cable connector can be found in both SMF and MMF cable installations.
 
 The cable operates similar to a BNC connector; it is a bayonet-style mechanism that you twist and lock into position. The benefit to this cable is that it will not come loose over time because of the positive locking mechanism.
+
+##
 
 ### Subscriber Connector (SC)
 
@@ -210,6 +232,8 @@ It can be found in SMF and MMF installations, but it is most popular with MMF in
 The SC connector is larger than most modern connectors, so it is starting to be replaced in new installations. 
 
 The cable operates with a push-on/pull-off mating mechanism.
+
+##
 
 ### Small Form Factor Fiber-Optic Connectors
 
@@ -259,6 +283,8 @@ The multi-fiber push on connector is yet another SFF high-density fiberoptic con
 
 The MPO connector typically fans out from a single connector to multiple LC connectors to provide 10 Gbps to 100 Gbps for each connection. This provides a single interface from a fiber distribution panel to multiple transceivers in a network switch.
 
+##
+
 ### APC vs. UPC
 
 The **angled physical contact (APC)** and **ultra physical contact (UPC)** is a not a connector; it is a finish on the end of the connector to curtain optical decibel loss.
@@ -273,11 +299,15 @@ With the UPC, the light is reflected back down to the core of the fiber cable, w
 
 You can tell the difference between an APC and UPC connector finish by looking at the color of the plastic that composes the connector. A green connector has an APC finish on the connector end, and a blue connector has a UPC finish on the connector end.
 
+##
+
 ### Fiber Distribution Panel
 
 Fiber distribution panels (FDPs) are termination and distribution systems for fiber-optic cable facilities.
 
 They consist of a cable management tray and a splice drawer. They are designed for central offices, remote offices, and LANs using fiber-optic facilities.
+
+##
 
 ### Fiber-Optic Transceivers
 
@@ -289,6 +319,8 @@ Fiber-optic transceivers can be either unidirectional (simplex) or bidirectional
 
 ![image](https://github.com/user-attachments/assets/ffa60a48-8038-4069-8e27-4f33eed186f5)
 
+##
+
 ### Transceivers
 
 A transceiver is a device made up of both a transmitter and a receiver, which are combined and share common circuitry or a single housing.
@@ -298,6 +330,8 @@ The term applies to wireless communications devices such as cellular telephones,
 **SFP+** The small form-factor pluggable (SFP) is a compact pluggable optical module transceiver used for both telecommunication and data communications applications. The **enhanced small form-factor pluggable (SFP+)** transceiver is an enhanced version of the SFP that supports data rates up to 16 Gbit/s.
 
 **QSFP** The quad small form-factor pluggable (QSFP) is another compact, hot-pluggable transceiver used for data communications applications. It interfaces networking hardware (such as servers and switches) to a fiberoptic cable or active or passive electrical copper connection. It allows data rates from 4x1 Gbps for QSFP and 4x10 Gbit/s for QSFP+ to the highest rate of 4x28 Gbit/s known as QSFP28 used for 100 Gbit/s links.
+
+##
 
 ### Media Converters
 
@@ -318,6 +352,8 @@ Sometimes, you'll need to convert from one media type to another. Maybe you need
 **Single-Mode to Multimode Fiber** These devices accept a single-mode fiber connector and a multimode fiber connector and convert the signals between the two.
 
 ![image](https://github.com/user-attachments/assets/a4b1698c-f28f-43d9-82f0-d15e8cf39399)
+
+##
 
 ### Serial Cables
 
@@ -366,6 +402,8 @@ Admins usually permit, or would like to have, transmission speeds of up to 10 Gb
 
 In the distribution and access areas, where users connect to switches, it's typically 100/1000 Mbps per connection, but transmission speeds are creeping up because the traffic demand is getting higher.
 
+##
+
 ### Distance
 
 Deciding factors used in choosing what cable type to use often come down to the topology of a network and the distance between its components.
@@ -374,6 +412,8 @@ Some network technologies can run much farther than others without communication
 
 Some cable types suffer from attenuation more than others.
 
+##
+
 ### Duplex
 
 All communications are either half-duplex or full-duplex. The difference is whether the communicating devices can “talk” and “listen” at the same time.
@@ -381,6 +421,8 @@ All communications are either half-duplex or full-duplex. The difference is whet
 During half-duplex communication, a device can either send communication or receive communication, but not both at the same time. Think walkie-talkie—when you press the button on the walkie-talkie, you turn the speaker off and you can't hear anything the other side is saying.
 
 In full-duplex communication, both devices can send and receive communication at the same time. This means that the effective throughput is doubled and communication is much more efficient. Full duplex is typical in most of today's switched networks.
+
+##
 
 ### Noise Immunity (Security, EMI)
 
@@ -401,6 +443,8 @@ It's still not impossible—you can do it at the equipment level, but you have t
 The second magnetic-flux issue comes from the outside in instead of from the inside out. Because wires can take on additional current if they're near any source of magnetism, you've got to be really careful where you run your cables.
 
 You can avoid EMI by keeping copper cables away from all powerful magnetic sources like electric motors, speakers, amplifiers, fluorescent light ballasts, and so on. Just keep them away from anything that can generate a magnetic field.
+
+##
 
 ### Frequency
 
@@ -424,6 +468,8 @@ There are different types of wiring standards available:
 - Crossover
 - Rolled/rollover
 
+##
+
 ### T568A vs. T568B
 
 If you look inside a network cable, you'll find four pairs of wires twisted together to prevent crosstalk; they're also twisted like this to help prevent EMI and tapping. 
@@ -446,6 +492,8 @@ This only leaves the wire pairs to connect to pins 1, 2, 3, and 6 for data. Reme
 
 On the other hand, if we switch from pin 1 to pin 3 and from pin 2 to pin 6 on one side only, we've created a crossover cable for most networks.
 
+##
+
 ### Straight-Through Cable
 
 The straight-through cable is used to connect a host to a switch or hub or a router to a switch or hub.
@@ -455,6 +503,8 @@ Four wires are used in straight-through cable to connect 10/100 Ethernet devices
 ![image](https://github.com/user-attachments/assets/a8aec32b-ed1b-4082-8694-745e7cb349af)
 
 Notice that only pins 1, 2, 3, and 6 are used. Connect 1 to 1, 2 to 2, 3 to 3, and 6 to 6 and you'll be up and networking in no time. Just remember that this would be a 10/100 Ethernet-only cable, so it wouldn't work with 1000 Mbps or greater Ethernet.
+
+##
 
 ### Crossover Cable
 
@@ -490,6 +540,8 @@ Use a cable tester to make sure that what you're dealing with is in fact a cross
 
 ![image](https://github.com/user-attachments/assets/4c42dcea-fb27-4cf0-877d-48d3305b6cf5)
 
+##
+
 ### UTP Gigabit Wiring (1000BaseT)
 
 In the previous examples of 10BaseT and 100BaseT UTP wiring, only two wire pairs were used, but that's just not good enough for Gigabit UTP transmission.
@@ -500,6 +552,8 @@ In the previous examples of 10BaseT and 100BaseT UTP wiring, only two wire pairs
 
 For a straight-through cable it's still 1 to 1, 2 to 2, and so on up to pin 8.
 
+##
+
 ### Rolled/Rollover Cable
 
 Although rolled cable isn't used to connect any Ethernet connections together, you can use a rolled Ethernet cable to connect a host EIA-TIA 232 interface to a router console serial communication (COM) port.
@@ -509,6 +563,8 @@ If you have a Cisco router or switch, you would use this cable to connect your P
 ![image](https://github.com/user-attachments/assets/ad34fcf9-4e63-4b11-9868-aff2c9e50ce1)
 
 These are probably the easiest cables to make because you just cut the end off on one side of a straight-through cable, turn it over, and put it back on— with a new connector.
+
+##
 
 ### T1 Crossover Cable
 
@@ -532,6 +588,8 @@ It's also considered the WAN termination point. It's installed in the building a
 
 Often, another wire frame called an intermediate distribution frame (IDF) is located in an equipment or telecommunications room. It's connected to the MDF and is used to provide greater flexibility for the distribution of all the communications lines to the building. It's typically a sturdy metal rack designed to hold the bulk of cables coming from all over the building.
 
+##
+
 ### 25 Pair
 
 A 25-pair cable consists of 25 individual pairs of wires all inside one common insulating jacket. 
@@ -540,9 +598,13 @@ It's not generally used for data cabling, just for telephone cabling, and especi
 
 This type of cable is often referred to as a **feeder cable** because it supplies signal to many connected pairs.
 
+##
+
 ### 66 Block
 
 If you know what a 66 block is, either you're really old or you work in an old building since they came out in 1962 and can really only be used for old analog telephone connections. This uses the 25-pair cable I just mentioned and is a standard termination block containing 50 rows, which created an industry standard for easy termination of voice cabling.
+
+##
 
 ### 110 Block
 
@@ -556,9 +618,13 @@ You'll find 110 blocks in sizes from 25 to more than 500 wire pairs, and some ca
 
 There is a proprietary European variant of the 110 block called a Krone block. The **Krone** block is compatible with the 110 block and can be used interchangeably.
 
+##
+
 ### BIX Block
 
 Another type of punch-down block is the BIX block. A BIX block can terminate up to 25 cable pairs and have a slip-in fitting that does not require pre-stripped wires.
+
+##
 
 ### Demarc/Demarc Extension
 
@@ -569,6 +635,8 @@ It's often at the MDF in your building connection, especially if your building i
 Network admins often test for connectivity on both sides of the demarc when troubleshooting to determine whether the problem is internal or external. 
 
 The length of copper or fiber that begins after the demarc but still doesn't reach up to your office is referred to as a **demarc extension**.
+
+##
 
 ### Smart Jack
 
