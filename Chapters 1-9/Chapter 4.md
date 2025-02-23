@@ -193,8 +193,6 @@ Remember that half-duplex Ethernet shares a collision domain and provides a lowe
 
 - The host network card and the switch port must be capable of operating in full-duplex mode.
 
-##
-
 ## Ethernet at the Data Link Layer
 
 Ethernet at the Data Link layer is responsible for Ethernet addressing, commonly referred to as **hardware addressing** or **MAC addressing**.
@@ -204,4 +202,12 @@ Ethernet is also responsible for framing packets received from the Network layer
 Ethernet MAC addresses are made up of hexadecimal addresses.
 
 ### Binary to Decimal and Hexadecimal Conversion
+
+Each digit used is limited to being either a 1 (one) or a 0 (zero), and each digit is called 1 bit (short for **binary** digit).
+
+Typically, you count either 4 or 8 bits together, with these being referred to as a **nibble** and a **byte**, respectively.
+
+What's interesting about binary numbering is the value represented in a decimal format—the typical decimal format being the base-10 number scheme. The binary numbers are placed in a value spot, starting at the right and moving left, with each spot having double the value of the previous spot.
+
+
 
