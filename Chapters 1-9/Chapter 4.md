@@ -113,6 +113,8 @@ The following are the effects of having a CSMA/CD network that has sustained hea
 
 - Congestion
 
+##
+
 ### Broadband/Baseband
 
 We have two ways to send analog and digital signals down a wire: broadband and baseband.
@@ -124,6 +126,8 @@ It allows us to have both our analog voice and digital data carried on the same 
 Baseband is what all LANs use. This is where all the bandwidth of the physical media is used by only one signal.
 
 For example, Ethernet uses only one digital signal at a time, and it requires all the available bandwidth. If multiple signals are sent from different hosts at the same time, we get collisions; same with wireless, except that uses only analog signaling via radio waves.
+
+##
 
 ### Bit Rates vs. Baud Rate
 
