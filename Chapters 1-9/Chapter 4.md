@@ -213,6 +213,8 @@ Typically, you count either 4 or 8 bits together, with these being referred to a
 
 What's interesting about binary numbering is the value represented in a decimal format—the typical decimal format being the base-10 number scheme. The binary numbers are placed in a value spot, starting at the right and moving left, with each spot having double the value of the previous spot.
 
-|---------------|-------------|
+
 | Nibble Values | Byte Values |
-|
+|--------------|--------------|
+| 8 4 2 1      | 128  64  32  16  8  4  2  1 |
+|0000 | 0000000 |
