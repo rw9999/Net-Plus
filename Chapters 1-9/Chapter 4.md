@@ -218,3 +218,224 @@ What's interesting about binary numbering is the value represented in a decimal 
 |--------------|--------------|
 | 8 4 2 1      | 128  64  32  16  8  4  2  1 |
 |0000 | 0000000 |
+
+In network addressing, we often refer to a byte as an octet. Mathematically, octal addressing actually refers to base 8, which is completely different from the base 10 we are familiar with. So, technically speaking we are using the term incorrectly, but it's the common usage anyway.
+
+If we have a 1 placed in each spot of our nibble, we then add up 8 + 4 + 2 + 1 to give us a maximum value of 15.
+
+We then count up every bit spot because each is turned on. It looks like this, which demonstrates the maximum value of a byte:
+
+128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255
+
+
+Binary-to-decimal memorization chart for subnetting
+
+![image](https://github.com/user-attachments/assets/bd6fe76b-a843-4578-ad28-2734874df72e)
+
+Hexadecimal addressing is completely different than binary or decimal—it's converted by reading nibbles, not bytes. We can convert these bits to hex pretty simply by using a nibble.
+
+First, understand that the hexadecimal addressing scheme uses only 0 through 9. And because the numbers 10, 11, 12, and so on can't be used (because they are two-digit numbers), the letters A, B, C, D, E, and F are used to represent 10, 11, 12, 13, 14, and 15, respectively.
+
+![image](https://github.com/user-attachments/assets/fef2b218-bfbb-432c-88a3-8c515a5f9f6b)
+![image](https://github.com/user-attachments/assets/cfd1cec5-c7b5-4780-b65d-03e8b24e9a0c)
+
+Some manufacturers put 0x in front of characters so you know that they're a hex value, while others give you an h. It doesn't have any other special meaning.
+
+#
+
+### Ethernet Addressing
+
+Ethernet addressing works by useing the Media Access Control (MAC) address burned into each and every Ethernet NIC. 
+
+The MAC, or hardware, address is a 48-bit (6-byte) address written in a hexadecimal format.
+
+![image](https://github.com/user-attachments/assets/ed0e304e-4346-48e3-b45b-1ef7541e9ff8)
+
+The organizationally unique identifier (OUI) is assigned by the Institute of Electrical and Electronics Engineers (IEEE) to an organization. It's composed of 24 bits, or 3 bytes.
+
+The organization, in turn, assigns a globally administered address (24 bits, or 3 bytes) that is unique to every adapter it manufactures.
+
+The Individual/Group (I/G) address bit is used to signify if the destination MAC address is a unicast or a multicast/broadcast layer 2 address. If the bit is set to 0, then it is an Individual MAC address and is a unicast address. If the bit is set to 1, it is a Group address and is a multicast/broadcast address.
+
+The next bit is the Local/Global bit (L/G). This bit is used to tell if the MAC address is the burned-in-address (BIA) or a MAC address that has been changed locally.
+
+The low-order 24 bits of an Ethernet address represent a locally administered or manufacturer-assigned code. This portion commonly starts with 24 0s for the first card made and continues in order until there are 24 1s for the last (16,777,216th) card made. You'll find that many manufacturers use these same six hex digits as the last six characters of their serial number on the same card.
+
+#
+
+### Ethernet Frames
+
+The Data Link layer is responsible for combining bits into bytes and bytes into frames. Frames are used at the Data Link layer to encapsulate packets handed down from the Network layer for transmission on a type of physical media access.
+
+The function of Ethernet stations is to pass data frames between each other using a group of bits known as a MAC frame format. This provides error detection from a cyclic redundancy check (CRC). But remember—this is error detection, not error correction.
+
+![image](https://github.com/user-attachments/assets/66253687-1906-4f85-a95c-13a3481529b0)
+
+Encapsulating a frame within a different type of frame is called **tunneling**.
+
+Following are the details of the different fields in the 802.3 and Ethernet frame types:
+
+**Preamble** An alternating 1,0 pattern provides a clock at the start of each packet, which allows the receiving devices to lock the incoming bit stream.
+
+**Start of Frame Delimiter (SOF)/Synch** The preamble is seven octets, and the start of a frame (SOF) is one octet (synch). The SOF is 10101011, where the last pair of 1s allows the receiver to come into the alternating 1,0 pattern somewhere in the middle and still sync up and detect the beginning of the data.
+
+**Destination Address (DA)** This transmits a 48-bit value using the least significant bit (LSB) first. The DA is used by receiving stations to determine whether an incoming packet is addressed to a particular host and can be an individual address or a broadcast or multicast MAC address. Remember that a broadcast is all 1s (or Fs in hex) and is sent to all devices, but a multicast is sent only to a similar subset of hosts on a network.
+
+**Source Address (SA)** The SA is a 48-bit MAC address used to identify the transmitting device, and it uses the LSB first. Broadcast and multicast address formats are illegal within the SA field.
+
+**Length or Type** 802.3 uses a Length field, but the Ethernet frame uses a Type field to identify the Network layer protocol. 802.3 by itself cannot identify the upper-layer routed protocol and must be used with an LAN protocol.
+
+**Data** This is a packet sent down to the Data Link layer from the Network layer. The size can vary from 64 to 1,500 bytes.
+
+**Frame Check Sequence (FCS)** FCS is a field that is at the end of the frame and is used to store the CRC
+
+Now let's take a minute to look at some frames caught on our trusty network analyzer.
+
+You can see that the following frame has only three fields: Destination, Source, and Type, displayed as Protocol Type on this analyzer:
+
+        Destination: 00:60:f5:00:1f:27
+        Source: 00:60:f5:00:1f:2c
+        Protocol Type: 08-00 IP
+
+This is an Ethernet_II frame. Notice that the Type field is IP, or 08-00 (mostly just referred to as 0x800) in hexadecimal.
+
+The next frame has the same fields, so it must be an Ethernet_II frame too:
+
+        Destination: ff:ff:ff:ff:ff:ff Ethernet
+        Broadcast
+        Source: 02:07:01:22:de:a4
+        Protocol Type: 08-00 IP
+
+Did you notice that this frame was a broadcast? You can tell because the destination hardware address is all 1s in binary, or all Fs in hexadecimal.
+
+Let's take a look at one more Ethernet_II frame. You can see that the Ethernet frame is the same Ethernet_II frame we use with the IPv4 routed protocol.
+
+The difference is that the Type field has 0x86dd when we are carrying IPv6 data, and when we have IPv4 data, we use 0x0800 in the Protocol field:
+
+        Destination: IPv6-Neighbor-
+        Discovery_00:01:00:03 (33:33:00:01:00:03)
+        Source: Aopen_3e:7f:dd (00:01:80:3e:7f:dd)
+        Type: IPv6 (0x86dd)
+
+Because of the Protocol field, we can run any Network layer–routed protocol, and it will carry the data because it can identify that particular Network layer protocol.
+
+## Ethernet at the Physical Layer
+
+Ethernet was first implemented by a group called DIX (Digital, Intel, and Xerox). DIX created and implemented the first Ethernet LAN specification, which the IEEE used to create the IEEE 802.3 Committee. This was a 10 Mbps network that ran on coax, then on twisted-pair, and finally on fiber physical media.
+
+The IEEE extended the 802.3 Committee to three new committees known as 802.3u (Fast Ethernet), 802.3ab (Gigabit Ethernet on Category 5+), and then finally 802.3ae (10 Gbps over fiber and coax).
+
+When designing your LAN, it's really important to understand the different types of Ethernet media available to you. Sure, it would be great to run Gigabit Ethernet to each desktop and 10 Gbps or 40 Gbps between switches, as well as to servers. Although this is starting to happen, justifying the cost of that network today for most companies would be a pretty hard sell. But if you mix and match the different types of Ethernet media methods currently available instead, you can come up with a cost-effective network solution that works great.
+
+![image](https://github.com/user-attachments/assets/d7703d5e-4df4-441b-b185-1978e963f7ca)
+
+The Electronic Industries Association and the newer Telecommunications Industry Alliance (EIA/TIA) together form the standards body that creates the Physical layer specifications for Ethernet.
+
+The EIA/TIA specifies that Ethernet use a registered jack (RJ) connector on unshielded twisted-pair (UTP) cabling (RJ-45). However, the industry is calling this just an 8-pin modular connector.
+
+ Each Ethernet cable type that is specified by the EIA/TIA has somethingknown as **inherent attenuation**, which is defined as the loss of signal strength as it travels the length of a cable and is measured in decibels (dB).
+
+ A higher-quality cable will have a higher-rated category and lower attenuation. For example, Category 5 is better than Category 3 because Category 5 cables have more wire twists per foot and therefore less crosstalk.
+ 
+ **Crosstalk** is the unwanted signal interference from adjacent pairs in the cable.
+
+ Here are the original IEEE 802.3 standards:
+
+**10Base2** This is also known as thinnet and can support up to 30 workstations on a single segment. It uses 10 Mbps of baseband technology, coax up to 185 meters in length, and a physical and logical bus with Attachment Unit Interface (AUI) connectors. The 10 means 10 Mbps, and Base means baseband technology—a signaling method for communication on the network—and the 2 means almost 200 meters. 10Base2 Ethernet cards use BNC (British Naval Connector, Bayonet Neill-Concelman, or Bayonet Nut Connector) and T-connectors to connect to a network.
+
+**10Base5** Also known as thicknet, 10Base5 uses a physical and logical bus with AUI connectors, 10 Mbps baseband technology, and coax up to 500 meters in length. You can go up to 2,500 meters with repeaters and 1,024 users for all segments.
+
+> [!NOTE]
+> Ideally, you will never need to deal with 10Base2 or 10Base5 in your professional career. These technologies have not been used in the past 20 years, but they serve as a reference.
+
+**10BaseT** This is 10 Mbps using Category 3 UTP wiring. Unlike on 10Base2 and 10Base5 networks, each device must connect into a hub or switch, and you can have only one host per segment or wire. It uses an RJ- 45 connector (eight-pin modular connector) with a physical star topology and a logical bus.
+
+Each of the 802.3 standards defines an AUI, which allows a one-bit-at-a-time transfer to the Physical layer from the Data Link media-access method. This allows the MAC address to remain constant but means the Physical layer can support both existing and new technologies. The original AUI interface was a 15-pin connector, which allowed a transceiver (transmitter/receiver) that provided a 15-pin-to-twisted-pair conversion.
+
+There's an issue, though—the AUI interface can't support 100 Mbps Ethernet because of the high frequencies involved. So basically, 100BaseT needed a new interface, and the 802.3u specifications created one called the Media Independent Interface (MII) that provides 100 Mbps throughput. The MII uses a nibble, which you of course remember is defined as 4 bits. Gigabit Ethernet uses a Gigabit Media Independent Interface (GMII) and transmits 8 bits at a time.
+
+802.3u (Fast Ethernet) is compatible with 802.3 Ethernet because they share the same physical characteristics. Fast Ethernet and Ethernet use the same maximum transmission unit (MTU) and the same MAC mechanisms, and they both preserve the frame format that is used by 10BaseT Ethernet. Basically, Fast Ethernet is just based on an extension to the IEEE 802.3 specification, and because of that, it offers us a speed increase of 10 times 10BaseT.
+
+Here are the expanded IEEE Ethernet 802.3 standards, starting with Fast Ethernet:
+
+**100BaseTX (IEEE 802.3u)** 100BaseTX, most commonly known as Fast Ethernet, uses EIA/TIA Category 5 or 5e or 6 and UTP two-pair wiring. It allows for one user per segment up to 100 meters long (328 feet) and uses an RJ-45 connector with a physical star topology and a logical bus.
+
+> [!NOTE]
+> 100BaseT and 100BaseTX: What's the difference? 100BaseT is the name of a group of standards for Fast Ethernet that includes 100BaseTX. Also included are 100BaseT4 and 100BaseT2. The same can be said about 1000BaseT and 1000BaseX.
+
+**100BaseFX (IEEE 802.3u)** This uses 62.5/125-micron multimode fiber cabling up to 412 meters long and point-to-point topology. It uses ST and SC connectors, which are media-interface connectors.
+
+> [!NOTE]
+> Ethernet's implementation over fiber can sometimes be referred to as 100BaseTF even though this isn't an actual standard. It just means that Ethernet technologies are being run over fiber cable.
+
+**1000BaseCX (IEEE 802.3z)** This is copper twisted-pair called twinax (a balanced coaxial pair) that can run only up to 25 meters and uses a special nine-pin connector known as the High-Speed Serial Data Connector (HSSDC).
+
+**1000BaseT (IEEE 802.3ab)** 1000BaseT uses Category 5, four-pair UTP wiring, and up to 100 meters long (328 feet). 
+
+**1000BaseTX** 1000BaseTX uses Category 5 and two-pair UTP wiring up to 100 meters long (328 feet). 1000BaseTX has been replaced by Category 6 cabling.
+
+**1000BaseSX (IEEE 802.3z)** The implementation of Gigabit Ethernet runs over multimode fiber-optic cable instead of copper twisted-pair cable and uses short wavelength laser. Multimode fiber (MMF), using a 62.5- and 50- micron core, utilizes an 850 nanometer (nm) laser and can go up to 220 meters with 62.5-micron; 550 meters with 50-micron.
+
+**1000BaseLX (IEEE 802.3z)** This is single-mode fiber that uses a 9-micron core, 1,300 nm laser, and can go from 3 km up to 10 km.
+
+**10GBaseT** 10GBaseT is a standard created by the IEEE 802.3an committee to provide 10 Gbps connections over conventional UTP cables (Category 5e, 6, 6A, or 7 cables). 10GBaseT allows the conventional RJ-45 used for Ethernet LANs. It can support signal transmission at the full 100-meter distance specified for LAN wiring. If you need to implement a 10 Gbps link, this is the most economical way to go.
+
+**10GBaseSR** This implementation of 10 Gigabit Ethernet uses short wave length lasers at 850 nm over multimode fiber. It has a maximum transmission distance of between 2 and 300 meters (990 feet), depending on the size and quality of the fiber.
+
+**10GBaseLR** This implementation of 10 Gigabit Ethernet uses longwavelength lasers at 1,310 nm over single-mode fiber. It also has a maximum transmission distance between 2 meters and 10 km, or 6 miles, depending on the size and quality of the fiber.
+
+**10GBaseER** This implementation of 10 Gigabit Ethernet running over single-mode fiber uses extra-long-wavelength lasers at 1,550 nm. It has the longest transmission distances possible of all the 10 Gigabit technologies: anywhere from 2 meters up to 40 km, again depending on the size and quality of the fiber used.
+
+**10GBaseSW** 10GBaseSW, as defined by IEEE 802.3ae, is a mode of 10GBaseS for MMF with an 850 nm laser transceiver and a bandwidth of 10 Gbps. It can support up to 300 meters of cable length. This media type is designed to connect to SONET equipment.
+
+**10GBaseLW** 10GBaseLW is a mode of 10GBaseL supporting a link length of 10 km on standard single-mode fiber (SMF) (G.652). This media type is also designed to connect to SONET equipment.
+
+**10GBaseEW** 10GBaseEW is a mode of 10GBaseE supporting a link length of up to 40 km on SMF based on G.652 using optical-wavelength 1,550 nm. This is another media type designed to connect to SONET equipment.
+
+**40GBaseT** 40GBaseT is a standard created by the IEEE 802.3bq committee and supports Ethernet speeds up to 40 Gbps and is also used for 25 Gbps Ethernet connections commonly found in server NICs. There is less distance than the slower Ethernet types with 40GBaseT limited to 30 meters. This is usually sufficient for data center cabling. Category 8 cabling is required to support the high data rates of 25GBaseT and 40GBaseT.
+
+![image](https://github.com/user-attachments/assets/82ef5842-fa7b-4f98-a89e-6b1a0eab9be9)
+![image](https://github.com/user-attachments/assets/fbc5f622-4d9f-4cf7-aed7-b86b39ebc254)
+
+## Ethernet over Other Standards (IEEE 1905.1-2013)
+
+IEEE 1905.1-2013 is an IEEE standard that defines a convergent digital home network for both wireless and wireline technologies. The technologies include IEEE 802.11 (Wi-Fi), IEEE 1901 (HomePlug, HDPLC) powerline networking, IEEE 802.3 Ethernet, and Multimedia over Coax (MoCA). The 1905.1-2013 was published in April 2013.
+
+#
+
+### Ethernet over Power Line
+
+In February 2011, the IEEE finally published a standard for Broadband over Power Line (BPL) called IEEE 1901, also referred to as Power Line Communication (PLC) or even Power Line Digital Subscriber Line (PDSL). Although this technology has been available for decades in theory, without an IEEE standard it was just not adopted as an alternative to other high-speed media.
+
+Recently this technology has gained traction, especially from the power companies that gather data from the power meter installed in your house. It relays this information to the power company and specifically reports how much power is being used by your residence.
+
+In the future, BPL will allow you to just plug a computer into a wall power socket and have more than 500 Mbps for up to 1,500 meters.
+
+![image](https://github.com/user-attachments/assets/7243f405-77cf-47c3-aab7-2a28f0ca9ab4)
+
+Powerline adapter sets
+
+This technology can be used to deliver Internet access to the home as well. For a computer (or any other device), you would simply need to plug a BPL modem into any outlet in an equipped building to have high-speed Internet access.
+
+![image](https://github.com/user-attachments/assets/9140e49d-0efe-4a0e-a4ba-9e2144bdd2ff)
+
+The picture shows the basic BPL installation.
+
+After the gateway is connected through the coupler to the meter bank for the building, any electrical outlet can be used with the BPL modem to receive the ISP connection to the Internet. 
+
+The following challenges still exist:
+
+
+- The fact that power lines are typically noisy.
+
+- The frequency at which the information is transmitted is used by shortwave, and the unshielded power lines can act as antennas, thereby interfering with shortwave communications.
+
+#
+
+### Ethernet over HDMI
+
+HDMI Ethernet Channel technology consolidates video, audio, and data streams into a single HDMI cable, combining the signal quality of HDMI connectivity with the power and flexibility of home entertainment networking.
+
+![image](https://github.com/user-attachments/assets/6138fe30-a66b-4d42-aa52-c9e57c3ca65d)
+
+It incorporates a dedicated data channel into the HDMI link, enabling highspeed, bidirectional networking at up to 100 Mbps.
