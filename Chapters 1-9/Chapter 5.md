@@ -314,3 +314,28 @@ They are network security appliances that monitor networks and packets for malic
 
 An IDS is considered monitor mode and just records and tells you about problems, whereas an IPS can work in real time to stop threats as they occur.
 
+The main difference between them is that an IPS works inline to actively prevent and block intrusions that are detected based on the rules you set up.
+
+IPSs can send an alarm, create correlation rules and remediation, drop malicious packets, provide malware protection, and reset the connection of offending source hosts.
+
+#
+
+### HIDS
+
+In a host-based IDS (HIDS), software runs on one computer to detect abnormalities on that system alone by monitoring applications, system logs, and event logs—not by directly monitoring network traffic.
+
+Systems like these are typically implemented on servers because they're a bear to manage if spread across several client computers on a network.
+
+Plus, if the IDS database is on the local computer and its data becomes compromised by an attack, the IDS data could be corrupted, too.
+
+Other types of IDSs are protocol-based (PIDS), which monitor traffic for one protocol on one server, and application protocol-based (APIDS), which monitor traffic for a group of servers running the same application (such as SQL).
+
+#
+
+### Access Point
+
+Wireless networks are even more important, now more than ever connecting all of our home appliances so they can communicate to apps we control and the Internet. The ease of communicating on a network using an AP instead of having to use an Ethernet cable has changed our world forever.
+
+![image](https://github.com/user-attachments/assets/7dbe2e20-7501-490b-a5b4-ac61be205d26)
+
+
