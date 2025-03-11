@@ -338,4 +338,121 @@ Wireless networks are even more important, now more than ever connecting all of 
 
 ![image](https://github.com/user-attachments/assets/7dbe2e20-7501-490b-a5b4-ac61be205d26)
 
+The wireless client modulates a digital signal to an analog signal, which the AP can read and demodulate back to a digital signal.
 
+The type of AP described in is known as an autonomous AP because it manages the wireless area with no controller or manager.
+
+The AP creates one collision domain and can run only half-duplex, which is why you can describe an AP as being like a hub.
+
+However, even though some standards provide some full-duplex-type connectivity, a wireless host will never achieve the same type of throughput, security, and consistency that a wired Ethernet network would.
+
+#
+
+### Wireless Range Extender
+
+In some cases you need the WLAN to extend further than the technology in use is designed to deliver. In that case, you can deploy an extender.
+
+These are radios and antennas that operate in the same frequency or channel and receive the signal as a station would and then transmit it in the direction you desire to clients that are out of reach of the original AP.
+
+These devices should be placed so there is at least 15% overlap of the coverage areas of the AP and the extender.
+
+#
+
+### Wireless LAN Controller
+
+In larger wireless networks, managing dozens, hundreds, or even thousands of wireless access points becomes an administrative burden.
+
+This led to the design and deployment of a centralized Wi-Fi configuration controller known as a WLC, or wireless LAN controller.
+
+The WLC lets you configure the complete network on a single device and push the configurations out to the Wi-Fi access points, referred to as lightweight access points, because the controller does the heavy lifting. The access points also tunnel the user data back to the controller, forwarding the traffic onto the LAN.
+
+WLCs greatly reduce the amount of administrative overhead required to manage large enterprise wireless networks.
+
+#
+
+### Load Balancer
+
+Your average router just sends incoming packets to their specified, correlative IP address on the network, but a load balancer can send incoming packets to multiple machines hidden behind one IP address.
+
+In large and busy networks, often a single server does not have the capabilities to serve all requested traffic.
+
+For example, a very busy website on the Internet could have hundreds of thousands of incoming requests every second. This is often too large for a single server to accommodate. Also, if that server were to fail, the whole website could go offline.
+
+Load balancers solve this problem by publishing a virtual IP address to a domain to receive incoming traffic.
+
+The load balancer then has a pool of real servers that it distributes the connections to. The distribution can be based on round robin, least number of connections, response time, a weighted percentage, or other metrics to evenly distribute the workload to the servers.
+
+Health checks are performed to make sure that the servers are operational. If one does not respond, it can be automatically taken offline with the site still operating on the remaining servers.
+
+Capacity can be dynamically added or removed using load balancers by using either manual or automatic scaling based on the current servers' workloads. New servers can dynamically be added and removed from the pool to scale the service up or down.
+
+Today's load-balancing routers follow various rules to determine specifically how they will route network traffic. Depending on your needs, you can set rules based on the least load, fault tolerance, the fastest response times, or just dividing up (balancing) outbound requests for smooth network operations.
+
+In fact, the fault tolerance, or redundancy, as well as the scalability so vital to large networking environments and e-commerce are some of the great benefits we gain using load balancers.
+
+Think about this scenario: Say you have a website where people are placing orders for the stuff you're selling. Obviously, the orders placed vary in size, and the rate at which they come in varies; you definitely wouldn't want your servers becoming so overloaded that they hose up and crash your site, causing you to lose lots of money, now would you? That's where balancingthe load of traffic between a group of servers comes to the rescue, because even if one of them freezes, your customers will still be able to access your site and place orders.
+
+#
+
+### Contention Methods
+
+In both wireless and wired environments that are shared mediums, meaning devices share a collision domain, such as when connected to a hub or when connected to a wireless access point, there is potential for frames from multiple devices colliding, destroying both packets.
+
+Both wired and wireless environments use a contention method to arbitrate access to the medium to help prevent collisions or at the least to recover from them when they occur.
+
+#
+
+### CSMA / CA
+
+When the device sending the frame is transmitting onto a wireless network, the Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA) contention method is used.
+
+The method starts with a check of the medium (in this case, a check of the radio frequency) for activity called **physical carrier sense**.
+
+The frame will go to the AP. The AP will acknowledge reception of the frame. If the frame is destined for another wireless station located on this wireless LAN, the frame will be forwarded to it by the AP. When this occurs, the AP will follow the same CSMA/CA contention method to get the frame onto the wireless medium.
+
+If the frame is destined for a station on the wired LAN, the AP will drop the 802.11 MAC header (which is structured differently from an Ethernet MAC header) and build a new Ethernet MAC header by using its MAC address as the source address and the MAC address of the default gateway as the destination.
+
+The LAN router will receive the frame, and normal LAN routing to the destination will continue from there, using the CSMA/CD contention mechanism (covered a bit later) to place the frame in the wire at each step.
+
+If frames are returned to the station, the AP will receive them, drop the Ethernet MAC header, build an 802.11 MAC header, and return the frame to the wireless station.
+
+When this occurs, the AP will follow the same CSMA/CA contention method to get the frame onto the wireless medium.
+
+#
+
+### Describing CSMA/CA Operation
+
+Because it is impossible for wireless stations to detect collisions, the CSMA/CA contention method is required to arbitrate access to the network.
+
+It requires a more involved process of checking for existing wireless traffic before a frame can be transmitted wirelessly.
+
+The stations (including the AP) must also acknowledge all frames.
+
+The steps in the process are as follows:
+
+1. Laptop A has a frame to send to laptop B. Before sending, laptop A must check for traffic in two ways. First, it performs carrier sense, which means it listens to see whether any radio waves are being received on its transmitter.
+
+2. If the channel is not clear (traffic is being transmitted), laptop A will decrement an internal countdown mechanism called the random backoff algorithm. This counter will have started counting down after the last time this station was allowed to transmit. All stations will be counting down their own individual timers. When a station's timer expires, it is allowed to send.
+
+3. If laptop A checks for carrier sense and there is no traffic and its timer hits zero, it will send the frame.
+
+4. The frame goes to the AP.
+
+5. The AP sends an acknowledgment back to laptop A. Until that acknowledgment is received by laptop A, all other stations must remain silent. The AP will cache the frame, where it already may have other cached frames that need to be relayed to other stations. Each frame that the AP needs to relay must wait its turn to send the frame using the same mechanism as the stations.
+
+6. When the frame's turn comes up in the cache queue, the frame from laptop A will be relayed to laptop B.
+
+7. Laptop B sends an acknowledgment back to the AP. Until that acknowledgment is received by the AP, all other stations must remain silent.
+
+When you consider that this process has to occur for every single frame and that there are many other frame types used by the AP to manage other functions of the network that also create competition for air time, it is no wonder that actual throughput on a wireless LAN is at best about half the advertised rate.
+
+For example, if two wireless stations were the only wireless clients and they were using 802.11g, which is capable of 54 Mbps, the very best throughput experienced would be about 25 to 28 Mbps. Moreover, as soon as a third station arrives, throughput will go down again because the stations are dividing the air time by 3 instead of 2. Add a fourth, and it gets even worse.
+
+#
+
+### CSMA/CD
+
+When the device sending the frame is transmitting onto a wired network, the Carrier Sense Multiple Access with Collision Detection (CSMA/CD) contention method is used.
+
+This method is somewhat more efficient because
+it is possible for wired computers to detect collisions while wireless stations cannot. When a host's or router's interface needs to send a frame, it checks the wire, and if no traffic is detected, it sends without checking a random back-off timer.
