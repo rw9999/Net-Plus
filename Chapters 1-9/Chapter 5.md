@@ -489,3 +489,7 @@ Its operation is as follows:
 
 DHCP servers assign IP addresses to hosts
 
+This protocol gives us a much easier way to administer—by automatically providing IP information—than the alternative and tedious method known as static IP addressing or static assignment, where we have to address each host manually.
+
+It works well in any network environment, from tiny to huge, and allows all types of hardware to be employed as a DHCP server, including routers.
+
