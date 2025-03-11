@@ -456,3 +456,36 @@ When the device sending the frame is transmitting onto a wired network, the Carr
 
 This method is somewhat more efficient because
 it is possible for wired computers to detect collisions while wireless stations cannot. When a host's or router's interface needs to send a frame, it checks the wire, and if no traffic is detected, it sends without checking a random back-off timer.
+
+However, it continues to listen, and if it detects that a collision has occurred, it sends out a jam signal that requires all stations to stop transmitting. Then the two computers that were involved in the collision will both wait a random amount of time (that each arrives at independently) and will resend.
+
+So instead of using a random break-off algorithm every time a transmission occurs, Ethernet uses its ability to detect collisions and uses this timer only when required, which makes the process more efficient.
+
+#
+
+### Describing CSMA/CD Operation
+
+CSMA/CD has mechanisms that help minimize but not eliminate collisions. 
+
+Its operation is as follows:
+
+1. When a device needs to transmit, it checks the wire. If a transmission is already underway, the device can tell. This is called carrier sense.
+
+2. If the wire is clear, the device will transmit. Even as it is transmitting, it is performing carrier sense.
+
+3. If another host is sending simultaneously, there will be a collision. The collision is detected by both devices through carrier sense.
+
+4. Both devices will issue a jam signal to all the other devices, which indicates to them to not transmit.
+
+5. Then both devices will increment a retransmission counter. This is a cumulative total of the number of times this frame has been transmitted and a collision has occurred. There is a maximum number at which the device aborts the transmission of the frame.
+
+6. Both devices will calculate a random amount of time and will wait that amount of time before transmitting again. This calculation is called a random back-off.
+
+7. In most cases, because both devices choose random amounts of time to wait, another collision will not occur.
+
+#
+
+### Dynamic Host Configuration Protocol Server
+
+DHCP servers assign IP addresses to hosts
+
