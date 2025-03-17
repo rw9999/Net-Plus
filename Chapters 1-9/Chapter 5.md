@@ -493,3 +493,5 @@ This protocol gives us a much easier way to administer—by automatically provid
 
 It works well in any network environment, from tiny to huge, and allows all types of hardware to be employed as a DHCP server, including routers.
 
+It works like this:
+
