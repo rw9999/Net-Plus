@@ -495,3 +495,144 @@ It works well in any network environment, from tiny to huge, and allows all type
 
 It works like this:
 
+DHCP server receives a request for IP information from a DHCP client using a broadcast.
+
+The DHCP server is configured by the administrator with what is called a pool of addresses that it uses for this purpose.
+
+When the administrator configures this pool, they can also set some addresses in the pool as “off limits.” These are called IP exclusions or **exclusion ranges**. It means that these addresses cannot be assigned. An example might be the address of the router interface.
+
+The only hitch is that if the DHCP server isn't on the same segment as the DHCP client, the broadcast won't be received by the server because, by default, routers won't forward broadcasts.
+
+![image](https://github.com/user-attachments/assets/e395dc2f-90ea-471d-97d6-192272d61de5)
+
+In the picture, Router A is configured with the IP helper address command on interface E0 of the router.
+
+Whenever interface E0 receives a broadcast request, Router A will forward that request as a unicast (meaning instead of a broadcast, the packet now has the destination IP address of the DHCP server).
+
+So, as shown in the figure, you can configure Router A to forward these requests and even use multiple DHCP servers for redundancy, if needed.
+
+This works because the router has been configured to forward the request to a single server using a unicast or by sending the request to multiple servers via a directed broadcast.
+
+It is possible to have a DHCP server on every network segment, but that is not necessary because of the routers' forwarding ability.
+
+![image](https://github.com/user-attachments/assets/5065c481-e061-4e65-8f7e-3830d6600714)
+
+**Scope options** provide IP configuration for hosts on a specific subnet.
+
+Below Scope Options, you'll find Server Options; these options provide IP information for all scopes configured on the server.
+
+If I had just one Domain Name System (DNS) server for the entire network, I'd configure the server options with my DNS server information; that DNS server information would then show up automatically in all scopes configured on my server.
+
+So, what exactly does a DHCP client ask for, and what does a DHCP server provide? Is it just an IP address, a mask, and a default gateway? No, it is much more than that.
+
+Scope options comprise the informational elements that the DHCP server can provide to the DHCP clients. 
+
+Here are some examples of these options:
+
+- TTL (provides the default TCP TTL value for TCP packets sent by the client)
+
+- DNS server
+
+- TFTP server (especially important for IP phones that need to get a configuration for a TFTP server)
+
+Let's take a look at a DHCP client request on an analyzer.
+
+![image](https://github.com/user-attachments/assets/950ca3f5-a9c4-45ae-9099-5d13299f834e)
+
+First, you can see that the DHCP service runs on top of the BootP protocol (port 68) and that the DHCP client is looking for a BootP server (port 67). 
+
+The client IP address is 0.0.0.0, and the client doesn't know the DHCP server address either because this is a broadcast to 255.255.255.255 (the Data Link layer broadcast shows ff:ff:ff:ff:ff:ff).
+
+Basically, all the DHCP client knows for sure is its own MAC address. 
+
+The client is “requesting” a certain IP address because this is the IP address it received from the server the last time it requested an IP address.
+
+![image](https://github.com/user-attachments/assets/fc1a8fa0-8f86-4e14-9379-b19da7e2c004)
+
+Notice all the parameter information that can be sent to a DHCP client from the server.
+
+The DHCP server will respond with the options that it has configured and are available to provide to a DHCP client.
+
+![image](https://github.com/user-attachments/assets/8b397239-e04d-4bc3-922c-a14ceb96a532)
+
+The client is going to get the IP address that it asked for (10.100.36.38), a subnet mask of 255.255.255.224, a lease time of 23 hours (the amount of time before the IP address and other DHCP information expires on the client), the IP address of the DHCP server, the default gateway (router), the DNS server IP address (it gets two), the domain name used by DNS, and some NetBIOS information (used by Windows for name resolution).
+
+The **lease time** is important and can even be used to tell you if you have a DHCP problem or, more specifically, that the DHCP server is no longer handing out IP addresses to hosts.
+
+If hosts start failing to get onto the network one at a time as they try to get a new IP address as their lease time expires, you need to check your server settings.
+
+A DHCP server can also be configured with a reservation list so that a host always receives the same IP address. When this is done, the reservation is made on the basis of the router interface MAC address.
+
+Therefore, it is sometimes called a MAC reservation. You would use this reservation list for routers or servers if they were not statically assigned. However, you can use reservation lists for any host on your network as well.
+
+DHCP is an Application layer protocol. While the DORA (Discover, Offer, Request, Acknowledgment) components operate at layer 2, the protocol is managed and responds to the Application layer. 
+
+DHCP uses UDP ports 67 and 68.
+
+#
+
+### DHCP Relay
+
+If you need to provide addresses from a DHCP server to hosts that aren't on the same LAN as the DHCP server, you can configure your router interface to relay or forward the DHCP client requests.
+
+This is referred to as a DHCP relay.
+
+If we don't provide this service, our router would receive the DHCP client broadcast, promptly discard it, and the remote host would never receive an address—unless we added a DHCP server on every broadcast domain.
+
+![image](https://github.com/user-attachments/assets/1ecb7a96-b172-4864-abaa-dbec509b59eb)
+
+So we know that because the hosts off the router don't have access to a DHCP server, the router will simply drop their client request broadcast messages by default.
+
+To solve this problem, we can configure the F0/0 interface of the router to accept the DHCP client requests and forward them to the DHCP server like this:
+    
+    Router#config t
+    Router(config)#interface fa0/0
+    Router(config-if)#ip helper-address 10.10.10.254
+
+#
+
+### IPAM
+
+IP address management (IPAM) tools are software products that integrate the management of DHCP and DNS.
+
+They are used to plan, track, and manage the IP addresses.
+
+With the integration of DNS and DHCP, each process is kept abreast of changes made to the other service. Many products offer additional functionality, such as tracking IP addresses in use and the devices an IP is assigned to, as well as at what time and to which user an IP address was assigned.
+
+## Other Specialized Devices
+
+In addition to the network connectivity devices I've discussed with you, several devices, while not directly connected to a network, do actively participate in moving network data. 
+
+Here's a list of them:
+
+- Multilayer switch
+- DNS server
+- Network Time Protocol
+- -Proxy server
+- Encryption devices
+- Analog modem
+- Packet shaper
+- VPN concentrator headend
+- Media converter
+- VoIP PBX
+- VoIP endpoint
+- NGFW/layer 7 firewall
+- VoIP gateway
+- DSL modem
+
+#
+
+### Multilayer Switch
+
+A multilayer switch (MLS) is a computer networking device that switches on OSI layer 2 like an ordinary network switch but provides routing.
+
+A 24-port MLS gives you the best of both worlds. It operates at layer 3 (routing) while still providing 24 collision domains, which a router could not do.
+
+The major difference between the packet-switching operation of a router and that of a layer 3 or multilayer switch lies in the physical implementation.
+
+In routers, packet switching takes place using a microprocessor, whereas a layer 3 switch handles this by using application specific integrated circuit (ASIC) hardware.
+
+#
+
+### Domain Name System Server
+
