@@ -636,3 +636,39 @@ In routers, packet switching takes place using a microprocessor, whereas a layer
 
 ### Domain Name System Server
 
+A Domain Name System (DNS) server is one of the most important servers in your network and on the Internet as well. Why? Because without a DNS server, you would have to type https://206.123.114.186 instead of simply entering www.lammle.com . So it follows that you can pretty much think of the DNS system as the phone book of the Internet.
+
+A hostname is typically the name of a device that has a specific IP address; on the Internet, it is part of what is known as a fully qualified domain name (FQDN). 
+
+An FQDN consists of a hostname and a domain name.
+
+The process of finding the IP address for any given hostname is known as name resolution, and it can be performed in several ways: a hosts file (meaning you statically type in all names and IP addresses on each and every host), a request broadcast on the local network, or DNS.
+
+DNS is the most popular today and is the resolution method you really need to know.
+
+On the Internet, domains are arranged in a hierarchical tree structure.
+
+The following list includes some of the root or top-level domains currently in use:
+
+- .com A commercial organization. Most companies end up as part of this domain.
+- .edu An educational establishment, such as a university.
+- .gov A branch of the US government.
+- .int An international organization, such as NATO or the United Nations.
+- .mil A branch of the US military.
+- .net A network organization.
+- .org A nonprofit organization.
+
+Your local ISP is probably a member of the .net domain, and your company is probably part of the .com domain. The .gov and .mil domains are reserved strictly for use by the government and the military within the United States. In other parts of the world, the final part of a domain name represents the country in which the server is located ( .ca for Canada, .jp for Japan, .uk for Great Britain, and .ru for Russia, for example). Well over 130 countries are represented on the Internet.
+
+The .com domain is by far the largest, followed by the .edu domain. Some new domain names are becoming popular, however, because of the increasing number of domain-name requests. These include .firm for businesses and companies, .store for businesses selling goods rather than services, .arts for cultural and entertainment organizations, and .info for informational services. The domains .cc , .biz , .travel , and .post are also in use on the Internet.
+
+![image](https://github.com/user-attachments/assets/4838d6c1-b937-47ea-b93c-02f3bf65c974)
+
+The picture shows how, when you type in a domain name, the DNS server resolves it, allowing the host to send the HTTPS packets to the server.
+
+This Command Prompt screen shows how the DNS server can resolve the human name to the IP address of the Lammle.com server when I ping the server by the name instead of the IP address.
+
+![image](https://github.com/user-attachments/assets/86091b19-9aaa-4114-91a2-f72516623f1b)
+
+
+
