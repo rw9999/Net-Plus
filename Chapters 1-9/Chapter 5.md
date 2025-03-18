@@ -670,5 +670,186 @@ This Command Prompt screen shows how the DNS server can resolve the human name t
 
 ![image](https://github.com/user-attachments/assets/86091b19-9aaa-4114-91a2-f72516623f1b)
 
+To complete unqualified DNS names that will be used to search and submit DNS queries at the client for resolution, you must have a list of DNS suffixes that can be appended to these DNS names.
 
+For DHCP clients, this can be set by assigning the DNS domain name option (option 15) and providing a single DNS suffix for the client to append and use in searches.
+
+For example, if you just wanted to ping todd instead of pinging todd.lammle.com , you can configure the DHCP server option 15 to provide the suffix for you.
+
+Now the hosts can receive the IP address of this DNS server, and then this server will resolve hostnames to correct IP addresses. This is a mission-critical service in today's networks.
+
+If I ping from a host to conlanpc1, the host will send the name resolution request to the DNS server and translate this name to IP address 192.168.255.8.
+
+Host (A) is called an A record or address (A) record and is what gives you the IP address of a domain or host. In IPv6, it's called a quad-A or AAAA record.
+
+You can see that each name has an A record, which is associated to an IP address. So, A records resolve hostnames to IP addresses, but what happens if you know the IP address and want to know the hostname? There is a record for this, too! It's called the pointer record (PTR).
+
+![image](https://github.com/user-attachments/assets/3dfa0c4b-179a-42be-b4b1-a5b11c5598f4)
+![image](https://github.com/user-attachments/assets/83953bcc-455f-4af4-8569-2734c2ee6568)
+![image](https://github.com/user-attachments/assets/27668a86-7e42-440c-bb5e-f71a7198e991)
+
+If the first-priority mail exchanger doesn't respond in a given amount of time, the mail-delivery system tries the second one, and so on.
+
+Here are some sample mail-exchange records:
+
+    hostname.company.com.    IN    MX    10
+    mail.company.com.
+    hostname.company.com.    IN    MX    20
+    mail2.company.com.
+    hostname.company.com.    IN    MX    30
+    mail3.company.com.
+
+In this example, if the first mail exchanger, mail.company.com , does not respond, the second one, mail2.company.com , is tried, and so on.
+
+Another important record type on a DNS server is the canonical name (CNAME) record. This is also commonly known as the alias record, and it allows hosts to have more than one name.
+
+For example, suppose your web server has the hostname www and you want that machine to also have the name ftp so that users can use FTP to access a different portion of the file system as an FTP root. You can accomplish this with a CNAME record.
+
+Given that you already have an address record established for the hostname www , a CNAME record that adds ftp as a hostname would look something like this:
+
+    www.company.com.    IN    A
+    204.176.47.2
+    ftp.company.com.    IN    CNAME
+    www.company.com.
+
+When you put all these record types together in a zone file, or DNS table, it might look like this:
+    
+    mail.company.com.      IN     A
+    204.176.47.9
+    mail2.company.com.     IN     A
+    204.176.47.21
+    mail3.company.com.     IN     A
+    204.176.47.89
+    yourhost.company.com.  IN    MX     10
+    mail.company.com.
+    yourhost.company.com.  IN    MX     20
+    mail2.company.com.
+    yourhost.company.com.  IN    MX     30
+    mail3.company.com.
+    www.company.com.       IN    A
+    204.176.47.2
+    ftp.company.com.       IN    CNAME
+    www.company.com.
+
+DNS uses zone transfers from the primary DNS server for a zone to update standby servers; this allows us to have some redundancy in our DNS deployments and distribute the workload across multiple DNS servers.
+
+There are two types of zones: Forward and Reverse.
+
+Forward lookup zones resolve names to IP addresses, and Reverse lookup zones resolve IP addresses to names.
+
+Forwarders are used on your DNS server to forward requests if your DNS server does not have an authoritative answer.
+
+When a client gets a DNS reply from a query, it will store it locally (cached) for a period of time to reduce the number of lookups on the DNS servers.
+
+In each DNS reply there is a field called TTL, or time to live. This instructs the client how long to store the replay before requesting again.
+
+This allows us to reduce the network workload and keep the DNS data fresh on the client.
+
+All devices use a cache system that stores the requests locally for a period of time, and the time to live (TTL) value tells the client how long that should be.
+
+What if you know the IP address but want to know what the domain name is? DNS can perform reverse lookup to query the server with the IP address, and it will return the domain name.
+
+Other lookup types include recursive and iterative.
+
+When a DNS system uses a recursive lookup, one DNS server will query other DNS servers instead of the client performing all of the operations.
+
+The other option is to have the client communicate with multiple DNS servers during the name resolution process, which is referred to as an iterative DNS query.
+
+Finally, there are other record types you should know about such as AAAA (for authentication IPV6 host addresses), PTR (pointer) records, and SOA (start of authority) records.
+
+PTR records are IP address–to–name mapping records rather than name–to–IP address mapping records. They reside in what is called a reverse lookup zone (or table) in the server and are used when an IP address is known but not a name.
+
+The start of authority, or SOA, record stores information about the DNS domain or zone such as how to contact the administrator, when the domain was last updated, and how long the server should wait between refreshes.
+
+![image](https://github.com/user-attachments/assets/ed16774c-581e-4b29-9f7d-85aa6e11ffc5)
+
+Let's take a look a tad deeper for a minute into how resolution takes place between a host and a DNS server.
+
+The picture shows a DNS query from my host to www.lammle.com from a browser.
+
+This figure shows that DNS uses User Datagram Protocol (UDP) at the Transport layer (it uses Transport Control Protocol [TCP] if it is updating its phone book pages—we call these **zone updates**) and this query is asking destination port 53 (the DNS service) on host 192.168.133.2 who the heck www.lammle.com is.
+
+Let's take a look at the server's response.
+
+![image](https://github.com/user-attachments/assets/aaaf9ee7-5843-44da-97a7-22b0a370f0e4)
+
+Port 53 answered from server 192.168.133.147 with a CNAME and an A record with the IP address of 184.172.53.52. My host can now go to that server requesting HTTP pages using the IP address.
+
+DNS is an Application layer protocol. DNS queries are made on UDP port 53.
+
+#
+
+### Dynamic DNS
+
+At one time all DNS records had to be manually entered into the DNS server and edited manually when changes occurred. Today, DNS is dynamic.
+
+It uses **dynamic assignment** and works in concert with the DHCP function.
+
+Hosts register their names with the DNS server as they receive their IP address configuration from the DHCP server.
+
+Some older operating systems are not capable of self-registration, but the DHCP server can even be configured to perform registration on behalf of these clients with the DNS server.
+
+This doesn't mean that manual records cannot be created if desired. In fact, some of the record types we have discussed can only be created manually. These include MX and CNAME records.
+
+#
+
+### Internal and External DNS
+
+DNS servers can be located in the screened subnet (or DMZ) or inside the intranet.
+
+![image](https://github.com/user-attachments/assets/fad0fd92-ab6c-426c-b72a-4fd6f1b2f175)
+
+When located in the DMZ, the DNS server should only contain the records of the devices that are placed in the DMZ.
+
+Implementing separate internal and external DNS servers might require you to include external resource records in the internal DNS zone.
+
+You need to do this when the Active Directory forest root uses the same DNS domain name as the external network or when you want to reference the externally accessible resources by their true IP addresses in the perimeter network rather than using the addresses published to the Internet by the firewall protecting the perimeter network.
+
+#
+
+### Third-Party/Cloud-Hosted DNS
+
+Some smaller organizations find that it makes more sense to outsource the DNS function.
+
+Rather than hire and train staff to set up, configure, and maintain the infrastructure required to keep name resolution up and secure, they might find it more cost effective to utilize a third party who makes it their business to provide this service.
+
+There is no shortage of cloud providers falling all over themselves to provide you with cloud-based storage, and these same vendors stand ready to provide you with DNS as a service.
+
+#
+
+### Domain Name System Security Extensions (DNSSEC)
+
+DNSSEC is not a single protocol but a suite of new extensions created by Extension Mechanisms for DNS (EDNS).
+
+EDNS was created to expand the size of various parameters of the DNS protocol, which was originally created too small and had size restrictions that engineers found too limited in today's Internet.
+
+Because of this expansion, new security specifications were created by the Internet Engineering Task Force (IETF) to secure data that is exchanged in the DNS protocol, and this was named DNSSEC.
+
+This protocol provides cryptographic authentication of data, authenticated denial of existence, and data integrity.
+
+#
+
+### DNS over HTTPS (DoH) and DNS over TLS (DoT)
+
+These two protocols are a great addition to the DNS protocol unless you are a cyber security expert trying to find DNS data for Next Generation Firewall (NGFW) tuning since the DNS queries are encrypted.
+
+This means you cannot see the URL, URL reputation, or the URL category or these queries.
+
+All these are necessary when tuning a Snort process (IPS) with URL filtering.
+
+**DNS over HTTPS** DoH is an Internet security protocol that communicates encrypted DNS information over HTTPS connections. DNS queries, as well as responses, are encrypted with DoH, which means that would-be attackers cannot forge or even alter DNS traffic. This also means that DoH looks like any other HTTPS traffic. DoH is used by Firefox by default. However, other browsers can support DoH; they just are not enabled by default.
+
+**DNS over TLS** Like DoH, DoT is a standard that encrypts DNS queries, which provides the security and privacy that users look for. Like DoH, DoT uses TLS (used to be called SSL) to encrypt and authenticate DNS communications. DoH uses TCP, but DoT uses UDP for DNS queries.
+
+The DoH and DoT standards were developed separately, which means that each ended up with its own RFC documentation.
+
+It's important to distinguish that DoT uses TCP port 853 as well as UDP port 8853, while DoH uses port TCP 443, and because DoH uses the same TCP 443 port used by other HTTPS traffic, identifying the DoH from other HTTPS traffic is difficult.
+
+You'll also see a protocol called DNS over QUIC (DoQ) created by Google and used by Chrome. 
+
+This is a transport layer encryption and not the query encryption that DoH and DoT use. DoQ basically does the same thing as both DoH and DoT, meaning that the connection to the configured DNS server is encrypted; however, DoQ uses UDP port 443 instead of TCP 443.
+
+#
+
+### Network Time Protocols
 
