@@ -853,3 +853,212 @@ This is a transport layer encryption and not the query encryption that DoH and D
 
 ### Network Time Protocols
 
+The Network Time Protocol (NTP) provides the time synchronization of the clocks on networking devices and computers on a network.
+
+This is used for distributed tasks that require accurate time to make sure tasks are processed in the correct sequence and recorded properly.
+
+NTP is needed for security and log tracking across many devices to correlate and trace events based on time.
+
+Many network management applications rely on timestamps for performance measurements and troubleshooting. If all of the devices in a network did not have the same time provided by syncing to a master clock using NTP, these would not be possible.
+
+The NTP protocol operates on UDP port 123.
+
+**Stratum** Stratum levels are how accurate the time source is. If the primary reference clock is a master time source such as a nuclear clock or a satellite navigation array, it is considered to be stratum level 0. Stratum 1 takes its time source from a stratum 0 clock, stratum 2 syncs from stratum 1, and so on. The accuracy is less the further you are from a stratum 0 time source.
+
+**Clients** Clients use the NTP protocol to query NTP servers to set their clocks. If every device in a network uses NTP, then all the clocks will be synchronized.
+
+Once a client has synchronized its clock from an NTP time server, it will generally check every 10 minutes to keep its time updated.
+
+**Servers** NTP servers can be specialized hardware on your network that sync to stratum 0 devices or on the Internet. The site at https://tf.nist.gov/tfcgi/servers.cgi lists servers available for public use.
+
+#
+
+### Network Time Security (NTS)
+
+NTP is a great tool to provide exact time to your network devices. However, it's possible that you may receive time from an unauthorized server without knowing it.
+
+Network Time Security (NTS) provides cryptographic security for the client-server mode of NTP.
+
+Users can now get time for their network devices in an authenticated manner. By using NTS, you can be sure your devices are receiving accurate time from a reliable source.
+
+NTS keeps the encryption process separate from the low-latency time synchronization.
+
+This process allows you to introduce encryption into the time distribution system without increasing latency and affecting the accuracy of the time received.
+
+#
+
+### Proxy Server
+
+A proxy server is basically a type of server that handles its client-machine requests by forwarding them to other servers while allowing granular control over the traffic between the local LAN and the Internet.
+
+When it receives a request, the proxy will then connect to the specific server that can fulfill the request for the client that wants it.
+
+A proxy server operates at the Application layer of the OSI model.
+
+Sometimes the proxy modifies the client's request or a server's response to it —or even handles the client's request itself.
+
+It will actually cache, or “remember,” the specific server that would have normally been contacted for the request in case it's needed another time. This behavior really speeds up the network's function, thereby optimizing its performance.
+
+However, proxy servers can also limit the availability of the types of sites that users on a LAN have access to, which is a benefit for an administrator of the network if users are constantly connected to non-work or prohibited sites and using all the WAN bandwidth.
+
+![image](https://github.com/user-attachments/assets/57ffb845-68a7-4185-aa08-e3a010b087d6)
+
+There are two main types of proxy servers you'll typically find working in present-day networks:
+
+**Web Proxy Server** A web proxy server is usually used to create a web cache. You experience this when you google a site you've visited before. The web proxy “remembers” you, and the site not only loads faster but sometimes even recalls your personal information by automatically filling in your username—or even your billing/shipping information when you place another order.
+
+**Caching Proxy Server** A caching proxy server speeds up the network's service requests by recovering information from a client's earlier request.  Caching proxies keep local copies of the resources requested often, which really helps minimize the upstream use of bandwidth. These servers can greatly enhance network performance.
+
+Unlike a forward proxy, a reverse proxy takes requests from the Internet and forwards them to servers in an internal network, whereas the forward proxy we discussed in this section takes client requests and sends them to the Internet.
+
+#
+
+### Encryption and Content Filtering
+
+Although a number of the devices we have discussed can perform encryption services, there are dedicated appliances that can perform encryption as well.
+
+The advantage of using these devices is that they normally provide more choice of encryption methods and stronger encryption options.
+
+They also offload the process from other devices like routers and servers, which is a good thing since the encryption/decryption process is very processor intensive and interferes with other functions that those routers and servers might be performing.
+
+Sometimes these devices are called encryption gateways.
+
+They can either sit in line with a server or a local network, encrypting and decrypting all traffic, or function as an application server, encrypting any file sent to them within a network.
+
+![image](https://github.com/user-attachments/assets/734595b7-e476-46f9-bc6c-5a1de562e63b)
+
+Encryption appliances ^
+
+While an encryption appliance is dedicated to encryption, a content filtering appliance scans the content of what goes through it and filters out specific content or content types.
+
+Dedicating a device to this process offloads the work from servers or routers that could do this but at a cost of greatly slowing the devices. Also, there is usually more functionality and granular control available with a dedicated appliance.
+
+Email is a good example of what you might run through one of these devices to filter out spam and objectionable content before the email is delivered. Another example of the use of a content filter might be to block websites based on the content of the web pages rather than on the basis of the URL or IP address.
+
+![image](https://github.com/user-attachments/assets/a29fb3ee-d7a0-4e33-93a4-884e9a1c7040)
+
+Content filtering appliance ^
+
+#
+
+### Analog Modem
+
+A modem (modulator-demodulator) is a device that modulates an analog carrier signal to encode digital information and demodulates the signal to decode the transmitted information.
+
+![image](https://github.com/user-attachments/assets/6841ce14-4803-4d0c-8ff0-452311e063f6)
+
+The goal is to produce a signal that can be transmitted easily and decoded to reproduce the original digital data. These signals are transmitted over telephone lines and demodulated by another modem at the receiver side in order to read the digital data.
+
+ Because modems connect to phone lines, the location and installation of these devices is fairly cut-and-dried. It will have to be near a phone line,  with one end connected to the phone line and another to a computer or modem bank. The analog modem operates at layer 1, like a repeater.
+
+#
+ 
+### Packet Shaper
+
+Packet shaping (also known as traffic shaping, it's a form of rate limiting) is an Internetworking traffic management technique that delays some or all packets to bring them into compliance with your or your company's traffic profile.
+
+![image](https://github.com/user-attachments/assets/7fb28d7d-1134-4fb0-ac2c-9c58a28f84f1)
+
+This process is used to optimize or guarantee performance, improve latency, and/or increase usable bandwidth for some kinds of packets by delaying other kinds, decided on by you.\
+
+#
+
+### VPN Concentrator/Headend
+
+A VPN concentrator, or as it is often called, a headend, is a device that accepts multiple VPN connections from remote locations.
+
+Although this function can be performed by a router or server, as with the encryption gateways and content filtering devices discussed earlier, the same performance benefits can be derived from dedicating a device to this.
+
+Moreover, additional functionality usually comes with these devices.
+
+![image](https://github.com/user-attachments/assets/dd435da0-b4e7-4815-938a-c6927b10a109)
+
+A headend device is a central control device required by some networks (for example, LANs or MANs). 
+
+A headend device can also refer to a central control device within CATV systems that provides centralized functions such as re-modulation.
+
+#
+
+### Media Converter
+
+Media converters are used when you need to convert from one type of cabling to another type.
+
+This might be required to convert from one type of fiber to another or from Ethernet to fiber.
+
+![image](https://github.com/user-attachments/assets/e07d5319-d726-4cd3-bb62-ed94f9e9fd45)
+
+Obviously, the location of these devices depends on where the conversion needs to take place. Media converters operate at layer 1.
+
+#
+
+### VoIP PBX
+
+A private branch exchange (PBX) is a private telephone switch that resides on the customer premises.
+
+It has a direct connection to the telecommunication provider's switch.
+
+It performs call routing within the internal phone system. This is how a company can have two “outside” lines but 50 internal phones.
+
+The call comes in on one of the two outside lines, and the PBX routes it to the proper extension. Sometimes the system converts analog to digital but not always.
+
+A VoIP PBX is one that switches calls between VoIP users on local lines while allowing all users to share a certain number of external phone lines.
+
+The typical IP PBX can also switch calls between a VoIP user and a traditional telephone user or between two traditional telephone users in the same way that a conventional PBX does.
+
+#
+
+### VoIP Endpoint
+
+VoIP endpoints are desktop phone systems or wireless phone systems that are part of the converged networks where data and voice traffic are now combined in today's networks.
+
+These endpoints may also be implemented as conferencing systems in meeting rooms. There is more flexibility and freedom in the location and installation of these systems as more wireless modes of connectivity are introduced for these devices.
+
+#
+
+### NGFW/Layer 7 Firewall
+
+Next-generation firewalls (NGFWs) are a category of devices that attempt to address traffic inspection and application awareness shortcomings of a traditional stateful firewall without hampering the performance.
+
+Although unified threat management (UTM) devices also attempt to address these issues, they tend to use separate internal engines to perform individual security functions.
+
+This means a packet may be examined several times by different engines to determine whether it should be allowed into the network.
+
+NGFWs are application aware, which means they can distinguish between specific applications instead of allowing all traffic coming in via typical web ports.
+
+Moreover, they examine packets only once during the deep packet inspection phase (which is required to detect malware and anomalies).
+
+#
+
+### VoIP Gateway
+
+A VoIP gateway is a network device that helps to convert voice and fax calls between an IP network and a public switched telephone network (PSTN) in real time.
+
+A VoIP gateway can typically support at least two T1/E1 digital channels.
+
+Most VoIP gateways feature at least one Ethernet and telephone port.
+
+Various protocols, such as Media Gateway Control Protocol (MGCP), Session Initiation Protocol (SIP), and Lightweight Telephony Protocol (LTP), can help to control a gateway.
+
+#
+
+### Cable Modem
+
+A cable modem allows for voice, video, and data (usually Internet) to connect from a home or small business to a cable provider's network.
+
+The cable modem is installed at the customer site and connects to the coax (coaxial) cable network.
+
+The Data Over Cable Service Interface Specifications (DOCSIS) standard allows both voice and data to share the cable with the standard video TV offerings provided by the local cable company.
+
+#
+
+### DSL Modem
+
+Digital Subscriber Line (DSL) modems are commonly deployed by traditional phone companies that have twisted-pair copper as the local connection to homes and businesses.
+
+DSL modems allow for voice, video, and data (usually Internet) to piggyback on the local copper line as a high-frequency carrier above the standard voice frequencies.
+
+
+## Networked Devices
+
+### VoIP Phones
+
