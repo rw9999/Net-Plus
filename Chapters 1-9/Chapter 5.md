@@ -1062,3 +1062,312 @@ DSL modems allow for voice, video, and data (usually Internet) to piggyback on t
 
 ### VoIP Phones
 
+Phones have migrated from the older analog style to digital Ethernet.
+
+While they tend to be low bandwidth, they are sensitive to delay and jitter so some form of quality of service (QoS) is usually required on the network to make sure the voice quality is acceptable.
+
+#
+
+### Printers
+
+Instead of having a printer connected to each desktop, they can be shared on the network with NIC cards installed directly in the printer or by using aprint server that connects to the Ethernet network and to the printer using a serial or parallel connection.
+
+#
+
+### Physical Access Control Devices
+
+In modern office buildings and industrial sites, access control systems are installed at key points such as a door or a gate.
+
+These devices are connected to an authorization server on the network, which can connect back to directory services such as Microsoft Active Directory.
+
+When a user scans their badge, a lookup is performed by the server and a response is sent back to the access control device to either unlock the door or prevent the person from entering.
+
+#
+
+### Cameras
+
+Cameras have moved from the analog world to digital and are now very common in today's networks.
+
+They operate off TCP/IP and send video feeds back to a central server for processing and recording.
+
+Advanced features may include Pan/Tilt/Zoom (PTZ) to remotely control the camera, and detection capabilities such as facial recognition are now common.
+
+Some cameras have heat and metal sensing capabilities.
+
+#
+
+### Heating Ventilation, and Air Conditioning (HVAC) Sensors
+
+Modern office buildings and industrial sites have intelligent HVAC systems that use sensors to monitor and control air conditioning and heating systems.
+
+This allows them to either manually or automatically adjust the environmental controls and has the added advantage of cost saving by changing the temperature values after hours when no one is in the facility.
+
+#
+
+### Internet of Things (IoT)
+
+The number of devices connected to the Internet has exploded in the past few years and only shows signs of increasing to billions of devices.
+
+Wearable devices such as watches, fitness analyzers, and medical sensors are driving this growth. At home we now have digital assistants such as Siri and Alexa that connect to digital smart devices such as doorbells, refrigerators, thermostats, lights, cameras, televisions, and speakers.
+
+This is collectively known as the Internet of Things (IoT), and the number and types of things is constantly increasing as new products and applications are introduced.
+
+We see IoT devices everywhere, including weather monitoring stations, traffic control devices, security devices, and devices for an almost infinite number of other uses.
+
+They connect to the network using what connectivity options are available at their locations.
+
+Common network connections include Ethernet, Wi-Fi, Bluetooth, and cellular. IoT devices connect to centralized server applications and usually consume very little network bandwidth. However, if there are a very large number of IoT devices, the additive bandwidth may become significant.
+
+#
+
+### Industrial Control Systems
+
+The industrial control systems (ICS) technology space uses sensors for monitoring and controlling everything from power grids to machines on the factory floor.
+
+By monitoring machinery, companies can proactively detect problems and flag the device for maintenance, potentially saving money on repairs and downtime. 
+
+Other uses are to monitor assembly line workflows and dynamically change them based on workload.
+
+The supervisory control and data acquisition (SCADA) architecture is an industry standard for monitoring and collecting industrial data such as a power grid or water utility.
+
+SCADA systems consist of an architecture that includes computers, sensors, and networks that collect and display the status of the monitored systems in a graphical format. SCADA systems are used to monitor electrical or water systems, industrial plants, and machinery.
+
+The monitored systems use programmable logic controllers (PLCs) or other types of sensors such as flow or electrical meters to interface with the machinery or systems.
+
+## Planning and Implementing a Basic SOHO Network Using Network Segmentation
+
+It's likely that at some point you'll have to break up one large network into a bunch of smaller ones because user response will have dwindled to a slow crawl as the network grew and grew. With all that growth, your LAN's  traffic congestion will have reached epic proportions.
+
+#
+
+### Determining Requirements
+
+When implementing a SOHO network, the first thing to be done is to identify the requirements of the network and the constraints around which you must operate. This should drive your design and device choices.
+
+An example set of requirements and constraints might be as follows:
+
+- A small number of computers are needed.
+- There is a high need for Internet access.
+- Resources need to be shared.
+- Wired hosts and wireless hosts will need to communicate with each other.
+- Security is very important.
+
+With these constraints in mind, you might find that you'll need more than just a switch and some Ethernet cabling for this project. There is a need for a router, an AP, and a firewall in this case.
+
+In addition, you need to think about compatibility between equipment and the types and brands of equipment to buy as well as environmental issues or limitations.
+
+One of the most important considerations you must take very seriously when building a basic network is LAN traffic congestion, which can be lessened with network segmentation and is directly related to device types and compatibility requirements as well as equipment limitations.
+
+Here's a list of some of the nasty things that commonly cause LAN traffic congestion:
+
+- Too many hosts in a broadcast domain
+- Broadcast storms
+- Multicasting
+- Low bandwidth
+- Adding hubs for connectivity to the network
+
+The answer to fixing a huge but slow network is to break it up into a number of smaller networks—something called network segmentation.
+
+You do this by using devices like routers and switches, which are sometimes still referred to as bridges because switches still use bridging technologies.
+
+![image](https://github.com/user-attachments/assets/9095473f-66ee-4bd9-85e0-2705e3c5aa2f)
+
+The picture displays a network that's been segmented with a switch so each network segment connected to the switch is now a separate collision domain. 
+
+But make note of the fact that this network is actually still one broadcast domain—the set of all devices on a network segment that hear all the broadcasts sent on that segment.
+
+And keep in mind that the hub used just extended the one collision domain from the switch port.
+
+Routers are used to connect networks together and route packets of data from one network to another.
+
+(Cisco has become the de facto standard for routers because of its high-quality router products, great selection, and fantastic service.)
+
+Routers, by default, break up a broadcast domain.
+
+![image](https://github.com/user-attachments/assets/e30b6996-a8c7-4366-92fb-0fd3534be0c4)
+
+The picture shows a router in our little network that creates an internetwork and breaks up broadcast domains.
+
+Each host is connected to its own collision domain, and the router has created two broadcast domains.
+
+And don't forget that the router provides connections to WAN services as well.
+
+The router uses something called a serial interface for WAN connections: specifically, a V.35 physical interface.
+
+Breaking up a broadcast domain is important because when a host or server sends a network broadcast, every device on the network must read and process that broadcast—unless you've got a router.
+
+When the router's interface receives this broadcast, it can respond by basically saying, “Thanks, but no thanks,” and discard the broadcast without forwarding it on to other networks.
+
+Even though routers are known for breaking up broadcast domains by default, it's important to remember that they break up collision domains as well.
+
+There are two advantages of using routers in your network:
+
+- They don't forward broadcasts by default.
+- They can filter the network based on layer 3 (Network layer) information (such as an IP address).
+
+Four router functions in your network are as follows:
+
+- Packet switching
+- Packet filtering
+- Internetwork communication
+- Path selection
+
+Remember that routers are really switches; they're actually what we call layer 3 switches.
+
+Unlike layer 2 switches, which forward or filter frames, routers (layer 3 switches) use logical addressing and provide what is called **packet switching**.
+
+Routers can also provide packet filtering by using access lists, and when routers connect two or more networks together and use logical addressing (IP or IPv6), this is called an **internetwork**.
+
+Last, routers use a **routing table** (map of the internetwork) to make path selections and to forward packets to remote networks
+
+Conversely, switches aren't used to create internetworks (they do not break up broadcast domains by default); they're employed to add functionality to a network LAN.
+
+The main purpose of a switch is to make a LAN work better—to optimize its performance—providing more bandwidth for the LAN's users.
+
+And switches don't forward packets to other networks as routers do. Instead, they only “switch” frames from one port to another within the switched network.
+
+By default, switches break up collision domains. 
+
+Collision domain is an Ethernet term used to describe a network scenario wherein one particular device sends a packet on a network segment, forcing every other device on that same segment to pay attention to it.
+
+At the same time, a different device tries to transmit, leading to a collision, after which both devices must retransmit, one at a time.
+
+This situation is typically found in a hub environment where each host segment connects to a hub that represents only one collision domain and only one broadcast domain. 
+
+By contrast, every port on a switch represents its own collision domain.
+
+Switches create separate collision domains but a single broadcast domain. Routers provide a separate broadcast domain for each interface.
+
+The term **bridging** was introduced before routers and hubs were implemented, so it's pretty common to hear people referring to bridges as switches.
+
+That's because bridges and switches basically do the same thing—break up collision domains on a LAN. (In reality, you cannot buy a physical bridge these days, only LAN switches, but these switches use bridging technologies.)
+
+So this means a switch is basically just a multiple-port bridge with more brainpower, right? Well, pretty much, but there are differences.
+
+Switches do provide this function, but they do so with greatly enhanced management ability and features. Plus, most of the time, bridges had only two or four ports.
+
+Yes, you could get your hands on a bridge with up to 16 ports, but that's nothing compared to the hundreds available on some switches.
+
+You would use a bridge in a network to reduce collisions within broadcast domains and to increase the number of collision domains in your network.
+
+Doing this provides more bandwidth for users. And keep in mind that using hubs in your network can contribute to congestion on your Ethernet network.
+
+![image](https://github.com/user-attachments/assets/47d71661-c774-48f5-bc20-0babd835f878)
+
+The picture shows how a network would look with all these internetwork devices in place. Remember that the router will not only break up broadcast domains for every LAN interface but also break up collision domains.
+
+Do you see the router at center stage and see how it connects each physical network together? We have to use this layout because of the older technologies involved—bridges and hubs.
+
+On the top internetwork in, you'll notice that a bridge is used to connect the hubs to a router.
+
+The bridge breaks up collision domains, but all the hosts connected to both hubs are still crammed into the same broadcast domain. Also, the bridge creates only two collision domains, so each device connected to a hub is in the same collision domain as every other device connected to that same hub.
+
+Notice something else: The three hubs at the bottom that are connected also connect to the router, creating one collision domain and one broadcast domain. This makes the bridged network look much better indeed.
+
+Although bridges/switches are used to segment networks, they will not isolate broadcast or multicast packets.
+
+The best network connected to the router is the LAN switch network on the left. Why? Because each port on that switch breaks up collision domains.
+
+But it's not all good—all devices are still in the same broadcast domain. If your broadcast domains are too large, the users have less bandwidth and are required to process more broadcasts, and network response time will slow.
+
+Once we have only switches in our network, things change a lot.
+
+![image](https://github.com/user-attachments/assets/c5e86624-5540-453c-a457-033966da3a5a)
+
+The picture shows the network that is typically found today.
+
+Here I've placed the LAN switches at the center of the network world so the router is connecting only logical networks together.
+
+If I implement this kind of setup, I've created virtual LANs (VLANs).
+
+But it is really important to understand that even though you have a switched network, you still need a router to provide your inter-VLAN communication, or internetworking.
+
+Obviously, the best network is one that's correctly configured to meet the business requirements of the company it serves. LAN switches with routers, correctly placed in the network, are the best network design.
+
+Routers break up collision domains, but you can also do that using layer 2 (Data Link layer) switches.
+
+Because each interface in a router represents a separate network, it must be assigned unique network identification numbers, and each host on the network connected to that router must use the same network number.
+
+![image](https://github.com/user-attachments/assets/f8734e77-e2d7-49a5-9c06-662c8b4d69ce)
+
+Here are some points about routers that you should commit to memory:
+
+- Routers, by default, will not forward any broadcast or multicast packets.
+- Routers use the logical address in a Network layer header to determinethe next hop router to forward the packet to.
+- Routers can provide layer 2 bridging functions if needed and can simultaneously route through the same interface.
+- Layer 3 devices (routers, in this case) provide connections between virtual LANs (VLANs).
+- Routers can provide quality of service (QoS) for specific types of network traffic.
+
+#
+
+### Switches and Bridges at the Data Link Layer
+
+Layer 2 switching is considered hardware-based bridging because it uses specialized hardware called an **application-specific integrated circuit (ASIC)**.
+
+ASICs can run up to multigigabit speeds with very low latency rates.
+
+**Latency** is the time measured from when a frame enters a port to when it exits.
+
+Bridges and switches read each frame as it passes through the network.
+
+The layer 2 device then puts the source hardware address in a filter table and keeps track of which port the frame was received on.
+
+This information (logged in the bridge's or switch's filter table) is what helps the machine determine the location of the specific sending device.
+
+![image](https://github.com/user-attachments/assets/a8a68e3a-7763-4e5e-a5ca-78397f77f203)
+
+Layer 3 machines (such as routers) need to locate specific networks, whereas layer 2 machines (switches and bridges) need to eventually locate specific devices.
+
+So, networks are to routers as individual devices are to switches and bridges.
+
+And routing tables that “map” the internetwork are for routers, as filter tables that “map” individual devices are for switches and bridges.
+
+After a filter table is built on the layer 2 device, it will forward frames only to the segment where the destination hardware address is located.
+
+If the destination device is on the same segment as the frame, the layer 2 device will block the frame from going to any other segments.
+
+If the destination is on a different segment, the frame can be transmitted only to that segment.
+
+This is called **transparent bridging**.
+
+When a switch interface receives a frame with a destination hardware address that isn't found in the device's filter table, it will forward the frame to all connected segments.
+
+If the unknown device that was sent the “mystery frame” replies to this forwarding action, the switch updates its filter table regarding that device's location.
+
+But in the event that the destination address of the transmitting frame is a broadcast address, the switch will forward all broadcasts to every connected segment by default.
+
+All devices that the broadcast is forwarded to are considered to be in the same broadcast domain.
+
+This can be a problem; Layer 2 devices propagate layer 2 broadcast storms that choke performance, and the only way to stop a broadcast storm from propagating through an internetwork is with a layer 3 device—a router.
+
+The biggest benefit of using switches instead of hubs in your internetwork is that each switch port is actually its own collision domain. (Conversely, a hub creates one large collision domain.) But even armed with a switch, you still can't break up broadcast domains. Neither switches nor bridges will do that. They'll typically simply forward all broadcasts instead.
+
+Another benefit of LAN switching over hub-centered implementations is that each device on every segment plugged into a switch can transmit simultaneously—at least they can as long as there is only one host on each port and a hub isn't plugged into a switch port. As you might have guessed, hubs allow only one device per network segment to communicate at a time.
+
+#
+
+### Hubs at the Physical Layer
+
+A hub is really a multiple-port repeater. A repeater receives a digital signal, reamplifies or regenerates that signal, and then forwards the digital signal out all active ports without looking at any data.
+
+An active hub does the same thing. Any digital signal received from a segment on a hub port is regenerated or reamplified and transmitted out all ports on the hub.
+
+This means all devices plugged into a hub are in the same collision domain as well as in the same broadcast domain.
+
+![image](https://github.com/user-attachments/assets/6fbe092c-c22a-4758-b8c7-0feafd75e533)
+
+Hubs and repeaters can be used to enlarge the area covered by a single LAN segment, although I do not recommend this. LAN switches and/or wireless APs are affordable for almost every situation.
+
+#
+
+### Environmental Considerations
+
+All of the equipment discussed in this chapter—switches, routers, hubs, and so on—require proper environmental conditions to operate correctly. These devices have the same needs as any computing device. 
+
+The environmental concerns can be categorized thusly:
+
+**Temperature** Like any device with a CPU, infrastructure devices such as routers, switches, and specialty appliances must have a cool area to operate. When temperatures rise, servers start rebooting, and appliance CPUs start overworking as well. The rooms where these devices are located should be provided with heavy-duty HVAC systems and ample ventilation. It may even be advisable to dedicate a suite for this purpose and put the entire system on a UPS with a backup generator in the case of total loss of power.
+
+Modern data centers use the architecture of hot and cold aisles. This maximizes the cooling of the equipment racks by forcing cold air in one row of racks and the exhaust of the hot air exiting into the next row.
+
+**Humidity** The air around these systems can be neither too damp nor too dry; it must be “just right.” If it is too dry, static electricity will build up in the air, making the situation ripe for damaging a system. It takes very little static electricity to fry some electrical components. If it is too damp, connections start corroding, and shorts begin to occur. A humidifying system should be used to maintain the level above 50 percent. The air conditioning should keep it within acceptable levels on the upper end.
