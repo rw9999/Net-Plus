@@ -334,3 +334,27 @@ SMB runs mostly on TCP port 445 now, but SMB can also run on UDP port 137 and 13
 
 Reading system messages from a switch's or router's internal buffer is the most popular and efficient method of seeing what's going on with your network at a particular time.
 
+But the best way is to log messages to a syslog server, which stores messages from you and can even time-stamp and sequence them for you, and it's easy to set up and configure.
+
+Syslog allows you to display, sort, and even search messages, all of which makes it a really great troubleshooting tool. The search feature is especially powerful because you can use keywords and even severity levels.
+
+Plus, the server can email admins based on the severity level of the message.
+
+Network devices can be configured to generate a syslog message and forward it to various destinations. 
+
+These four examples are popular ways to gather messages from Cisco devices:
+
+- Logging buffer (on by default)
+- Console line (on by default)
+- Terminal lines (using the terminal monitor command)
+- Syslog server
+
+![image](https://github.com/user-attachments/assets/d5d4d942-c821-49cb-8149-21835a0b7a8a)
+
+Informational is the default and will result in all messages being sent to the buffers and console.
+
+#
+
+### SMTPS (TCP 587)
+
+
