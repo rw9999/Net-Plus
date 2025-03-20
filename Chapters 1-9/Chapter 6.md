@@ -254,5 +254,83 @@ It's very important because so many of the transactions done today are time- and
 
 ### Internet Message Access Protocol (TCP 143)
 
+Because Internet Message Access Protocol (IMAP) makes it so you get control over how you download your mail, with it, you also gain some much-needed security.
 
+It lets you peek at the message header or download just a part of a message.
+
+With it, you can choose to store messages on the email server hierarchically and link to documents and user groups too. IMAP even gives you search commands to use to hunt for messages based on their subject, header, or content.
+
+As you can imagine, it has some serious authentication features—it actually supports the Kerberos authentication scheme that MIT developed. And yes, IMAP4 is the current version.
+
+#
+
+### Simple Network Management Protocol (UDP 161/162)
+
+Simple Network Management Protocol (SNMP) collects and manipulates valuable network information.
+
+It gathers data by polling the devices on the network from a management station at fixed or random intervals, requiring them to disclose certain information.
+
+When all is well, SNMP receives something called a **baseline**—a report delimiting the operational traits of a healthy network.
+
+This protocol can also stand as a watchdog over the network, quickly notifying managers of any sudden turn of events.
+
+The network watchdogs are called agents, and when aberrations occur, agents send an alert called a trap to the management station.
+
+The Network Management System (NMS) polls the agents through a Management Information Base (MIB).
+
+The MIB is basically a database with a set of predefined questions the NMS can ask the agents regarding the health of the device or network.
+
+![image](https://github.com/user-attachments/assets/5113923a-d49d-47d0-8702-741807e08d3c)
+
+In addition, SNMP can help simplify the process of setting up a network as well as the administration of your entire internetwork.
+
+#
+
+### Lightweight Directory Access Protocol (TCP 389)
+
+If you're the system administrator of any decent-sized network, odds are you have a type of directory in place that keeps track of all your network resources, such as devices and users. But how do you access those directories?
+
+LDAP is a protocol used to access and query directory services systems such as Microsoft Active Directory.
+
+And there is a secure version of LDAP called LDAPS that uses port 636.
+
+This protocol standardizes how you access directories, and its first and second inceptions are described in RFCs 1487 and 1777, respectively. There were a few glitches in those two earlier versions, so a third version—the one most commonly used today—was created to address those issues and is described in RFC 3377.
+
+#
+
+### Hypertext Transfer Protocol Secure (TCP 443)
+
+Hypertext Transfer Protocol Secure (HTTPS) is a secure version of HTTP that arms you with a whole bunch of security tools for keeping transactions between a web browser and a server secure.
+
+It's what your browser needs to fill out forms, sign in, authenticate, and encrypt an HTTP message when you make a reservation or buy something online. The Chromium browser actually requires HTTPS encryption or it will notify you that there is no privacy.
+
+Both SSH (port 22) and HTTPS (port 443) are used to encrypt packets over your intranet and the Internet.
+
+#
+
+### Transport Layer Security/Secure Sockets Layer (TCP 995/465)
+
+Both Transport Layer Security (TLS) and its forerunner, Secure Sockets Layer (SSL), are cryptographic protocols that come in really handy for enabling secure online data-transfer activities like browsing the web, instant messaging, Internet faxing, and so on.
+
+They both use X.509 certificates and asymmetric cryptography to authenticate to the host they are communicating with and to exchange a key. 
+
+This key is then used to encrypt data flowing between the hosts.
+
+This allows for data/message confidentiality, message integrity, and message authentication.
+
+Even though I listed TLS/SSL as using ports 995 and 465, which is true if you're using Gmail, TLS/SSL isn't tied down to any certain ports and can use various different ones.
+
+#
+
+### Server Message Block (TCP 445)
+
+Server Message Block (SMB) is used for sharing access to files and printers and other communications between hosts on a Microsoft Windows network.
+
+SMB runs mostly on TCP port 445 now, but SMB can also run on UDP port 137 and 138 and on TCP port 137 and 139 using NetBIOS.
+
+#
+
+### Syslog (UDP 514)
+
+Reading system messages from a switch's or router's internal buffer is the most popular and efficient method of seeing what's going on with your network at a particular time.
 
