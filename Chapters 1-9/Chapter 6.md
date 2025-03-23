@@ -358,3 +358,83 @@ Informational is the default and will result in all messages being sent to the b
 ### SMTPS (TCP 587)
 
 
+Simple Mail Transfer Protocol (SMTP), answering our ubiquitous call to email, uses a spooled, or queued, method of mail delivery using TCP port 25. However, this email is sent in clear text, and some email servers can still use this.
+
+SMTPS encrypts email when it is sent, and most email servers use or can use port 587 to send email now; some even demand it. This port, coupled with TLS encryption, will ensure that email is securely sent, following the guidelines set out by the IETF of course.
+
+#
+
+### Lightweight Directory Access Protocol over SSL (TCP 636)
+
+Taking off from our discussion earlier on TCP 389 LDAP, understand that this traffic is transmitted unsecured. Bring in LDAP over SSL TCP 636, which is the suggested use of LDAP in today's networks. To make this function correctly, you need to install a proper certificate from a Microsoft certification authority (CA) or other type of CA.
+
+#
+
+### IMAP over SSL (TCP 993)
+
+Because Internet Message Access Protocol (IMAP) makes it so you get control over how you download your mail, with it, you also gain some much-needed security.
+
+However, IMAP over SSL means that IMAP traffic travels over a security socket to a security port, using TCP port 993 usually.
+
+#
+
+### POP3 over SSL (TCP 995)
+
+As discussed previously. Post Office Protocol (POP) gives us a storage facility for incoming mail, and the latest version of POP is called POP3.
+
+This email is probably downloaded in clear text. 
+
+Either POP3 over SSL or IMAP over SSL is more commonly used to encrypt emails being downloaded from servers today.
+
+#
+
+### Structured Query Language (SQL) Server (TCP 1433)
+
+Microsoft SQL Server has grown from a simple relational database engine to a multipurpose enterprise-level data platform.
+
+TCP port 1433 is the default port for SQL Server, and it's also the official Internet Assigned Number Authority (IANA) socket number for SQL Server. 
+
+Client systems use TCP 1433 to connect to the database engine.
+
+#
+
+### SQLnet (TCP 1521)
+
+SQLnet (also referred to as SQL*Net and Net8) is Oracle's networking software that allows remote data access between programs using Oracle Database.
+
+Applications and databases are shared with different machines and continue communicating as if they were local.
+
+SQLnet is based on Oracle's Transparent Network Substrate (TNS), a network technology that provides a generic interface to all network protocols; however, this is no longer needed today since we have TCP/IP.
+
+SQL*Net is used by both client and server to communicate with one another. Without the Net8 layer acting as the interpreter, the client and server processes cannot interconnect (notice how I used all three names in this section—and all define the same thing).
+
+#
+
+###  MySQL (TCP 3306)
+
+MySQL is a relational database management system based on SQL, or Structured Query Language. 
+
+This is used within companies for data warehousing, e-commerce, logging applications, and more. 
+
+The most common use for MySQL is for the purpose of a cloud-based database.
+
+#
+
+### Remote Desktop Protocol (TCP 3389)
+
+Remote Desktop Protocol (RDP) is a proprietary protocol developed by Microsoft. 
+
+It allows you to connect to another computer and run programs.
+
+RDP operates like Telnet, except instead of getting a command-line promptas you do with Telnet, you get the actual graphical user interface (GUI) of the remote computer.
+
+Clients exist for most versions of Windows, and Macs now come with a preinstalled RDP client.
+
+Microsoft currently calls its official RDP server software Remote Desktop Services; it was called Terminal Services for a while. Microsoft's official client software is called Remote Desktop Connection (RDC), which was called Terminal Services Client in the past.
+
+RDP is an excellent tool for remote clients, allowing users to connect to their work computer from home, for example, and get their email or perform work on other applications without running or installing any of the software on their home computer.
+
+#
+
+### SIP (VoIP) (TCP or UDP 5060/TCP 5061)
+
