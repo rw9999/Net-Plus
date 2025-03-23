@@ -438,3 +438,75 @@ RDP is an excellent tool for remote clients, allowing users to connect to their 
 
 ### SIP (VoIP) (TCP or UDP 5060/TCP 5061)
 
+Session Initiation Protocol (SIP) is a hugely popular signaling protocol used to construct and deconstruct multimedia communication sessions for many things like voice and video calls, videoconferencing, streaming multimedia distributions, instant messaging, presence information, and online games over the Internet. 
+
+SIP commonly works in conjunction with RTP (VoIP) streams to set up the connection between endpoints.
+
+#
+
+### RTP (VoIP) (UDP 5004/TCP 5005)
+
+Real-time Transport Protocol (RTP) describes a packet-formatting standard for delivering audio and video over the Internet. 
+
+Although initially designed as a multicast protocol, it's now used for unicast applications too. 
+
+It's commonly employed for streaming media, videoconferencing, and push-totalk systems—all things that make it a de facto standard in Voice over IP (VoIP) industries.
+
+#
+
+### MGCP (Multimedia) (TCP 2427/2727)
+
+Media Gateway Control Protocol (MGCP) is a standard protocol for handling the signaling and session management needed during a multimedia conference.
+
+The protocol defines a means of communication between a media gateway, which converts data from the format required for a circuit-switched network to that required for a packet-switched network, and the media gateway controller.
+
+MGCP can be used to set up, maintain, and terminate calls between multiple endpoints.
+
+#
+
+### H.323 (Video) (TCP 1720)
+
+H.323 is a protocol that provides a standard for video on an IP network that defines how real-time audio, video, and data information is transmitted.
+
+This standard provides signaling, multimedia, and bandwidth control mechanisms. H.323 uses the RTP standard for communication.
+
+#
+
+### Internet Group Management Protocol
+
+Internet Group Management Protocol (IGMP) is the TCP/IP protocol used for managing IP multicast sessions.
+
+It accomplishes this by sending out unique IGMP messages over the network to reveal the multicast-group landscape and to find out which hosts belong to which multicast group.
+
+The host machines in an IP network also use IGMP messages to become members of a group and to quit the group too. 
+
+IGMP messages come in seriously handy for tracking group memberships as well as active multicast streams. 
+
+IGMP works at the Network layer and doesn't use port numbers.
+
+#
+
+### NetBIOS (TCP and UDP 137–139)
+
+Network Basic Input/Output System works only in the upper layers of the OSI model and allows for an interface on separate computers to communicate over a network.
+
+It was first created in the early 1980s to work on an IBM LAN and was proprietary. Microsoft and Novell both created a NetBIOS implementation to allows their hosts to communicate to their servers, but Microsoft's version became the de facto version.
+
+#
+
+### The Host-to-Host Layer Protocols
+
+The main purpose of the Host-to-Host layer is to shield the upper-layer applications from the complexities of the network.
+
+This layer says to the upper layer, “Just give me your data stream, with any instructions, and I'll begin the process of getting your information ready to send.”
+
+The following sections describe the two protocols at this layer:
+
+- Transmission Control Protocol (TCP)
+
+- User Datagram Protocol (UDP)
+
+#
+
+### Transmission Control Protocol
+
