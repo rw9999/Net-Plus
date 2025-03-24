@@ -516,3 +516,84 @@ It numbers and sequences each segment so that the destination's TCP process can 
 
 After these segments are sent, TCP (on the transmitting host) waits for an acknowledgment from the receiving end's TCP process, retransmitting those segments that aren't acknowledged.
 
+Remember that in a reliable transport operation, a device that wants to transmit sets up a connection-oriented communication with a remote device by creating a session.
+
+The transmitting device first establishes a connection-oriented session with its peer system; that session is called a **call setup** or a **three-way handshake**.
+
+Data is then transferred, and when the transfer is complete, a call termination takes place to tear down the virtual circuit.
+
+Because the upper layers send a data stream to the protocols in the Transport layer, I'll demonstrate how TCP segments a data stream and prepares it for the Internet layer. When the Internet layer receives the data stream, it routes the segments as packets through an internetwork.
+
+The segments are handed to the receiving host's Host-to-Host layer protocol, which rebuilds the data stream to hand to the upper-layer protocols.
+
+TCP is a full-duplex, connection-oriented, reliable, and accurate protocol, but establishing all these terms and conditions, in addition to error checking, is no small task. TCP is very complicated, and so not surprisingly, it's costly in terms of network overhead.
+
+And since today's networks are much more reliable than those of yore, this added reliability is often unnecessary. 
+
+Most programmers use TCP because it removes a lot of programming work, but for real-time video and VoIP, User Datagram Protocol (UDP) is often better because using it results in less overhead.
+
+#
+
+### TCP Segment Format
+
+When the Internet layer receives the data stream, it routes the segments as packets through an internetwork.
+
+The segments are handed to the receiving host's Host-to-Host layer protocol, which rebuilds the data stream for the upper-layer applications or protocols.
+
+The TCP header is 24 bytes long, or up to 60 bytes with options.
+
+![image](https://github.com/user-attachments/assets/c1a4e1c6-2433-4f69-b089-b48058214909)
+
+The picture shows the TCP segment format and the different fields within the TCP header.
+
+Again, it's good to understand what each field in the TCP segment is in order to build a strong educational foundation:
+
+**Source Port** This is the port number of the application on the host sending the data.
+
+**Destination Port** This is the port number of the application requested on the destination host.
+
+**Sequence Number** A number used by TCP that puts the data back in the correct order or retransmits missing or damaged data during a process called sequencing.
+
+**Acknowledgment Number** The value is the TCP octet that is expected next.
+
+**Header Length** The number of 32-bit words in the TCP header, which indicates where the data begins. The TCP header (even one including options) is an integral number of 32 bits in length. Reserved Always set to zero.
+
+**Code Bits/TCP Flags** Controls functions used to set up and terminate a session.
+
+**Window** The window size the sender is willing to accept, in octets.
+
+**Checksum** The cyclic redundancy check (CRC), used because TCP doesn't trust the lower layers and checks everything. The CRC checks the header and data fields.
+
+**Urgent** A valid field only if the Urgent pointer in the code bits is set. If so, this value indicates the offset from the current sequence number, in octets, where the segment of non-urgent data begins.
+
+**Options** May be 0, meaning that no options have to be present, or a multiple of 32 bits. However, if any options are used that do not cause the option field to total a multiple of 32 bits, padding of 0s must be used to make sure the data begins on a 32-bit boundary. These boundaries are known as words.
+
+**Payload (Data)** Handed down to the TCP protocol at the Transport layer, which includes the upper-layer headers.
+
+Let's take a look at a TCP segment copied from a network analyzer. In the following output, I have bolded the Payload (data) area that the packet is carrying to the destination host:
+
+      TCP - Transport Control Protocol
+      Source Port: 5973
+      Destination Port: 23
+      Sequence Number: 1456389907
+      Ack Number: 1242056456
+      Offset: 5
+      Reserved: %000000
+      Code: %011000
+      Ack is valid
+      Push Request
+      Window: 61320 Checksum: 0x61a6
+      Urgent Pointer: 0
+      No TCP Options
+      **TCP Data Area:
+      vL.5.+.5.+.5.+.5 76 4c 19 35 11 2b 19 35 11
+      2b 19 35 11
+      2b 19 35 +. 11 2b 19**
+      Frame Check Sequence: 0x0d00000f
+
+As you can see from the number of fields in the header, TCP creates a lot of overhead. Again, this is why application developers may opt for efficiency over reliability to save overhead and go with UDP instead. It's also defined at the Transport layer as an alternative to TCP.
+
+#
+
+### User Datagram Protocol
+
