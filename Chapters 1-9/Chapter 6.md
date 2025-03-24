@@ -510,3 +510,9 @@ The following sections describe the two protocols at this layer:
 
 ### Transmission Control Protocol
 
+Transmission Control Protocol (TCP) takes large blocks of information from an application and breaks them into segments.
+
+It numbers and sequences each segment so that the destination's TCP process can put the segments back into the order the application intended.
+
+After these segments are sent, TCP (on the transmitting host) waits for an acknowledgment from the receiving end's TCP process, retransmitting those segments that aren't acknowledged.
+
