@@ -601,5 +601,26 @@ If you were to compare User Datagram Protocol (UDP) with TCP, the former is basi
 
 UDP doesn't offer all the bells and whistles of TCP either, but it does do a fabulous job of transporting information that doesn't require reliable delivery—and it does so using far fewer network resources.
 
+There are some situations in which it would definitely be wise for developers to opt for UDP rather than TCP.
 
+SNMP monitors the network, sending intermittent messages and a fairly steady flow of status updates and alerts, especially when running on a large network. The cost in overhead to establish, maintain, and close a TCP connection for each one of those little messages would reduce what would be an otherwise healthy, efficient network to a dammed-up bog in no time.
 
+Another circumstance calling for UDP over TCP is when reliability is already handled at the Process/Application layer. DNS handles its own reliability issues, making the use of TCP both impractical and redundant. 
+
+But ultimately, it's up to the application developer to decide whether to use UDP or TCP, not the user who wants to transfer data faster.
+
+UDP does not sequence the segments and doesn't care in which order the segments arrive at the destination.
+
+But after that, UDP sends the segments off and forgets about them. It doesn't follow through, check up on them, or even allow for an acknowledgment of safe arrival—complete abandonment. Because of this, it's referred to as an **unreliable protocol**.
+
+This doesn't mean that UDP is ineffective, only that it doesn't handle issues of reliability. Because UDP assumes that the application will use its own reliability method, it doesn't use any. This gives an application developer a choice when running the IP stack: TCP for reliability or UDP for faster transfers.
+
+Further, UDP doesn't create a virtual circuit, nor does it contact the destination before delivering information to it. Because of this, it's also considered a connectionless protocol.
+
+![image](https://github.com/user-attachments/assets/c6e22a41-af46-4b19-b35f-fccc894fb0cb)
+
+The picture clearly illustrates UDP's markedly low overhead as compared to TCP's hungry usage.
+
+#
+
+### Key Concepts of Host-to-Host Protocols
