@@ -597,3 +597,9 @@ As you can see from the number of fields in the header, TCP creates a lot of ove
 
 ### User Datagram Protocol
 
+If you were to compare User Datagram Protocol (UDP) with TCP, the former is basically the scaled-down economy model that's sometimes referred to as a **thin protocol**. Like a thin person on a park bench, a thin protocol doesn't take up a lot of room—or in this case, much bandwidth on a network.
+
+UDP doesn't offer all the bells and whistles of TCP either, but it does do a fabulous job of transporting information that doesn't require reliable delivery—and it does so using far fewer network resources.
+
+
+
