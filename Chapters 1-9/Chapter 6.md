@@ -624,3 +624,37 @@ The picture clearly illustrates UDP's markedly low overhead as compared to TCP's
 #
 
 ### Key Concepts of Host-to-Host Protocols
+
+![image](https://github.com/user-attachments/assets/a83f3c80-e1ed-4b78-a797-313c6d538611)
+
+A telephone analogy could help you understand how TCP works. Most of us know that before you speak to someone on the phone, you must first establish a connection with that person—wherever they are. This is like a virtual circuit with TCP. If you were giving someone important information during your conversation, you might say, “You know?” or ask, “Did you get that?” Saying something like this is a lot like a TCP acknowledgment—it's designed to get your verification. From time to time (especially on cell phones), people also ask, “Are you still there?” They end their conversations with a “Goodbye” of some kind, putting closure on the phone call. TCP also performs these types of functions.
+
+Alternatively, using UDP is like sending a postcard. To do that, you don't need to contact the other party first. You write your message, address the postcard, and mail it. This is analogous to UDP's connectionless orientation. Because the message on the postcard is probably not a matter of life or death, you don't need an acknowledgment of its receipt. Similarly, UDP doesn't involve acknowledgments.
+
+#
+
+### Port Numbers
+
+TCP and UDP must use port numbers to communicate with the upper layers because they're what keep track of different simultaneous conversations originated by or accepted by the local host.
+
+Originating source port numbers are dynamically assigned by the source host and will usually have a value of 1024 or higher. Ports 1023 and below are defined in RFC 3232, which discusses what are called **well-known port numbers**. 
+
+Virtual circuits that don't use an application with a well-known port number are assigned port numbers randomly from a specific range instead. 
+
+These port numbers identify the source and destination application or process in the TCP segment.
+
+![image](https://github.com/user-attachments/assets/bba72039-d1e5-4e2f-aa86-c101b7b59458)
+
+You just need to remember that numbers below 1024 are considered well-known port numbers and are defined in RFC 3232. Numbers 1024 andabove are used by the upper layers to set up sessions with other hosts and by TCP as source and destination identifiers in the TCP segment.
+
+![image](https://github.com/user-attachments/assets/8e96c6fc-def2-41bd-a400-e7f06144ee5c)
+![image](https://github.com/user-attachments/assets/9e521853-682c-4294-a620-8af6bf72c0a4)
+
+Notice that DNS uses both TCP and UDP. Whether it opts for one or the other depends on what it's trying to do. Even though it's not the only application that can use both protocols, it's certainly one that you should remember in your studies.
+
+#
+
+### The Internet Layer Protocols
+
+
+
