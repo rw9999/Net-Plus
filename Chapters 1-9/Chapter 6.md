@@ -886,4 +886,33 @@ The picture shows a diskless workstation asking for its IP address with a RARP b
 
 ### Generic Routing Encapsulation (GRE)
 
+Generic Routing Encapsulation (GRE) is a tunneling protocol that can encapsulate many protocols inside IP tunnels.
+
+Some examples would be routing protocols such as EIGRP and OSPF and the routed protocol IPv6.
+
+![image](https://github.com/user-attachments/assets/2dc139e9-6e9b-4d1c-94dd-29f1894cc024)
+
+The picture shows shows the different pieces of a GRE header.
+
+A GRE tunnel interface supports a header for each of the following:
+
+- A passenger protocol or encapsulated protocols like IP or IPv6, which is the protocol being encapsulated by GRE
+
+- GRE encapsulation protocol
+
+- A transport delivery protocol, typically IP
+
+GRE tunnels have the following characteristics:
+
+- GRE uses a protocol-type field in the GRE header, so any layer 3 protocol can be used through the tunnel.
+
+- GRE is stateless and has no flow control.
+
+- GRE offers no security.
+
+- GRE creates additional overhead for tunneled packets—at least 24 bytes.
+
+#
+
+### Internet Protocol Security (IPSec)
 
