@@ -916,3 +916,5 @@ GRE tunnels have the following characteristics:
 
 ### Internet Protocol Security (IPSec)
 
+As I just mentioned, GRE by itself provides no security—no form of payload confidentiality or encryption. If the packets are sniffed over the public networks, their contents are in plaintext, and although IPSec provides a secure method for tunneling data across an IP network, it has limitations.
+
