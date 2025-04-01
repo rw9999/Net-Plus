@@ -656,5 +656,234 @@ Notice that DNS uses both TCP and UDP. Whether it opts for one or the other depe
 
 ### The Internet Layer Protocols
 
+In the DoD model, there are two main reasons for the Internet layer's existence: routing and providing a single network interface to the upper layers.
+
+None of the other upper- or lower-layer protocols have any functions relating to routing—that complex and important task belongs entirely to the Internet layer.
+
+The Internet layer's second duty is to provide a single network interface to the upper-layer protocols.
+
+Without this layer, application programmers would need to write what are called **hooks** into every one of their applications for each different Network Access protocol.
+
+This would not only be a pain in the neck, but it would also lead to different versions of each application—one for wired Ethernet, another one for wireless Ethernet, and so on.
+
+To prevent this, IP provides one single network interface for the upper-layer protocols. That accomplished, it's then the job of IP and the various Network Access protocols to get along and work together.
+
+All network roads don't lead to Rome—they lead to IP. And all the other protocols at this layer, as well as all those at the upper layers, use it. Never forget that.
+
+All paths through the DoD model go through IP. 
+
+The following sections describe the protocols at the Internet layer:
+
+- Internet Protocol
+
+- Internet Control Message Protocol
+
+- Address Resolution Protocol
+
+- Reverse Address Resolution Protocol
+
+- Generic Router Encapsulation
+
+- IP Security
+
+#
+
+### Internet Protocol
+
+Internet Protocol (IP) is essentially the Internet layer.
+
+The other protocols found here merely exist to support it.
+
+IP holds the big picture and could be said to “see all” in that it's aware of all the interconnected networks.
+
+It can do this because all the machines on the network have a software, or logical, address called an IP address.
+
+IP looks at each packet's destination address. Then, using a routing table, it decides where a packet is to be sent next, choosing the best path.
+
+The protocols of the Network Access layer at the bottom of the DoD model don't possess IP's enlightened scope of the entire network; they deal only with physical links (local networks).
+
+Identifying devices on networks requires answering these two questions:
+
+Which network is it on? And what is its ID on that network?
+
+The answer to the first question is the software address, or logical address (the correct street).
+
+The answer to the second question is the hardware address (the correct mailbox).
+
+All hosts on a network have a logical ID called an IP address. This is the software, or logical, address and contains valuable encoded information, greatly simplifying the complex task of routing. (IP is discussed in RFC 791.)
+
+IP receives segments from the Host-to-Host layer and fragments them into packets if necessary.
+
+IP then reassembles packets back into segments on the receiving side.
+
+Each packet is assigned the IP address of the sender and of the recipient.
+
+Each router (Layer 3 device) that receives a packet makes routing decisions based on the packet's destination IP address.
+
+![image](https://github.com/user-attachments/assets/0ef7fc5b-5676-4713-9e26-af95bd2bacee)
+
+The picture shows an IPv4 header. This will give you an idea of what IP has to go through every time user data is sent from the upper layers to a remote network.
+
+The following fields make up the IP header:
+
+**Version** IP version number.
+
+**Header Length** Header length (HLEN) in 32-bit words.
+
+**Priority and Type of Service** Type of Service tells how the datagram should be handled. The first 3 bits are the priority bits, now called the differentiated services bits.
+
+**Total Length** Length of the packet, including header and data.
+
+**Identification** Unique IP-packet value used to differentiate fragmented packets from different datagrams.
+
+**Flags** Specifies whether fragmentation of the packet should occur.
+
+**Fragment Offset** Provides fragmentation and reassembly if the packet is too large to put in a frame. It also allows different maximum transmission units (MTUs define the size of packets) on the Internet.
+
+**Time To Live** Set into a packet when it is originally generated. If it doesn't get to where it's supposed to go before the TTL expires, boom—it's gone. This stops IP packets from continuously circling the network looking for a home.
+
+**Protocol** Port of upper-layer protocol; for example, TCP is port 6 or UDP is port 17. Also supports Network layer protocols, like ARP and ICMP, and can be referred to as the Type field in some analyzers. We'll talk about this field more in a minute.
+
+**Header Checksum** Cyclic redundancy check (CRC) on header only.
+
+**Source IP Address** 32-bit IP address of sending station.
+
+**Destination IP Address** 32-bit IP address of the station this packet is destined for.
+
+**Options** Used for network testing, debugging, security, and more.
+
+**Data** After the IP option field, will be the upper-layer data.
+
+Here's a snapshot of an IP packet caught on a network analyzer. Notice that all the header information discussed previously appears here:
+
+      IP Header - Internet Protocol Datagram
+      Version: 4
+      Header Length: 5
+      Precedence: 0
+      Type of Service: %000
+      Unused: %00
+      Total Length: 187
+      Identifier: 22486
+      Fragmentation Flags: %010 Do Not Fragment
+      Fragment Offset: 0
+      Time To Live: 60
+      IP Type: 0x06 TCP
+      Header Checksum: 0xd031
+      Source IP Address: 10.7.1.30
+      Dest. IP Address: 10.7.1.10
+      No Internet Datagram Options
+
+The Type field is typically a Protocol field, but this analyzer sees it as an IP Type field. This is important. If the header didn't carry the protocol information for the next layer, IP wouldn't know what to do with the data carried in the packet. The preceding example clearly tells IP to hand the segment to TCP.
+
+![image](https://github.com/user-attachments/assets/63fd84d5-7e5d-4350-9468-096987735938)
+
+The picture demonstrates how the Network layer sees the protocols at the Transport layer when it needs to hand a packet up to the upper-layer protocols.
+
+In this example, the Protocol field tells IP to send the data to either TCP port 6 or UDP port 17. But it will be UDP or TCP only if the data is part of a data stream headed for an upper-layer service or application. It could just as easily be destined for Internet Control Message Protocol (ICMP), Address Resolution Protocol (ARP), or some other type of Network layer protocol.
+
+![image](https://github.com/user-attachments/assets/c6ccb619-f4eb-41bb-b916-c7ba7f1e89a1)
+
+Some other popular protocols that can be specified in the Protocol field.
+
+#
+
+### Internet Control Message Protocol
+
+Internet Control Message Protocol (ICMP) works at the Network layer and is used by IP for many different services.
+
+ICMP is a management protocol and messaging service provider for IP. Its messages are carried as IP packets.
+
+ICMP packets have the following characteristics:
+
+- They can provide hosts with information about network problems.
+
+- They are encapsulated within IP datagrams.
+
+The following are some common events and messages that ICMP relates to, and the two most popular programs that use ICMP:
+
+**Destination Unreachable** If a router can't send an IP datagram any further, it uses ICMP to send a message back to the sender, advising it of the situation.
+
+![image](https://github.com/user-attachments/assets/186407d3-13a3-4d1e-8281-a5e85f481034)
+
+When Host A sends a packet destined for Host B, the Lab B router will send an ICMP Destination Unreachable message back to the sending device (directly to Host A, in this example).
+
+**Buffer Full** If a router's memory buffer for receiving incoming datagrams is full, it will use ICMP to send out this message until the congestion abates.
+
+**Hops** Each IP datagram is allotted a certain number of routers, called hops, to pass through. If a datagram reaches its limit of hops before arriving at its destination, the last router to receive it deletes it. The executioner router then uses ICMP to send an obituary message, informing the sending machine of the demise of its datagram.
+
+**Ping** Ping uses ICMP echo request and reply messages to check the physical and logical connectivity of machines on an internetwork.
+
+**Traceroute** Traceroute uses IP packet time to live time-outs to discover the path a packet takes as it traverses an internetwork.
+
+Both Ping and Traceroute (also just called Trace, and Microsoft Windows uses tracert ) allow you to verify address configurations in your internetwork.
+
+#
+
+### Address Resolution Protocol
+
+Address Resolution Protocol (ARP) finds the hardware address of a host from a known IP address.
+
+Here's how it works:
+
+When IP has a datagram to send, it must inform a Network Access protocol, such as Ethernet or wireless, of the destination's hardware address on the local network. (It has already been informed by upper-layer protocols of the destination's IP address.)
+
+If IP doesn't find the destination host's hardware address in the ARP cache, it uses ARP to find this information.
+
+As IP's detective, ARP interrogates the local network by sending out a broadcast asking the machine with the specified IP address to reply with its hardware address.
+
+So basically, ARP translates the software (IP) address into a hardware address—for example, the destination machine's Ethernet address.
+
+![image](https://github.com/user-attachments/assets/86f3397e-43cd-4e92-9369-d115fc85225f)
+
+ARP resolves IP addresses to Ethernet (MAC) addresses.
+
+The following trace shows an ARP broadcast—notice that the destination hardware address is unknown and is all 0s in the ARP header. 
+
+In the Ethernet header, a destination of all Fs in hex (all 1s in binary), a hardware address broadcast, is used to make sure all devices on the local link receive the ARP request:
+
+      Flags: 0x00
+      Status: 0x00
+      Packet Length: 64
+      Timestamp: 09:17:29.574000 12/06/21
+      Ethernet Header
+      Destination: FF:FF:FF:FF:FF:FF Ethernet
+      Broadcast
+      Source: 00:A0:24:48:60:A5
+      Protocol Type: 0x0806 IP ARP
+      ARP - Address Resolution Protocol
+      Hardware: 1 Ethernet (10Mb)
+      Protocol: 0x0800 IP
+      Hardware Address Length: 6
+      Protocol Address Length: 4
+      Operation: 1 ARP Request
+      Sender Hardware Address: 00:A0:24:48:60:A5
+      Sender Internet Address: 172.16.10.3
+      Target Hardware Address: 00:00:00:00:00:00
+      (ignored)
+      Target Internet Address: 172.16.10.10
+      Extra bytes (Padding):
+      ……………. 0A 0A 0A 0A 0A 0A 0A 0A 0A 0A 0A 0A
+      0A0A 0A 0A 0A 0A
+      Frame Check Sequence: 0x00000000
+
+#
+
+### Reverse Address Resolution Protocol (RARP)
+
+When an IP machine happens to be a diskless machine, it has no way of initially knowing its IP address. But it does know its MAC address.
+
+Reverse Address Resolution Protocol (RARP) discovers the identity of the IP address for diskless machines by sending out a packet that includes its MAC address and a request for the IP address assigned to that MAC address.
+
+A designated machine, called a RARP server, responds with the answer, and the identity crisis is over.
+
+RARP uses the information it does know about the machine's MAC address to learn its IP address and complete the machine's ID portrait.
+
+![image](https://github.com/user-attachments/assets/bfca6956-bde0-49e0-aca1-2f9509499799)
+
+The picture shows a diskless workstation asking for its IP address with a RARP broadcast.
+
+#
+
+### Generic Routing Encapsulation (GRE)
 
 
