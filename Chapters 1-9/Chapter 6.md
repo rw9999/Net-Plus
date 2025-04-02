@@ -983,3 +983,18 @@ The key takeaway should be that IKE is used to negotiate the IPSec tunnel, and t
 
 ## Data Encapsulation
 
+When a host transmits data across a network to another device, the data goes through encapsulation:
+
+It's wrapped with protocol information at each layer of the OSI model. Each layer communicates only with its peer layer on the receiving device.
+
+To communicate and exchange information, each layer uses **protocol data units (PDUs)**.
+
+These hold the control information attached to the data at each layer of the model. They're usually attached to the header in front of the data field but can also be in the trailer, or end, of it.
+
+Each PDU attaches to the data by encapsulating it at each layer of the OSI model, and each has a specific name depending on the information provided in each header.
+
+This PDU information is read only by the peer layer on the receiving device. After it's read, it's stripped off, and the data is then handed to the next layer up.
+
+![image](https://github.com/user-attachments/assets/47901733-1fbe-4f59-9e96-35eaa9f78d19)
+
+The picture shows the PDUs and how they attach control information to each layer. This figure demonstrates how the upper-layer user data is converted for transmission on the network.
