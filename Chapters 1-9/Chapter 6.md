@@ -918,3 +918,68 @@ GRE tunnels have the following characteristics:
 
 As I just mentioned, GRE by itself provides no security—no form of payload confidentiality or encryption. If the packets are sniffed over the public networks, their contents are in plaintext, and although IPSec provides a secure method for tunneling data across an IP network, it has limitations.
 
+IPSec does not support IP broadcast or IP multicast, preventing the use of protocols that need them, like routing protocols.
+
+IPSec also does not support the use of the multiprotocol traffic.
+
+GRE is a protocol that can be used to “carry” other passenger protocols like IP broadcast or IP multicast, as well as non-IP protocols.
+
+So using GRE tunnels with IPSec allows you to run a routing protocol, IP multicast, and multiprotocol traffic across your network.
+
+With a generic hub-and-spoke topology (Corp to Branch, for example), you can implement static tunnels, typically GRE over IPSec, between the corporate office and branch offices.
+
+When you want to add a new spoke to the network, all you need to do is configure it on the hub router. The traffic between spokes has to traverse the hub, where it must exit one tunnel and enter another. Static tunnels can be an appropriate solution for small networks, but this solution actually becomes an unacceptable problem as the number of spokes grows larger and larger.
+
+The two primary security protocols used by IPSec are Authentication Header (AH) and Encapsulating Security Payload (ESP).
+
+**Authentication Header (AH)**
+
+The AH protocol provides authentication for the data and the IP header of a packet using a one-way hash for packet authentication.
+
+It works like this:
+
+The sender generates a one-way hash; then the receiver generates the same one-way hash. If the packet has changed in any way, it won't be authenticated and will be dropped. So basically, IPSec relies upon AH to guarantee authenticity. AH checks the entire packet, but it doesn't offer any encryption services.
+
+This is unlike ESP, which provides an integrity check only on the data of a packet.
+
+**Encapsulating Security Payload (ESP)**
+
+ESP will provide confidentiality, data origin authentication, connectionless integrity, anti-replay service, and limited traffic-flow confidentiality by defeating traffic flow analysis.
+
+There are five components of ESP:
+
+**Confidentiality (Encryption)** This allows the sending device to encrypt the packets before transmitting in order to prevent eavesdropping.
+
+Confidentiality is provided through the use of symmetric encryption algorithms. Confidentiality can be selected separately from all other services, but the confidentiality selected must be the same on both endpoints of your VPN.
+
+The following cryptographic algorithms are defined for use with IPSec:
+
+- HMAC-SHA1/SHA2 for integrity protection and authenticity
+- TripleDES-CBC for confidentiality
+- AES-CBC and AES-CBC for confidentiality
+- AES-GCM AND ChaCha20-Poly1305 providing confidentiality and authentication together efficiently
+
+**Data Integrity** Data integrity allows the receiver to verify that the data received was not altered in any way along the way. IPSec uses checksums as a simple check of the data.
+
+**Authentication** Authentication ensures that the connection is made with the correct partner. The receiver can authenticate the source of the packet by guaranteeing and certifying the source of the information.
+
+**Anti-Replay Service** Anti-replay election is based upon the receiver, meaning the service is effective only if the receiver checks the sequence number. In case you were wondering, a replay attack is when a hacker nicks a copy of an authenticated packet and later transmits it to the intended destination. When the duplicate, authenticated IP packet gets to the destination, it can disrupt services and generally wreak havoc. The Sequence Number field is designed to foil this type of attack.
+
+**Traffic Flow** For traffic flow confidentiality to work, you need to have at least tunnel mode selected. It's most effective if it's implemented at a security gateway where tons of traffic amasses because it's precisely the kind of environment that can mask the true source-destination patterns to bad guys who are trying to breach your network's security.
+
+**Internet Key Exchange (IKE)**
+
+Internet Key Exchange (IKE) is a management protocol that is used to negotiate security associations (SA) between endpoints.
+
+A security association will define the authentication, encryption, and IPSec protocols used for establishing the IPSec connection.
+
+IKE will use the Internet Security Association and Key Management Protocol (ISAKMP) to manage the two phases for the connection:
+
+**Phase 1 (Main mode)** Phase 1 is where the parameters (policies) are agreed upon by the endpoints. The hash, authentication, group, lifetime, and  encryption to be used, known as the HAGLE, will be agreed upon by the endpoints to establish a shared set of policies. Once it is agreed upon, both parties will authenticate and calculate a shared secret symmetrical encryption key. Upon successful authentication, the initial encryption tunnel will be created between the endpoints, and this will pave the way for phase 2.
+
+**Phase 2 (Quick mode)** Phase 2 is the negotiation and connection of IPSec. The initial encryption tunnel created via phase 1 is used to encrypt the negotiation of protocols and algorithms for phase 2 of the IKE process. This negotiation is called the IPSec transform set, and it contains details about the AH and ESP protocols to be used between endpoints. It will also contain details about the encryption, hashing, and mode that the IPSec tunnel will operate in.
+
+The key takeaway should be that IKE is used to negotiate the IPSec tunnel, and this is done in two phases.
+
+## Data Encapsulation
+
