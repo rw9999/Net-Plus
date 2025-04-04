@@ -998,3 +998,89 @@ This PDU information is read only by the peer layer on the receiving device. Aft
 ![image](https://github.com/user-attachments/assets/47901733-1fbe-4f59-9e96-35eaa9f78d19)
 
 The picture shows the PDUs and how they attach control information to each layer. This figure demonstrates how the upper-layer user data is converted for transmission on the network.
+
+The data stream is then handed down to the Transport layer, which sets up a virtual circuit to the receiving device by sending over a sync packet.
+
+Next, the data stream is broken up into smaller pieces, and a Transport layer header (a PDU) is created and attached to the header of the data field; now the piece of data is called a **segment**.
+
+Each segment is sequenced so the data stream can be put back together on the receiving side exactly as it was transmitted.
+
+Each segment is then handed to the Network layer for network addressing and routing through the internetwork.
+
+Each segment is then handed to the Network layer for network addressing and routing through the internetwork.
+
+The Network layer protocol adds a control header to the segment handed down from the Transport layer, and what we have now is called a **packet** or **datagram**.
+
+Remember that the Transport and Network layers work together to rebuild a data stream on a receiving host, but it's not part of their work to place their PDUs on a local network segment—which is the only way to get the information to a router or host.
+
+It's the Data Link layer that's responsible for taking packets from the Network layer and placing them on the network medium (cable or wireless).
+
+The Data Link layer encapsulates each packet in a **frame**, and the frame's header carries the hardware address of the source and destination hosts.
+
+If the destination device is on a remote network, then the frame is sent to a router to be routed through an internetwork. Once it gets to the destination network, a new frame is used to get the packet to the destination host.
+
+To put this frame on the network, it must first be put into a digital signal. Because a frame is really a logical group of 1s and 0s, the Physical layer is responsible for encoding these digits into a digital signal, which is read by devices on the same local network. The receiving devices will synchronizeon the digital signal and extract (decode) the 1s and 0s from the digital signal.
+
+At this point, the devices build the frames, run a cyclic redundancy check (CRC), and then check their answer against the answer in the frame's Frame Check Sequence (FCS) field.
+
+If it matches, the packet is pulled from the frame, and what's left of the frame is discarded.
+
+This process is called **de-encapsulation**.
+
+The packet is handed to the Network layer, where the address is checked. If the address matches, the segment is pulled from the packet, and what's left of the packet is discarded. The segment is processed at the Transport layer, which rebuilds the data stream and acknowledges to the transmitting station that it received each piece. It then happily hands the data stream to the upper-layer application.
+
+In summary, at a transmitting device, the data-encapsulation method works like this:
+
+1. User information is converted to data for transmission on the network.
+
+2. Data is converted to segments, and a reliable connection is set up between the transmitting and receiving hosts.
+
+3. Segments are converted to packets or datagrams, and a logical address is placed in the header so each packet can be routed through an internetwork.
+
+4. Packets or datagrams are converted to frames for transmission on the local network. Hardware (Ethernet) addresses are used to uniquely identify hosts on a local network segment.
+
+5. Frames are converted to bits, and a digital encoding and clocking scheme is used.
+
+![image](https://github.com/user-attachments/assets/28b12a84-b7b7-404c-b1df-c460d404a270)
+
+Remember that a data stream is handed down from the upper layer to the Transport layer.
+
+As technicians, we really don't care who the data stream comes from because that's a programmer's problem. Our job is to rebuild the data stream reliably and hand it to the upper layers on the receiving device.
+
+Let's review port numbers and make sure you understand them. The Transport layer uses port numbers to define both the virtual circuit and the upper-layer process.
+
+![image](https://github.com/user-attachments/assets/a95bdf96-ae39-4aec-80e0-21d0d6b25744)
+
+The Transport layer takes the data stream, makes segments out of it, and establishes a reliable session by creating a virtual circuit.
+
+It then sequences (numbers) each segment and uses acknowledgments and flow control.
+
+If you're using TCP, the virtual circuit is defined by the source port number.
+
+Remember, the host just makes this up starting at port number 1024 (0 through 1023 are reserved for well-known port numbers).
+
+The destination port number defines the upper-layer process (application) that the data stream is handed to when the data stream is reliably rebuilt on the receiving host.
+
+Once the Transport layer header information is added to the piece of data, it becomes a segment and is handed down to the Network layer along with the destination IP address. (The destination IP address was handed down from the upper layers to the Transport layer with the data stream, and it was discovered through a name resolution method at the upper layers—probably DNS.)
+
+The Network layer adds a header, and adds the logical addressing (IP addresses), to the front of each segment. Once the header is added to the segment, the PDU is called a **packet**.
+
+The packet has a protocol field that describes where the segment came from (either UDP or TCP) so it can hand the segment to the correct protocol at the Transport layer when it reaches the receiving host.
+
+The Network layer is responsible for finding the destination hardware address that dictates where the packet should be sent on the local network.
+
+It does this by using ARP. IP at the Network layer looks at the destination IP address and compares that address to its own source IP address and subnet mask. If it turns out to be a local network request, the hardware address of the local host is requested via an ARP request.
+
+Suppose the packet is destined for a remote host. In that case, IP will get the IP address of the default gateway from its configuration information and then ARP for the hardware address of the default gateway (router) instead.
+
+The packet, along with the destination hardware address of either the local host or the default gateway, is then handed down to the Data Link layer.
+
+The Data Link layer will add a header to the front of the packet, and the piece of data then becomes a frame. (We call it a frame because both a header and a trailer are added to the packet, which makes the data resemble bookends or a frame, if you will.)
+
+The frame uses an Ether-Type field to describe which protocol the packet came from at the Network layer. 
+
+Now a CRC is run on the frame, and the answer to the CRC is placed in the FCS field found in the trailer of the frame.
+
+The frame is now ready to be handed down, one bit at a time, to the Physical layer, which will use bit-timing rules to encode the data into a digital signal. 
+
+Every device on the network segment will synchronize with the clock, extract the 1s and 0s from the digital signal, and build a frame. After the frame is rebuilt, a CRC is run to make sure the frame is okay. If everything turns out to be good, the hosts will check the destination address to see if the frame is for them.
