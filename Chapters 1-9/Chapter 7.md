@@ -222,5 +222,18 @@ This is economical because they can use private IP addresses on their inside net
 
 To accomplish this task, the ISP and the corporation—the end users, no matter who they are—need to use something called network address translation (NAT), which basically takes a private IP address and converts it for use on the Internet.
 
+NAT provides security in that these IP addresses cannot be seen by external users.
+
+External users will only be able to see the public IP address to which the private IP address has been mapped. 
+
+Moreover, multiple devices in the same private network can use the same, real IP address to transmit out onto the Internet. Doing things this way saves megatons of address space—a very good thing for us all.
+
+RFC 1918 reserved private addresses
+
+![image](https://github.com/user-attachments/assets/64733975-058e-4574-b08f-abb68795b638)
+
+#
+
+### Virtual IP (VIP)
 
 
