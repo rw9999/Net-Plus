@@ -130,3 +130,97 @@ The valid hosts are the numbers in between the network address and the broadcast
 
 ### Class B Addresses
 
+In a Class B network address, the first 2 bytes are assigned to the network address, and the remaining 2 bytes are used for host addresses. 
+
+The format is as follows:
+
+    network.network.host.host
+
+For example, in the IP address 172.16.30.56, the network address is 172.16, and the host address is 30.56.
+
+With a network address being 2 bytes (8 bits each), we're left with 2 unique combinations.
+
+But the Internet designers decided that all Class B network addresses should start with the binary digit 1, then 0. This leaves 14 bit positions available to manipulate, so in reality, we get 16,384 (that is, 2 ) unique Class B network addresses.
+
+In a Class B network, the request or comments (RFCs) state that the first bit of the first byte must always be turned on, but the second bit must always be turned off.
+
+If we turn the other 6 bits all off and then all on, we will find the range for a Class B network:
+
+    10000000 = 128
+    10111111 = 191
+
+As you can see, a Class B network is defined when the first byte is configured from 128 to 191.
+
+A Class B address uses 2 bytes for host addresses. This is 2 minus the two reserved patterns (all 0s and all 1s), for a total of 65,534 possible host addresses for each Class B network.
+
+Here's an example of how to find the valid hosts in a Class B network:
+
+- All host bits turned off is the network address: 172.16.0.0.
+
+- All host bits turned on is the broadcast address: 172.16.255.255.
+
+The valid hosts would be the numbers in between the network address and the broadcast address: 172.16.0.1 through 172.16.255.254.
+
+### Class C Addresses
+
+The first 3 bytes of a Class C network address are dedicated to the network portion of the address, with only 1 measly byte remaining for the host address.
+
+Here's the format:
+
+    network.network.network.host
+
+Using the example IP address 192.168.100.102, the network address is 192.168.100, and the host address is 102.
+
+In a Class C network address, the first 3 bit positions are always the binary 110. The calculation is as follows: 3 bytes, or 24 bits, minus 3 reserved positions leaves 21 positions. Hence, there are 2 , or 2,097,152, possible Class C networks.
+
+For Class C networks, the RFCs define the first 2 bits of the first octet as always turned on, but the third bit can never be on. 
+
+Following the same process as the previous classes, convert from binary to decimal to find the range. Here's the range for a Class C network:
+
+    11000000 = 192
+    11011111 = 223
+
+So, if you see an IP address with a range from 192 up to 223, you'll know it's a Class C IP address.
+
+Each unique Class C network has 1 byte to use for host addresses. This gets us to 2 , or 256, minus the two reserved patterns of all 0s and all 1s for a total of 254 available host addresses for each Class C network.
+
+Here's an example of how to find a valid host ID in a Class C network:
+
+- All host bits turned off is the network ID: 192.168.100.0.
+
+- All host bits turned on is the broadcast address: 192.168.100.255.
+
+The valid hosts would be the numbers in between the network address and the broadcast address: 192.168.100.1 through 192.168.100.254.
+
+### Class D and E Addresses
+
+Addresses with the first octet of 224 to 255 are reserved for Class D and E networks.
+
+Class D (224–239) is used for multicast addresses and Class E (240–255) for scientific purposes.
+
+You do need to remember that the multicast range is from 224.0.0.0 through 239.255.255.255.
+
+### Special Purposes of Network Addresses
+
+Some IP addresses are reserved for special purposes, so network administrators can't ever assign them to hosts.
+
+See previous table.
+
+#
+
+### Private IP Addresses (RFC 1918)
+
+The people who created the IP addressing scheme also created what we call private IP addresses.
+
+These addresses can be used on a private network, but they're not routable through the Internet.
+
+This is designed for the purpose of creating a measure of much-needed security, but it also conveniently saves valuable IP address space.
+
+If every host on every network had to have real routable IP addresses, we would have run out of available IP addresses to hand out years ago. But by using private IP addresses, ISPs, corporations, and home users need only a relatively tiny group of bona fide IP addresses to connect their networks to the Internet. 
+
+This is economical because they can use private IP addresses on their inside networks and get along just fine.
+
+To accomplish this task, the ISP and the corporation—the end users, no matter who they are—need to use something called network address translation (NAT), which basically takes a private IP address and converts it for use on the Internet.
+
+
+
