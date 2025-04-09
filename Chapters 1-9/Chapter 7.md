@@ -236,4 +236,97 @@ RFC 1918 reserved private addresses
 
 ### Virtual IP (VIP)
 
+When a public IP address is substituted for the actual private IP address that has been assigned to the network interface of the device, the public IP address becomes an example of what is called a virtual IP address.
+
+This means it doesn't correspond to an actual physical network interface. A well-used example is a subinterface configured on a physical router interface, which allows you to create multiple IPs or subnets on one interface.
+
+There are other examples of such virtual IP addresses. For example, when a web proxy server substitutes its IP address for the sender's IP address before sending a packet to the Internet, it is another example of creating a virtual IP address.
+
+#
+
+### APIPA
+
+What happens if you have a few hosts connected together with a switch or hub and you don't have a DHCP server?
+
+You can add static IP information to a host, or you can use what is called Automatic Private IP Addressing (APIPA). I don't recommend this, but APIPA is a “feature,” so you do need to remember it.
+
+With APIPA, clients can automatically self-configure an IP address and subnet mask, which is the minimum information needed for hosts to communicate when a DHCP server isn't available.
+
+In this way, it could be thought of as a DHCP failover scheme. If all of the hosts set themselves with an APIPA address, they could communicate with one another but unfortunately not with any addresses that were statically configured, such as default gateways.
+
+The IP address range for APIPA is 169.254.0.1 through 169.254.255.254. The client also configures itself with a default Class B subnet mask of 255.255.0.0.
+
+However, when you're in your corporate network and you're running a DHCP server, and your host displays that it is using this IP address range, this means that either your DHCP client on the host is not working, or the DHCP server is down or can't be reached because of a network issue.
+
+For example, if you plug a DHCP client into a port that is disabled, the host will receive an APIPA address. If users cannot connect to the Internet and their IP addresses fall into the APIPA address range, the DHCP server is most likely the problem.
+
+## IPv4 Address Types
+
+Most people use broadcast as a generic term, and most of the time, we understand what they mean. But not always. For example, you might say, “The host broadcasted through a router to a DHCP server,” but, well, it's pretty unlikely that this would ever really happen. What you probably mean— using the correct technical jargon—is, “The DHCP client broadcasted for an IP address; a router then forwarded this as a unicast packet to the DHCP server.” Remember that with IPv4, broadcasts are pretty important, but with IPv6, there aren't any broadcasts sent at all.
+
+**Layer 2 Broadcasts** These are sent to all nodes on a LAN.
+
+**Broadcasts (Layer 3)** These are sent to all nodes on the network.
+
+**Unicast** This is an address for a single interface, and these are used to send packets to a single destination host.
+
+**Multicast** These are packets sent from a single source and transmitted to many devices on different networks. Referred to as one-to-many.
+
+#
+
+### Layer 2 Broadcasts
+
+First, understand that layer 2 broadcasts are also known as hardware broadcasts—they only go out on a LAN, and they don't go past the LAN boundary (router).
+
+The typical hardware address is 6 bytes (48 bits) and looks something like 0c.43.a4.f3.12.c2. The broadcast would be all 1s in binary, which would be all Fs in hexadecimal, as in FF.FF.FF.FF.FF.FF.
+
+#
+
+### Layer 3 Broadcasts
+
+Broadcast messages are meant to reach all hosts on a broadcast domain. These are the network broadcasts that have all host bits on.
+
+Here's an example that you're already familiar with:
+
+The network address of 172.16.0.0 would have a broadcast address of 172.16.255.255—all host bits on.
+
+Broadcasts can also be “any network and all hosts,” as indicated by 255.255.255.255.
+
+A good example of a broadcast message is an Address Resolution Protocol (ARP) request.
+
+When a host has a packet, it knows the logical address (IP) of the destination. To get the packet to the destination, the host needs to forward the packet to a default gateway if the destination resides on a different IP network.
+
+If the destination is on the local network, the source will forward the packet directly to the destination. Because the source doesn't have the MAC address to which it needs to forward the frame, it sends out a broadcast, something that every device in the local broadcast domain will listen to.
+
+This broadcast says, in essence, “If you are the owner of IP address 192.168.2.3, please forward your MAC address to me,” with the source giving the appropriate information.
+
+#
+
+### Unicast Address
+
+A unicast address is assigned to a single interface, and this term is used in both IPv4 and IPv6 to describe your host interface IP address.
+
+#
+
+### Multicast Address (Class D)
+
+Multicast is a different beast entirely. At first glance, it appears to be a hybrid of unicast and broadcast communication, but that isn't quite the case.
+
+Multicast does allow point-to-multipoint communication, which is similar to broadcasts, but it happens in a different manner.
+
+The crux of multicast is that it enables multiple recipients to receive messages without flooding the messages to all hosts on a broadcast domain. However, this is not the default behavior—it's what we can do with multicasting if it's configured correctly.
+
+Multicast works by sending messages or data to IP multicast group addresses.
+
+Routers then forward copies (unlike broadcasts, which are not forwarded) of the packet out every interface that has hosts subscribed to a particular group address.
+
+This is where multicast differs from broadcast messages—with multicast communication, copies of packets, in theory, are sent only to subscribed hosts. When I say in theory, this means the hosts will receive, for example, a multicast packet destined for 224.0.0.10 (this is an EIGRP packet, and only a router running the EIGRP protocol will read it).
+
+All hosts on the broadcast LAN (Ethernet is a broadcast multi-access LAN technology) will pick up the frame, read the destination address, and immediately discard the frame, unless they are in the multicast group. This saves PC processing, not LAN bandwidth.
+
+Multicasting can cause severe LAN congestion, in some instances, if not implemented carefully.
+
+There are several different groups that users or applications can subscribe to. The range of multicast addresses starts with 224.0.0.0 and goes through 239.255.255.255. As you can see, this range of addresses falls within IP Class D address space based on classful IP assignment.
+
+## Internet Protocol Version 6 (IPv6)
 
