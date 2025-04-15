@@ -117,5 +117,33 @@ We can't use a /31 or /32 because, remember, we have to leave at least 2 host bi
 
 ### Subnetting a Class C Address: The Fast Way!
 
+Practice Example #1C: 255.255.255.128 (/25)
 
+Because 128 is 10000000 in binary, there is only 1 bit for subnetting, and there are 7 bits for hosts. We're going to subnet the Class C network address 192.168.10.0.
+
+- 192.168.10.0 = Network address
+
+- 255.255.255.128 = Subnet mask
+
+Now, let's answer the big five:
+
+- How many subnets? Because 128 is 1 bit on (10000000), the answer is 2 = 2.
+
+- How many hosts per subnet? We have 7 host bits off (10000000), so the equation is 2 – 2 = 126 hosts.
+
+- What are the valid subnets? 256 – 128 = 128. Remember, we'll start at zero and count in our block size, so our subnets are 0, 128.
+
+- What's the broadcast address for each subnet? The number right before the value of the next subnet is all host bits turned on and equals the broadcast address. For the 0 subnet, the next subnet is 128, so the broadcast address of the 0 subnet is 127.
+
+- What are the valid hosts? These are the numbers between the subnet and broadcast address. The easiest way to find the hosts is to write out the subnet address and the broadcast address. This way, the valid hosts are obvious. The following table shows the 0 and 128 subnets, the valid host ranges of each, and the broadcast address of both subnets:
+
+![image](https://github.com/user-attachments/assets/ac35096d-4dfd-411b-8725-e1afc2224108)
+
+![image](https://github.com/user-attachments/assets/e4836b7e-62a6-4145-ad0e-f059ec9d1fcf)
+
+Okay, looking at a Class C /25, it's pretty clear there are two subnets. But so what —why is this significant? Well actually, it's not, but that's not the right question. What you really want to know is what you would do with this information.
+
+The key to understanding subnetting is to understand the very reason you need to do it. And I'm going to demonstrate this by going through the process of building a physical network—and let's add a router. (We now have an internetwork) Because we added that router, for the hosts on our internetwork to communicate, they must now have a logical network addressing scheme. We could use IPv6, but IPv4 is still the most popular, and it also just happens to be what we're studying at the moment, so that's what we're going with.
+
+By the way, the output you see after the diagram is the routing table of the router, which was displayed by executing the show ip route command on the router. There are two physical networks, so we're going to implement a logical addressing scheme that allows for two logical networks. As always, it's a really good idea to look ahead and consider any likely growth scenarios—both short and long term, but for this example, a /25 will do the trick.
 
