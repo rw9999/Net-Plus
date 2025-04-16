@@ -503,13 +503,13 @@ This is done the same way as the preceding subnet mask, except that we have more
 
 Notice in the last example I started counting at zero. This is called **ip subnet-zero**. It is a command that if executed on a router, allows us to use the zero subnet as our first subnet. This may or may not be enabled on your router. If it is not enabled, then you cannot start counting subnets at zero. Most routers, if not all routers these days, support ip subnet-zero.
 
-3.What subnet and broadcast address is the IP address 172.16.50.10 255.255.224.0 (/19) a member of? 
+3. What subnet and broadcast address is the IP address 172.16.50.10 255.255.224.0 (/19) a member of? 
 
-256 – 224 = 0, 32, 64 (remember, we always start counting at zero). The subnet is 172.16.32.0, and the broadcast must be 172.16.63.255 because 64.0 is the next subnet.
+   256 – 224 = 0, 32, 64 (remember, we always start counting at zero). The subnet is 172.16.32.0, and the broadcast must be 172.16.63.255 because 64.0 is the next subnet.
 
 4. What subnet and broadcast address is the IP address 172.16.46.255 255.255.240.0 (/20) a member of?
 
-256 – 240 = 16. The third octet is interesting to us. 0, 16, 32, 48. This subnet address must be in the 172.16.32.0 subnet, and the broadcast must be 172.16.47.255 because 48.0 is the next subnet. So, yes, 172.16.46.255 is a valid host.
+   256 – 240 = 16. The third octet is interesting to us. 0, 16, 32, 48. This subnet address must be in the 172.16.32.0 subnet, and the broadcast must be 172.16.47.255 because 48.0 is the next subnet. So, yes, 172.16.46.255 is a valid host.
 
 5. What subnet and broadcast address is the IP address 172.16.45.14 255.255.255.252 (/30) a member of?
   
@@ -517,7 +517,7 @@ Notice in the last example I started counting at zero. This is called **ip subne
 
 6. What is the subnet and broadcast address of the host 172.16.88.255/20?
 
-What is a /20? If you can't answer this, you can't answer this question, can you? A /20 is 255.255.240.0, which gives us a block size of 16 in the third octet, and because no subnet bits are on in the fourth octet, the answer is always 0 and 255 in the fourth octet. 0, 16, 32, 48, 64, 80, 96. Bingo: 88 is between 80 and 96, so the subnet is 80.0 and the broadcast address is 95.255.
+   What is a /20? If you can't answer this, you can't answer this question, can you? A /20 is 255.255.240.0, which gives us a block size of 16 in the third octet, and because no subnet bits are on in the fourth octet, the answer is always 0 and 255 in the fourth octet. 0, 16, 32, 48, 64, 80, 96. Bingo: 88 is        between  80 and 96, so the subnet is 80.0 and the broadcast address is 95.255.
 
 7. A router receives a packet on an interface with a destination address of 172.16.46.191/26. What will the router do with this packet?
 
