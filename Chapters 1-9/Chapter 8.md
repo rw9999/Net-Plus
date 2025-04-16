@@ -117,7 +117,28 @@ We can't use a /31 or /32 because, remember, we have to leave at least 2 host bi
 
 ### Subnetting a Class C Address: The Fast Way!
 
-Practice Example #1C: 255.255.255.128 (/25)
+When you've chosen a possible subnet mask for your network and need to determine the number of subnets, valid hosts, and broadcast addresses of a subnet that the mask provides, all you need to do is answer five simple questions:
+
+- How many subnets does the chosen subnet mask produce?
+- How many valid hosts per subnet are available?
+- What are the valid subnets?
+- What's the broadcast address of each subnet?
+- What are the valid hosts in each subnet?
+
+Here's how you get the answers to those five big questions:
+
+- How many subnets? 2<sup>x</sup> = number of subnets. x is the number of masked bits, or the 1s. For example, in 11000000, the number of 1s gives us 2<sup>2</sup> subnets. In this example, there are four subnets.
+
+- How many hosts per subnet? 2<sup>y</sup> – 2 = number of hosts per subnet. y is the number of unmasked bits, or the 0s. For example, in 11000000, the number of 0s gives us 2<sup>6</sup> – 2 hosts. In this example, there are 62 hosts per subnet. You need to subtract 2 for the subnet address and the broadcast address, which are not valid hosts.
+
+- What are the valid subnets? 256 – subnet mask = block size, or increment number. An example would be 256 – 192 = 64. The block size of a 192 mask is always 64. Start counting at zero in blocks of 64 until you reach the subnet mask value, and these are your subnets. 0, 64, 128, 192.
+
+- What's the broadcast address for each subnet? Now here's the really easy part. Because we counted our subnets in the last section as 0, 64, 128, and 192, the broadcast address is always the number right before the next subnet. For example, the 0 subnet has a broadcast address of 63 because the next subnet is 64. The 64 subnet has a broadcast address of 127 because the next subnet is 128. And so on. And remember, the broadcast address of the last subnet is always 255.
+
+- What are the valid hosts? Valid hosts are the numbers between the subnets, omitting all the 0s and all the 1s. For example, if 64 is the subnet number and 127 is the broadcast address, then 65–126 is the valid host range—it's always the numbers between the subnet address and the broadcast address.
+
+
+### Practice Example #1C: 255.255.255.128 (/25)
 
 Because 128 is 10000000 in binary, there is only 1 bit for subnetting, and there are 7 bits for hosts. We're going to subnet the Class C network address 192.168.10.0.
 
@@ -127,9 +148,9 @@ Because 128 is 10000000 in binary, there is only 1 bit for subnetting, and there
 
 Now, let's answer the big five:
 
-- How many subnets? Because 128 is 1 bit on (10000000), the answer is 2 = 2.
+- How many subnets? Because 128 is 1 bit on (10000000), the answer is 2<sup>1</sup> = 2.
 
-- How many hosts per subnet? We have 7 host bits off (10000000), so the equation is 2 – 2 = 126 hosts.
+- How many hosts per subnet? We have 7 host bits off (10000000), so the equation is 2<sup>7</sup> – 2 = 126 hosts.
 
 - What are the valid subnets? 256 – 128 = 128. Remember, we'll start at zero and count in our block size, so our subnets are 0, 128.
 
@@ -146,4 +167,361 @@ Okay, looking at a Class C /25, it's pretty clear there are two subnets. But so 
 The key to understanding subnetting is to understand the very reason you need to do it. And I'm going to demonstrate this by going through the process of building a physical network—and let's add a router. (We now have an internetwork) Because we added that router, for the hosts on our internetwork to communicate, they must now have a logical network addressing scheme. We could use IPv6, but IPv4 is still the most popular, and it also just happens to be what we're studying at the moment, so that's what we're going with.
 
 By the way, the output you see after the diagram is the routing table of the router, which was displayed by executing the show ip route command on the router. There are two physical networks, so we're going to implement a logical addressing scheme that allows for two logical networks. As always, it's a really good idea to look ahead and consider any likely growth scenarios—both short and long term, but for this example, a /25 will do the trick.
+
+### Practice Example #2C: 255.255.255.192 (/26)
+
+In this second example, we're going to subnet the network address 192.168.10.0 using the subnet mask 255.255.255.192.
+
+- 192.168.10.0 = Network address
+- 255.255.255.192 = Subnet mask
+
+It's time to answer the big five:
+
+- How many subnets? Because 192 is 2 bits on (11000000), the answer is 2<sup>2</sup> = 4 subnets.
+- How many hosts per subnet? We have 6 host bits off (11000000), so the equation is 2<sup>6</sup> – 2 = 62 hosts.
+- What are the valid subnets? 256 – 192 = 64. Remember, we start at zero and count in our block size, so our subnets are 0, 64, 128, and 192.
+- What's the broadcast address for each subnet? The number right before the value of the next subnet is all host bits turned on and equals the broadcast address. For the 0 subnet, the next subnet is 64, so the broadcast address for the 0 subnet is 63.
+- What are the valid hosts? These are the numbers between the subnet and broadcast address. The easiest way to find the hosts is to write out the subnet address and the broadcast address. This way, the valid hosts are obvious. The following table shows the 0, 64, 128, and 192 subnets, the valid host ranges of each, and the broadcast address of each subnet:
+
+![image](https://github.com/user-attachments/assets/a1107dae-5c70-4bea-9e0b-f891f1bb3dfb)
+
+![image](https://github.com/user-attachments/assets/308ff3ba-1918-4004-be3c-83dbdf807cd4)
+
+The /26 mask provides four subnetworks, and we need a subnet for each router interface. With this mask, in this example, we actually have room to add another router interface.
+
+### Practice Example #3C: 255.255.255.224 (/27)
+
+This time, we'll subnet the network address 192.168.10.0 and subnet mask 255.255.255.224.
+
+- 192.168.10.0 = Network address
+- 255.255.255.224 = Subnet mask
+
+- How many subnets? 224 is 11100000, so our equation is 2<sup>3</sup> = 8
+- How many hosts? 2<sup>5</sup> – 2 = 30.
+- What are the valid subnets? 256 – 224 = 32. We just start at zero and count to the subnet mask value in blocks (increments) of 32: 0, 32, 64, 96, 128, 160, 192, and 224.
+- What's the broadcast address for each subnet (always the number right before the next subnet)?
+- What are the valid hosts (the numbers between the subnet number and the broadcast address)?
+
+To answer the last two questions, first just write out the subnets, and then write out the broadcast address—the number right before the next subnet.
+
+Last, fill in the host address. The following table gives you all the subnets for the 255.255.255.224 Class C subnet mask:
+
+![image](https://github.com/user-attachments/assets/d24bc22e-d5d3-4827-a42b-7618d32c2163)
+
+![image](https://github.com/user-attachments/assets/50a226f2-6435-4782-92e3-860595571e8e)
+
+### Practice Example #4C: 255.255.255.240 (/28)
+
+Let's practice on another one:
+
+- 192.168.10.0 = Network address
+- 255.255.255.240 = Subnet mask
+
+- Subnets? 240 is 11110000 in binary. 2<sup>4</sup> = 16.
+- Hosts? 4 host bits, or 2<sup>4</sup> – 2 = 14.
+- Valid subnets? 256 – 240 = 16. 0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+To answer the last two questions, check out the following table. It gives you the subnets, valid hosts, and broadcast address for each subnet. 
+
+First, find the address of each subnet using the block size (increment). 
+
+Second, find the broadcast address of each subnet increment (it's always the number right before the next valid subnet); then, just fill in the host address.
+
+### Practice Example #5C: 255.255.255.248 (/29)
+
+- 192.168.10.0 = Network address
+- 255.255.255.248 = Subnet mask
+
+- Subnets? 248 in binary = 11111000. 2<sup>5</sup> = 32.
+- Hosts? 2<sup>3</sup> – 2 = 6.
+- Valid subnets? 256 – 248 = 8, start at zero: 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, and 248.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+### Practice Example #6C: 255.255.255.252 (/30)
+
+- 192.168.10.0 = Network address
+- 255.255.255.252 = Subnet mask
+
+- Subnets? 64.
+- Hosts? 2.
+- Valid subnets? 0, 4, 8, 12, and so on, all the way to 252.
+
+- Broadcast address for each subnet (always the number right before the next subnet)?
+- Valid hosts (the numbers between the subnet number and the broadcast address)?
+
+ #
+ 
+ ### So What Do You Know Now?
+
+ Here's where you can really apply what you've learned so far and begin committing it all to memory
+
+ When you see a subnet mask or slash notation (CIDR), you should know the following when working with Class C networks.
+
+ /25
+ 
+What do you know about a /25?
+
+- 128 mask
+- 1 bit on and 7 bits off (10000000)
+- Block size of 128
+- 2 subnets, each with 126 hosts
+
+/26
+
+And what do you know about a /26?
+
+- 192 mask
+- 2 bits on and 6 bits off (11000000)
+- Block size of 64
+- 4 subnets, each with 62 hosts
+
+/27
+
+What about a /27?
+
+- 224 mask
+- 3 bits on and 5 bits off (11100000)
+- Block size of 32
+- 8 subnets, each with 30 hosts
+
+/28
+
+And what about a /28?
+
+- 240 mask
+- 4 bits on and 4 bits off
+- Block size of 16
+- 16 subnets, each with 14 hosts
+
+/29
+
+What do you know about a /29?
+
+- 248 mask
+- 5 bits on and 3 bits off
+- Block size of 8
+- 32 subnets, each with 6 hosts
+
+/30
+
+And last, what about a /30?
+
+- 252 mask
+- 6 bits on and 2 bits off
+- Block size of 4
+- 64 subnets, each with 2 hosts
+
+Regardless of whether you have a Class A, Class B, or Class C address, the /30 mask will provide you with only two hosts, ever. This mask is suited almost exclusively for use on point-to-point links.
+
+#
+
+### Subnetting Class B Addresses
+
+Notice that we have a lot more possible subnet masks than we do with a Class C network address:
+
+255.255.0.0 (/16)
+255.255.128.0 (/17)
+255.255.192.0 (/18)
+255.255.224.0 (/19)
+255.255.240.0 (/20)
+255.255.248.0 (/21)
+255.255.252.0 (/22)
+255.255.254.0 (/23)
+255.255.255.0 (/24)
+255.255.255.128(/25)
+255.255.255.192(/26)
+255.255.255.224(/27)
+255.255.255.240(/28)
+255.255.255.248(/29)
+255.255.255.252(/30)
+
+We know the Class B network address has 16 bits available for host addressing. 
+
+This means we can use up to 14 bits for subnetting (because we have to leave at least 2 bits for host addressing).
+
+Using a /16 means you are not subnetting with Class B, but it is a mask you can use.
+
+The process of subnetting a Class B network is pretty much the same as it is for a Class C, except that you have more host bits and you start in the third octet.
+
+Use the same subnet numbers for the third octet with Class B that you used for the fourth octet with Class C, but add a 0 to the network portion and a 255 to the broadcast section in the fourth octet.
+
+The following table shows you an example host range of two subnets used in a Class B 240 (/20) subnet mask:
+
+![image](https://github.com/user-attachments/assets/5da0aec0-5d5c-497a-8559-13fd7f7665d5)
+
+Notice that these are the same numbers we used in the fourth octet with a /28 mask, but we moved them to the third octet and added a .0 and .255 at the end. Just add the valid hosts between the numbers, and you're set.
+
+### Subnetting Practice Examples: Class B Addresses
+
+The following sections will give you an opportunity to practice subnetting Class B addresses. Again, I have to mention that this is the same as subnetting with Class C, except we start in the third octet—with the exact same numbers.
+
+### Practice Example #1B: 255.255.128.0 (/17)
+
+Let's take a look at our first example:
+
+- 172.16.0.0 = Network address
+- 255.255.128.0 = Subnet mask
+
+- Subnets? 2<sup>1</sup> = 2 (same as Class C).
+- Hosts? 2<sup>15</sup> – 2 = 32,766 (7 bits in the third octet, and 8 in the fourth).
+- Valid subnets? 256 – 128 = 128. 0, 128. Remember that subnetting in Class B starts in the third octet, so the subnet numbers are really 0.0 and 128.0, as shown in the next table. These are the exact numbers we used with Class C; we use them in the third octet and add a 0 in the fourth octet for the network address.
+- Broadcast address for each subnet?
+
+The following table shows the two subnets available, the valid host range, and the broadcast address of each:
+
+![image](https://github.com/user-attachments/assets/78a2d52a-5360-431c-b31b-7a0e46c430f8)
+
+Notice that we just added the fourth octet's lowest and highest values and came up with the answers. And again, it's done the same way as for a Class C subnet. We just use the same numbers in the third octet and added 0 and 255 in the fourth octet.
+
+### Practice Example #2B: 255.255.192.0 (/18)
+
+Let's take a look at a second example with Class B.
+
+- 172.16.0.0 = Network address
+- 255.255.192.0 = Subnet mask
+
+- Subnets? 2<sup>2</sup> = 4.
+- Hosts? 2<sup>14</sup> – 2 = 16,382 (6 bits in the third octet, and 8 in the fourth).
+- Valid subnets? 256 – 192 = 64. 0, 64, 128, 192. Remember that we're in the third octet, so the subnet numbers are really 0.0, 64.0, 128.0, and 192.0, as shown in the next table.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+The following table shows the four subnets available, the valid host range, and the broadcast address of each:
+
+![image](https://github.com/user-attachments/assets/57dbe6bf-e23e-47f2-9247-c538069659dc)
+
+Again, it's pretty much the same as it is for a Class C subnet—we just added 0 and 255 in the fourth octet for each subnet in the third octet.
+
+#
+
+### Practice Example #3B: 255.255.240.0 (/20)
+
+Let's take a look:
+
+172.16.0.0 = Network address
+255.255.240.0 = Subnet mask
+
+- Subnets? 2<sup>4</sup> = 16.
+- Hosts? 2<sup>12</sup> – 2 = 4,094.
+- Valid subnets? 256 – 240 = 16, but we start counting from 0. 0, 16, 32, 48, and so on, up to 240. Notice that these are the same numbers as a Class C 240 mask—we just put them in the third octet and add a 0 and 255 in the fourth octet.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+The following table shows the first four subnets, valid hosts, and broadcast address in a Class B 255.255.240.0 mask:
+
+![image](https://github.com/user-attachments/assets/3151df10-1331-4f99-af90-00fc945120c5)
+
+![image](https://github.com/user-attachments/assets/a08e3252-b412-44b4-813d-a1bd2a77649c)
+
+### Practice Example #4B: 255.255.254.0 (/23)
+
+Let's take a look:
+
+- 172.16.0.0 = Network address
+- 255.255.254.0 = Subnet mask
+
+- Subnets? 2<sup>7</sup> = 128.
+- Hosts? 2<sup>9</sup> – 2 = 510.
+- Valid subnets? 256 – 254 = 0, 2, 4, 6, 8, and so on, up to 254.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+The following table shows the first five subnets, valid hosts, and broadcast address in a Class B 255.255.254.0 mask:
+
+![image](https://github.com/user-attachments/assets/90ab6a4b-6a48-4d79-840e-889aae74effd)
+
+![image](https://github.com/user-attachments/assets/97a83fa1-ab7d-4f0c-9990-c740e2de7a76)
+
+### Practice Example #5B: 255.255.255.0 (/24)
+
+Contrary to popular belief, 255.255.255.0 used with a Class B network address is not called a Class B network with a Class C subnet mask. It's amazing how many people see this mask used in a Class B network and think it's a Class C subnet mask. This is a Class B subnet mask with 8 bits of subnetting—it's considerably different from a Class C mask. Subnetting this address is fairly simple:
+
+- 172.16.0.0 = Network address
+- 255.255.255.0 = Subnet mask
+
+- Subnets? 2<sup>8</sup> = 256.
+- Hosts? 2<sup>8</sup> – 2 = 254.
+- Valid subnets? 256 – 255 = 1. 0, 1, 2, 3, and so on, all the way to 255.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+### Practice Example #6B: 255.255.255.128 (/25)
+
+This is one of the hardest subnet masks you can play with. And worse, it actually is a really good subnet to use in production because it creates more than 500 subnets with a whopping 126 hosts for each subnet—a nice mixture.
+
+- 172.16.0.0 = Network address
+- 255.255.255.128 = Subnet mask
+
+- Subnets? 2<sup>9</sup> = 512.
+- Hosts? 2<sup>7</sup> – 2 = 126.
+- Valid subnets? Now for the tricky part. 256 – 255 = 1. 0, 1, 2, 3, and so on for the third octet. But you can't forget the one subnet bit used in the fourth octet. Remember when I showed you how to figure one subnet bit with a Class C mask? You figure this out the same way. (Now you know why I showed you the 1-bit subnet mask in the Class C section—to make this part easier.) You actually get two subnets for each third octet value, hence the 512 subnets. For example, if the third octet is showing subnet 3, the two subnets would actually be 3.0 and 3.128.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+### Practice Example #7B: 255.255.255.192 (/26)
+
+Now, this is where Class B subnetting gets easy. Because the third octet has a 255 in the mask section, whatever number is listed in the third octet is a subnet number. However, now that we have a subnet number in the fourth octet, we can subnet this octet just as we did with Class C subnetting. Let's try it:
+
+- 172.16.0.0 = Network address
+- 255.255.255.192 = Subnet mask
+
+- Subnets? 2<sup>10</sup> = 1024.
+- Hosts? 2<sup>6</sup> – 2 = 62.
+- Valid subnets? 256 – 192 = 64. The subnets are shown in the following table. Do these numbers look familiar?
+- Broadcast address for each subnet?
+- Valid hosts?
+
+Notice that for each subnet value in the third octet, you get subnets 0, 64, 128, and 192 in the fourth octet.
+
+### Practice Example #8B: 255.255.255.224 (/27)
+
+This is done the same way as the preceding subnet mask, except that we have more subnets and fewer hosts per subnet available.
+
+- 172.16.0.0 = Network address
+- 255.255.255.224 = Subnet mask
+
+- Subnets? 2<sup>11</sup> = 2048.
+- Hosts? 2<sup>5</sup> – 2 = 30.
+- Valid subnets? 256 – 224 = 32. 0, 32, 64, 96, 128, 160, 192, 224.
+- Broadcast address for each subnet?
+- Valid hosts?
+
+#
+
+### Subnetting in Your Head: Class B Addresses
+
+1. What subnet and broadcast address is the IP address 172.16.10.33 255.255.255.224 (/27) a member of?
+
+   The interesting octet is the fourth octet. 256 – 224 = 32. 32 + 32 = 64. Bingo: 33 is between 32 and 64. However, remember that the third octet is considered part of the subnet, so the answer is the 10.32 subnet. The broadcast is 10.63 because 10.64 is the next subnet. That was a pretty easy one.
+
+2. What subnet and broadcast address is the IP address 172.16.66.10 255.255.192.0 (/18) a member of?
+
+   The interesting octet is the third octet instead of the fourth octet. 256 – 192 = 64. 0, 64, 128. The subnet is 172.16.64.0. The broadcast must be 172.16.127.255 because 128.0 is the next subnet.
+
+Notice in the last example I started counting at zero. This is called **ip subnet-zero**. It is a command that if executed on a router, allows us to use the zero subnet as our first subnet. This may or may not be enabled on your router. If it is not enabled, then you cannot start counting subnets at zero. Most routers, if not all routers these days, support ip subnet-zero.
+
+3.What subnet and broadcast address is the IP address 172.16.50.10 255.255.224.0 (/19) a member of? 
+
+256 – 224 = 0, 32, 64 (remember, we always start counting at zero). The subnet is 172.16.32.0, and the broadcast must be 172.16.63.255 because 64.0 is the next subnet.
+
+4. What subnet and broadcast address is the IP address 172.16.46.255 255.255.240.0 (/20) a member of?
+
+256 – 240 = 16. The third octet is interesting to us. 0, 16, 32, 48. This subnet address must be in the 172.16.32.0 subnet, and the broadcast must be 172.16.47.255 because 48.0 is the next subnet. So, yes, 172.16.46.255 is a valid host.
+
+5. What subnet and broadcast address is the IP address 172.16.45.14 255.255.255.252 (/30) a member of?
+  
+   Where is the interesting octet? 256 – 252 = 0, 4, 8, 12, 16 (in the fourth octet). The subnet is 172.16.45.12, with a broadcast of 172.16.45.15 because the next subnet is 172.16.45.16.
+
+6. What is the subnet and broadcast address of the host 172.16.88.255/20?
+
+What is a /20? If you can't answer this, you can't answer this question, can you? A /20 is 255.255.240.0, which gives us a block size of 16 in the third octet, and because no subnet bits are on in the fourth octet, the answer is always 0 and 255 in the fourth octet. 0, 16, 32, 48, 64, 80, 96. Bingo: 88 is between 80 and 96, so the subnet is 80.0 and the broadcast address is 95.255.
+
+7. A router receives a packet on an interface with a destination address of 172.16.46.191/26. What will the router do with this packet?
+
+    Discard it. Do you know why? 172.16.46.191/26 is a 255.255.255.192 mask, which gives us a block size of 64. Our subnets are then 0, 64, 128, 192. 191 is the broadcast address of the 128 subnet, so a router, by default, will discard any broadcast packets.
+
+## Troubleshooting IP Addressing
 
