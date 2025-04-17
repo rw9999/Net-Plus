@@ -646,3 +646,96 @@ Once you've gone through all these steps and used the appropriate command-line t
 
 It's common for a host, router, or other network device to be configured with the wrong IP address, subnet mask, or default gateway. Because this happens way too often, I'm going to teach you how to both determine and fix IP address configuration errors.
 
+Once you've worked through the four basic steps of troubleshooting and determined there's a problem, you obviously then need to find and fix it.
+
+It really helps to draw out the network and IP addressing scheme. If it's already done, consider yourself lucky; although it should be done, it rarely is. And if it is, it's usually outdated or inaccurate anyway. Typically it is not done, and you'll probably just have to bite the bullet and start from scratch.
+
+Once you have your network accurately drawn out, including the IP addressing scheme, you need to verify each host's IP address, mask, and default gateway address to determine the problem. (I'm assuming that you don't have a physical problem or that if you did, you've already fixed it.)
+
+![image](https://github.com/user-attachments/assets/8df85194-0f54-492a-951f-280a337bae72)
+
+Let's check out the example.
+
+A user in the sales department calls and tells you that she can't get to Server A in the marketing department. You ask her if she can get to Server B in the marketing department, but she doesn't know because she doesn't have rights to log onto that server. What do you do?
+
+You ask the client to go through the four troubleshooting steps that you learned about in the preceding section.
+
+Steps 1 through 3 work, but step 4 fails. By looking at the figure, can you determine the problem? Look for clues in the network drawing.
+
+First, the WAN link between the Lab_A router and the Lab_B router shows the mask as a /27.
+
+You should already know that this mask is 255.255.255.224 and then determine that all networks are using this mask. 
+
+The network address is 192.168.1.0. What are our valid subnets and hosts? 256 – 224 = 32, so this makes our subnets 0, 32, 64, 96, 128, and so on. 
+
+So, by looking at the figure, you can see that subnet 32 is being used by the sales department, the WAN link is using subnet 96, and the marketing department is using subnet 64.
+
+Now you have to determine what the valid host ranges are for each subnet. The valid hosts for the Sales LAN are 33 through 62—the broadcast address is 63 because the next subnet is 64, right? 
+
+For the Marketing LAN, the valid hosts are 65 through 94 (broadcast 95), and for the WAN link, 97 through 126 (broadcast 127).
+
+By looking at the figure, you can determine that the default gateway on the Lab_B router is incorrect. That address is the broadcast address of the 64 subnet, so there's no way it could be a valid host.
+
+![image](https://github.com/user-attachments/assets/f528af4b-4111-44d3-9a40-72b73e2ce36a)
+
+A user in the Sales LAN can't get to ServerB. You have the user run through the four basic troubleshooting steps and find that the host can communicate to the local network but not to the remote network. Find and define the IP addressing problem.
+
+If you use the same steps used to solve the last problem, you can see first that the WAN link again provides the subnet mask to use—/29, or 255.255.255.248. You need to determine what the valid subnets, broadcast addresses, and valid host ranges are to solve this problem.
+
+The 248 mask is a block size of 8 (256 – 248 = 8), so the subnets both start and increment in multiples of 8. By looking at the figure, you see that the Sales LAN is in the 24 subnet, the WAN is in the 40 subnet, and the Marketing LAN is in the 80 subnet.
+
+Can you see the problem yet? The valid host range for the Sales LAN is 25–30, and the configuration appears correct. The valid host range for the WAN link is 41–46, and this also appears correct. The valid host range for the 80 subnet is 81–86, with a broadcast address of 87 because the next subnet is 88. ServerB has been configured with the broadcast address of the subnet.
+
+Now that you can figure out misconfigured IP addresses on hosts, what do you do if a host doesn't have an IP address and you need to assign one? What you need to do is look at other hosts on the LAN and figure out the network, mask, and default gateway. Let's take a look at a couple of examples of how to find and apply valid IP addresses to hosts.
+
+You need to assign a server and router IP addresses on a LAN. The subnet assigned on that segment is 192.168.20.24/29, and the router needs to be assigned the first usable address and the server the last valid host ID. What are the IP address, mask, and default gateway assigned to the server?
+
+To answer this, you must know that a /29 is a 255.255.255.248 mask, which provides a block size of 8. The subnet is known as 24, the next subnet in a block of 8 is 32, so the broadcast address of the 24 subnet is 31, which makes the valid host range 25–30:
+
+- Server IP address: 192.168.20.30
+- Server mask: 255.255.255.248
+- Default gateway: 192.168.20.25 (router's IP address)
+
+![image](https://github.com/user-attachments/assets/8e48fe2a-4d23-4a8a-af9d-0afc6a8c4964)
+
+Look at the router's IP address on Ethernet0. What IP address, subnet mask, and valid host range could be assigned to the host?
+
+The IP address of the router's Ethernet0 is 192.168.10.33/27. As you already know, a /27 is a 224 mask with a block size of 32. The router's interface is in the 32 subnet. The next subnet is 64, so that makes the broadcast address of the 32 subnet 63 and the valid host range 33–62:
+
+- Host IP address: 192.168.10.34–62 (any address in the range except for 33, which is assigned to the router)
+- Mask: 255.255.255.224
+- Default gateway: 192.168.10.33
+
+![image](https://github.com/user-attachments/assets/3bfb7db8-4611-482a-ad31-7c9bee495a7f)
+
+The picture shows two routers with Ethernet configurations already assigned.
+
+What are the host addresses and subnet masks of hosts A and B?
+
+RouterA has an IP address of 192.168.10.65/26 and RouterB has an IP address of 192.168.10.33/28. What are the host configurations? RouterA Ethernet0 is in the 192.168.10.64 subnet, and RouterB Ethernet0 is in the 192.168.10.32 network:
+
+- HostA IP address: 192.168.10.66–126
+ -HostA mask: 255.255.255.192
+- HostA default gateway: 192.168.10.65
+- HostB IP address: 192.168.10.34–46
+- HostB mask: 255.255.255.240
+- HostB default gateway: 192.168.10.33
+
+![image](https://github.com/user-attachments/assets/018e36e8-378a-4562-9946-4531ce4cfa54)
+
+The picture shows two routers; you need to configure the S0/0 interface on RouterA. 
+
+The network assigned to the serial link is 172.16.16.0/22. What IP address can be assigned?
+
+First, you must know that a /22 CIDR is 255.255.252.0, which makes a block size of 4 in the third octet. Because 16 is listed, the available range is 16.1 through 19.254; so, for example, the IP address S0/0 could be 172.16.18.255 because that's within the range.
+
+![image](https://github.com/user-attachments/assets/e8f526a8-8d6c-4267-b097-172474ef89a0)
+
+You have one Class C network ID, and you need to provide one usable subnet per city while allowing enough usable host addresses for each city specified in the picture.
+
+What is your mask?
+
+Actually, this is probably the easiest thing you've done all day! I count 5 subnets needed, and the Chicago office needs 15 users (always look for the network that needs the most hosts). What block size is needed for the Chicago office? 32. (Remember, you cannot use a block size of 16 because you always have to subtract 2!) What mask provides you with a block size of 32? 224. Bingo! This provides 8 subnets, each with 30 hosts.
+
+## Introduction to Network Address Translation (NAT)
+
