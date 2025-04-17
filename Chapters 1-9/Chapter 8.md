@@ -525,3 +525,124 @@ Notice in the last example I started counting at zero. This is called **ip subne
 
 ## Troubleshooting IP Addressing
 
+![image](https://github.com/user-attachments/assets/fa36754f-5dc0-4c72-a517-26a728c50f7f)
+
+Let's use this picture as an example of your basic IP trouble—poor Sally can't log into the Windows server.
+
+Let's get started by going over the basic troubleshooting steps.
+
+Pretend you're at Sally's host and she's complaining that she can't communicate to a server that just happens to be on a remote network:
+
+1. Open a command prompt window on Sally's host, and ping 127.0.0.1.
+
+        C:\>ping 127.0.0.1
+        Pinging 127.0.0.1 with 32 bytes of data:
+        Reply from 127.0.0.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 127.0.0.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 127.0.0.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 127.0.0.1: bytes=32 time<1ms
+        TTL=128
+        Ping statistics for 127.0.0.1:
+        Packets: Sent = 4, Received = 4, Lost
+        = 0 (0% loss),
+        Approximate round trip times in milliseconds:
+        Minimum = 0ms, Maximum = 0ms, Average
+        = 0ms
+
+This is the diagnostic, or IPv4 loopback address, and if you get a successful ping, your IP stack is considered to be initialized. If it fails, then you have an IP stack failure and need to reinstall TCP/IP on the host.
+
+If you ping the loopback address and receive an “unable to contact IP driver, error code 2” message, you need to reinstall the TCP/IP protocol suite on the host.
+
+2. Now, from the same command prompt window, ping the IP address of the local host.
+
+        C:\>ping 172.16.10.2
+        Pinging 172.16.10.2 with 32 bytes of data:
+        Reply from 172.16.10.2: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.10.2: bytes=32 time<1ms
+        TTL=128 Reply from 172.16.10.2: bytes=32
+        time<1ms TTL=128
+        Reply from 172.16.10.2: bytes=32 time<1ms
+        TTL=128
+        Ping statistics for 172.16.10.2:
+        Packets: Sent = 4, Received = 4, Lost
+        = 0 (0% loss),
+        Approximate round trip times in milliseconds:
+        Minimum = 0ms, Maximum = 0ms, Average
+        = 0ms
+
+If that's successful, your network interface card (NIC) is functioning. 
+
+If it fails, there is a problem with the NIC. 
+
+Success here doesn't mean that a cable is plugged into the NIC, only that the IP protocol stack on the host can communicate to the NIC (via the LAN driver).
+
+3. From the command prompt window, ping the default gateway (router).
+
+        C:\>ping 172.16.10.1
+        Pinging 172.16.10.1 with 32 bytes of data:
+        Reply from 172.16.10.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.10.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.10.1: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.10.1: bytes=32 time<1ms
+        TTL=128
+        Ping statistics for 172.16.10.1:
+        Packets: Sent = 4, Received = 4, Lost
+        = 0 (0% loss),
+        Approximate round trip times in milliseconds:
+        Minimum = 0ms, Maximum = 0ms, Average
+        = 0ms
+
+If the ping works, it means that the NIC is plugged into the network and can communicate on the local network. If it fails, you have a local physical network problem that could be anywhere from the NIC to the router.
+
+4. If steps 1 through 3 were successful, try to ping the remote server.
+
+        C:\>ping 172.16.20.2
+        Pinging 172.16.20.2 with 32 bytes of data:
+        Reply from 172.16.20.2: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.20.2: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.20.2: bytes=32 time<1ms
+        TTL=128
+        Reply from 172.16.20.2: bytes=32 time<1ms
+        TTL=128
+        Ping statistics for 172.16.20.2:
+        Packets: Sent = 4, Received = 4, Lost
+        = 0 (0% loss),
+        Approximate round trip times in milliseconds:
+        Minimum = 0ms, Maximum = 0ms, Average
+        = 0ms
+
+If that works, then you know that you have IP communication between the local host and the remote server. You also know that the remote physical network is working.
+
+If the user still can't communicate with the server after steps 1 through 4 are successful, you probably have some type of name resolution problem and need to check your Domain Name System (DNS) settings.
+
+But if the ping to the remote server fails, then you know you have some type of remote physical network problem and need to go to the server and work through steps 1 through 3 until you find the snag.
+
+Basic yet handy command-line tools that you can use to help troubleshoot your network from both a PC and a Cisco router (the commands might do the same thing, but they are implemented differently):
+
+**Packet InterNet Groper** (ping) Uses an Internet Control Message Protocol (ICMP) echo request and replies to test if a host IP stack is initialized and alive on the network.
+
+**Traceroute** Displays the list of routers on a path to a network destination by using time to live (TTL) time-outs and ICMP error messages. This command will work on a router, MAC, or Linux box, but not from a Windows command prompt.
+
+**Tracert** Same command as traceroute , but it's a Microsoft Windows command and will not work on other devices, like a Cisco router or macOS or Linux box.
+
+**arp -a** Displays IP–to–MAC-address mappings on a Windows PC.
+
+**ipconfig /all** Used only from a command prompt. Shows you the PC network configuration.
+
+Once you've gone through all these steps and used the appropriate command-line tools, if necessary, what do you do if you find a problem? How do you go about fixing an IP address configuration error?
+
+#
+
+### Determining IP Address Problems
+
+It's common for a host, router, or other network device to be configured with the wrong IP address, subnet mask, or default gateway. Because this happens way too often, I'm going to teach you how to both determine and fix IP address configuration errors.
+
