@@ -801,3 +801,22 @@ After translation, the inside local address is then called the **inside global a
 
 In the example shown, host 10.1.1.1 sends an outbound packet to the border router configured with NAT. The router identifies the IP address as an inside local IP address destined for an outside network, translates the address, and documents the translation in the NAT table.
 
+The packet is sent to the outside interface with the new translated source address. The external host returns the packet to the destination host, and the NAT router translates the inside global IP address back to the inside local IP address using the NAT table. This is as simple as it gets.
+
+![image](https://github.com/user-attachments/assets/672a1568-fe95-4bd0-a6c0-940077ae46d6)
+
+Let's take a look at a more complex configuration using overloading, or what is also referred to as PAT.
+
+With overloading, all inside hosts get translated to one single IP address, which is why it's called overloading. Again, the reason we have not run out of available IP addresses on the Internet is because of overloading port address translation.
+
+In addition to the inside local IP address and outside global IP address, we now have port numbers. These port numbers help the router identify which host should receive the return traffic.
+
+Port numbers are used at the Transport layer to identify the local host in this example.
+
+If we had to use IP addresses to identify the source hosts, that would be called static NAT, and we would run out of addresses.
+
+PAT allows us to use the Transport layer to identify the hosts, which in turn allows us to use (theoretically) up to 65,000 hosts with one real IP address.
+
+We've been discussing translating IP addresses using some type of network address translation. However, using a router or firewall, you can also perform port forwarding, which is translating the port number of a packet to a new destination.
+
+The destination may be a predetermined network port (using any IP protocol, but typically TCP or UDP ports) on a host within a private network behind a NAT router. Based on the received port number, a remote host can communicate to servers behind the NAT gateway to the local network.
