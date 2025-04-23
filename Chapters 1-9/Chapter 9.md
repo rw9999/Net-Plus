@@ -10,4 +10,7 @@ Once all routers know about all networks, a **routed protocol** can be used to s
 
 Routed protocols are assigned to an interface and determine the method of packet delivery. Examples of routed protocols are Internet Protocol (IP) and Internet Protocol version 6 (IPv6).
 
+#
+
 ### Routing Basics
+
