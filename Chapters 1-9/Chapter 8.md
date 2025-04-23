@@ -1,4 +1,4 @@
-# IP Subnetting, Troubleshooting IP, and Introduction to NAT
+![image](https://github.com/user-attachments/assets/54e9a6ac-3229-48a3-971d-b396c1f852a3)# IP Subnetting, Troubleshooting IP, and Introduction to NAT
 
 ## Subnetting Basics
 
@@ -738,4 +738,66 @@ What is your mask?
 Actually, this is probably the easiest thing you've done all day! I count 5 subnets needed, and the Chicago office needs 15 users (always look for the network that needs the most hosts). What block size is needed for the Chicago office? 32. (Remember, you cannot use a block size of 16 because you always have to subtract 2!) What mask provides you with a block size of 32? 224. Bingo! This provides 8 subnets, each with 30 hosts.
 
 ## Introduction to Network Address Translation (NAT)
+
+Similar to Classless Inter-Domain Routing (CIDR), the original intention for NAT was to slow the depletion of available IP address space by allowing many private IP addresses to be represented by some smaller number of public IP addresses.
+
+Since then, it's been discovered that NAT is also a useful tool for network migrations and mergers, server load sharing, and creating “virtual servers.”
+
+At times, NAT really decreases the overwhelming amount of public IP addresses required in your networking environment. And NAT comes in very handy when two companies that have duplicate internal addressing schemes merge.
+
+NAT is also great to have around when an organization changes its ISP and the networking manager doesn't want the hassle of changing the internal address scheme.
+
+Here's a list of situations when it's best to have NAT on your side:
+
+- You need to connect to the Internet and your hosts don't have globally unique IP addresses.
+
+- You change to a new ISP that requires you to renumber your network.
+
+- You need to merge two intranets with duplicate addresses.
+
+![image](https://github.com/user-attachments/assets/de7d1e36-1cb3-40b7-984d-9276582233fc)
+
+You typically use NAT on a border router.
+
+There are truly some serious snags related to NAT use.
+
+For a visual of the pros and cons linked to using NAT:
+
+![image](https://github.com/user-attachments/assets/a32d8b05-b227-4b5e-9c76-2e19b104d838)
+
+#
+
+### Types of Network Address Translation
+
+**Static NAT (SNAT)** This type of NAT is designed to allow one-to-one mapping between local and global addresses. Keep in mind that the static version requires you to have one real Internet IP address for every host on your network.
+
+**Dynamic NAT (DNAT)** This version gives you the ability to map an unregistered IP address to a registered IP address from a pool of registered IP addresses. You don't have to statically configure your router to map an inside-to-an-outside address as you would using static NAT, but you do have to have enough real, bona fide IP addresses for everyone who's going to be sending packets to and receiving them from the Internet.
+
+**Overloading** This is the most popular type of NAT configuration. Understand that overloading really is a form of dynamic NAT that maps multiple unregistered IP addresses to a single registered IP address—many-to-one—by using different ports. Now, why is this so special? Well, because it's also known as port address translation (PAT). And by using PAT (NAT Overload), you get to have thousands of users connect to the Internet using only one real global IP address. NAT Overload is the real reason we haven't run out of valid IP addresses on the Internet.
+
+#
+
+### NAT Names
+
+Addresses used after NAT translations are called **global addresses**.
+
+These are usually the public addresses used on the Internet, but remember, you don't need public addresses if you aren't going on the Internet.
+
+**Local addresses** are the ones we use before network translation.
+
+So, the inside local address is actually the private address of the sending host that's trying to get to the Internet, while the outside local address is the address of the destination host.
+
+The latter is usually a public address (web address, mail server, and so on) and is how the packet begins its journey.
+
+After translation, the inside local address is then called the **inside global address**, and the outside global address then becomes the name of the destination host.
+
+![image](https://github.com/user-attachments/assets/88e42265-6815-4ac9-918f-01cf4a2fb640)
+
+#
+
+### How NAT Works
+
+![image](https://github.com/user-attachments/assets/67502292-5768-4eda-84f1-ca8c6a538d41)
+
+In the example shown, host 10.1.1.1 sends an outbound packet to the border router configured with NAT. The router identifies the IP address as an inside local IP address destined for an outside network, translates the address, and documents the translation in the NAT table.
 
