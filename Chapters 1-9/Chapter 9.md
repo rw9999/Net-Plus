@@ -96,3 +96,170 @@ When the routing tables of all routers in the network are complete (because they
 
 ## The IP Routing Process
 
+The IP routing process is actually pretty simple, and it doesn't change, regardless of the size of your network.
+
+![image](https://github.com/user-attachments/assets/36b8df99-b2d9-4268-9605-43e0a55efcfb)
+
+What happens when Host_A wants to communicate with Host_B on a different network?
+
+Suppose that a user on Host_A pings Host_B's IP address. Routing doesn't get any simpler than this, but it still involves a lot of steps. Let's work through them.
+
+- A packet is created on the host:
+
+1. Internet Control Message Protocol (ICMP) creates an echo request payload (which is just the alphabet in the data field).
+
+2. ICMP hands that payload to IP, which then creates a packet. At a minimum, this packet contains an IP source address, an IP destination address, and a Protocol field with 01h. (Remember that Cisco likes to use 0x in front of hex characters, so this could look like 0x01.) All of that tells the receiving host whom it should hand the payload to when the destination is reached. In this example, it's ICMP.
+The packet is forwarded:
+
+3. After the packet is created, IP determines whether the destination IP address is on the local network or a remote one.
+
+4. Because IP has discovered that this is a remote request, the packet needs to be sent to the default gateway so the packet can be routed to the correct remote network. The Registry in Windows is parsed to find the configured default gateway.
+
+5. The default gateway of host 172.16.10.2 (Host_A) is configured to 172.16.10.1. For this packet to be sent to the default gateway, the hardware address of the router's interface Ethernet 0 (configured with the IP address of 172.16.10.1) must be known. Why? So the packet can be handed down to the Data Link layer, framed, and sent to the router's interface that's connected to the 172.16.10.0 network. Because hosts only communicate via hardware addresses on the local LAN, it's important to recognize that for Host_A to communicate to Host_B, it has to send packets to the Media Access Control (MAC) address of the default gateway on the local network.
+
+MAC addresses are always local on the LAN and never go through and past a router.
+
+6. The Address Resolution Protocol (ARP) cache of the host is checked to see whether the IP address of the default gateway has already been resolved to a hardware address. If it has, the packet is then free to be handed to the Data Link layer for framing. (The hardware-destination address is also handed down with that packet.) To view the ARP cache on your host, use the following command:
+
+        C:\>arp -a
+        Interface: 172.16.10.2 --- 0x3
+        Internet Address Physical
+        Address Type
+        172.16.10.1 00-15-05-06-31-
+        b0 dynamic
+
+If the hardware address isn't already in the ARP cache of the host, an ARP broadcast is sent out onto the local network to search for the hardware address of 172.16.10.1. The router responds to that request and provides the hardware address of Ethernet 0, and the host caches this address.
+
+7. After the packet and destination hardware address have been handed to the Data Link layer, the LAN driver is used to provide media access via the type of LAN being used (in this example, it's Ethernet). A frame is then generated, encapsulating the packet with control information. Within that frame are the hardwaredestination and source addresses plus, in this case, an Ether-Type field that describes the Network layer protocol that handed the packet to the Data Link layer—in this instance, IP. At the end of the frame is something called a Frame Check Sequence (FCS) field that houses the result of the cyclic redundancy check (CRC).
+
+![image](https://github.com/user-attachments/assets/08cfb62e-b4b7-4683-93fd-99f923475329)
+
+It contains Host_A's hardware (MAC) address and the hardware-destination address of the default gateway. It does not include the remote host's MAC address—remember that because it's important!
+
+8. When the frame is completed, it's handed down to the Physical layer to be placed onto the physical medium one bit at a time. In this example, the physical medium is twisted-pair wire. The router receives the packet:
+
+9. Every device within the collision domain receives these bits and builds the frame. They each run a CRC and check the answer in the FCS field. If the answers don't match, the frame is discarded. But if the CRC matches, then the hardware-destination address is checked to see if it matches, too (in this example, it's the router's interface, Ethernet 0). If it's a match, then the Ether-Type field is checked to find the protocol used at the Network layer.
+
+10. The packet is pulled from the frame, and what is left of the frame is discarded. The packet is then handed to the protocol listed in the Ether-Type field—it's given to IP.
+
+The router routes the packet:
+
+11. IP receives the packet and checks the IP destination address. Because the packet's destination address doesn't match any of the addresses configured on the receiving router's interfaces, the router will look up the destination IP network address in its routing table.
+
+12. The routing table must have an entry for the network 172.16.20.0 or the packet will be discarded immediately and an ICMP message will be sent back to the originating device with a Destination Unreachable message.
+
+13. If the router does find an entry for the destination network in its table, the packet is switched to the exit interface—in this example, interface Ethernet 1. The following output displays the Lab_A router's routing table. The C means “directly connected.” No routing protocols are needed in this network because all networks (all two of them) are directly connected:
+
+        Lab_A>sh ip route
+        Codes:C - connected,S - static,I -
+        IGRP,R - RIP,M - mobile,B –
+        BGP, D - EIGRP,EX - EIGRP external,O
+        - OSPF,IA - OSPF inter
+        area, N1 - OSPF NSSA external type
+        1, N2 - OSPF NSSA external
+        type 2, E1 - OSPF external type 1, E2 -
+        OSPF external type 2,
+        E – EGP,i - IS-IS, L1 - IS-IS level-1,
+        L2 - IS-IS level-2, ia
+        - IS-IS intearea * - candidate
+        default, U - per-user static
+        route, o – ODR P - periodic
+        downloaded static route
+        Gateway of last resort is not set
+        172.16.0.0/24 is subnetted, 2
+        subnets
+        C 172.16.10.0 is directly
+        connected, Ethernet0
+        C 172.16.20.0 is directly
+        connected, Ethernet1
+
+14. The router packet-switches the packet to the Ethernet 1 buffer.
+
+15. Now that the packet is in the Ethernet 1 buffer, IP needs to know the hardware address of the destination host and first checks the ARP cache. If the hardware address of Host_B has already been resolved and is in the router's ARP cache, then the packet and the hardware address are handed down to the Data Link layer to be framed. Let's take a look at the ARP cache on the Lab_A router by using the show ip arp command:
+
+        Lab_A#sh ip arp
+        Protocol Address Age(min) Hardware
+        Addr Type Interface
+        Internet 172.16.20.1 -
+        00d0.58ad.05f4 ARPA Ethernet1
+        Internet 172.16.20.2 3
+        0030.9492.a5dd ARPA Ethernet1
+        Internet 172.16.10.1 -
+        0015.0506.31b0 ARPA Ethernet0
+        Internet 172.16.10.2 12
+        0030.9492.a4ac ARPA Ethernet0
+
+The dash (-) means that this is the physical interface on the router. From this output, we can see that the router knows the 172.16.10.2 (Host_A) and 172.16.20.2 (Host_B) hardware addresses. Cisco routers will keep an entry in the ARP table for four hours. But if the hardware address hasn't already been resolved, the router then sends an ARP request out E1 looking for the hardware address of 172.16.20.2. Host_B responds with its hardware address, and the packet and hardware-destination address are both sent to the Data Link layer for framing.
+
+16. The Data Link layer creates a frame with the destination and source hardware address, Ether-Type field, and FCS field at the end. The frame is handed to the Physical layer to be sent out on the physical medium one bit at a time.
+
+Finally, the remote host receives the packet:
+
+17. Host_B receives the frame and immediately runs a CRC. If the result matches what's in the FCS field, the hardware-destination address is then checked. If the host finds a match, the Ether-Type field is then checked to determine the protocol that the packet should be handed to at the Network layer—IP, in this example.
+
+18. At the Network layer, IP receives the packet and checks the IP destination address. Because there's finally a match made, the Protocol field is checked to find out whom the payload should be given to
+
+19. The payload is handed to ICMP, which understands that this is an echo request. ICMP responds to this by immediately discarding the packet and generating a new payload as an echo reply. The destination host becomes a source host:
+
+20. A packet is created, including the source and destination IP addresses, Protocol field, and payload. The destination device is now Host_A.
+
+21. IP checks to see whether the destination IP address is a device on the local LAN or on a remote network. Because the destination device is on a remote network, the packet needs to be sent to the default gateway.
+
+22. The default gateway IP address is found in the Registry of the Windows device, and the ARP cache is checked to see whether the hardware address has already been resolved from an IP address.
+
+23. After the hardware address of the default gateway is found, the packet and destination hardware addresses are handed down to the Data Link layer for framing.
+
+24. The Data Link layer frames the packet of information and includes the following in the header:
+
+1. The destination and source hardware addresses
+2. The Ether-Type field with 0x0800 (IP) in it
+3. The FCS field with the CRC result in tow
+
+25. The frame is now handed down to the Physical layer to be sent out over the network medium one bit at a time. Time for the router to route another packet:
+
+26. The router's Ethernet 1 interface receives the bits and builds a frame. The CRC is run, and the FCS field is checked to make sure the answers match.
+
+27. When the CRC is found to be okay, the hardware-destination address is checked. Because the router's interface is a match, the packet is pulled from the frame, and the Ether-Type field is checked to see which protocol at the Network layer the packet should be delivered to.
+
+28. The protocol is determined to be IP, so it gets the packet. IP runs a CRC check on the IP header first and then checks the destination IP address.
+
+IP does not run a complete CRC the way the Data Link layer does—it only checks the header for errors.
+
+Because the IP destination address doesn't match any of the router's interfaces, the routing table is checked to see whether it has a route to 172.16.10.0. If it doesn't have a route over to the destination network, the packet will be discarded immediately. (This is the source point of confusion for a lot of administrators—when a ping fails, most people think the packet never reached the destination host. But as we see here, that's not always the case. All it takes is just one of the remote routers to be lacking a route back to the originating host's network and—poof!—the packet is dropped on the return trip, not on its way to the host.)
+
+Just a quick note to mention that when (if) the packet is lost on the way back to the originating host, you will typically see a Request Timed Out message because it is an unknown error. If the error occurs because of a known issue, such as a route that is not in the routing table on the way to the destination device, you will see a Destination Unreachable message. This should help you determine if the problem occurred on the way to the destination or on the way back.
+
+29. In this case, the router does know how to get to network 172.16.10.0—the exit interface is Ethernet 0—so the packet is switched to interface Ethernet 0.
+
+30. The router checks the ARP cache to determine whether the hardware address for 172.16.10.2 has already been resolved.
+
+31. Because the hardware address to 172.16.10.2 is already cached from the originating trip to Host_B, the hardware address and packet are handed to the Data Link layer.
+
+32. The Data Link layer builds a frame with the destination and source hardware addresses and then puts IP in the Ether-Type field. A CRC is run on the frame, and the result is placed in the FCS field.
+
+33. The frame is then handed to the Physical layer to be sent out onto the local network one bit at a time. The original source host, now the destination host, receives the reply packet:
+
+34. The destination host receives the frame, runs a CRC, checks the hardware destination address, and looks in the Ether-Type field to find out whom to hand the packet to.
+
+35. IP is the designated receiver, and after the packet is handed to IP at the Network layer, IP checks the Protocol field for further direction. IP finds instructions to give the payload to ICMP, and ICMP determines the packet to be an ICMP echo reply.
+
+36. ICMP acknowledges that it has received the reply by sending an exclamation point (!) to the user interface. ICMP then attempts to send four more echo requests to the destination host.
+
+The key point to understand here is that if you had a much larger network, the process would be the same. In a really big internetwork, the packet just goes through more hops before it finds the destination host. 
+
+It's super important to remember that when Host_A sends a packet to Host_B, the destination hardware address used is the default gateway's Ethernet interface. Why? Because frames can't be placed on remote networks—only local networks. So, packets destined for remote networks must go through the default gateway.
+
+Let's take a look at Host_A's ARP cache now by using the arp -a command from the command prompt:
+
+        C:\>arp -a
+        Interface: 172.16.10.2 --- 0x3
+        Internet Address   Physical Address
+        Type
+        172.16.10.1        00-15-05-06-31-b0
+        dynamic
+        172.16.20.1        00-15-05-06-31-b0
+        dynamic
+
+Did you notice that the hardware (MAC) address that Host_A uses to get to Host_B is the Lab_A E0 interface?
+
+Hardware addresses are always local, and they never pass a router's interface. Understanding this process is as important to internetworking as breathing air is to you, so carve this into your memory!
