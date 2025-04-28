@@ -263,3 +263,8 @@ Let's take a look at Host_A's ARP cache now by using the arp -a command from the
 Did you notice that the hardware (MAC) address that Host_A uses to get to Host_B is the Lab_A E0 interface?
 
 Hardware addresses are always local, and they never pass a router's interface. Understanding this process is as important to internetworking as breathing air is to you, so carve this into your memory!
+
+#
+
+### Testing Your IP Routing Understanding
+
