@@ -268,3 +268,33 @@ Hardware addresses are always local, and they never pass a router's interface. U
 
 ### Testing Your IP Routing Understanding
 
+![image](https://github.com/user-attachments/assets/e116b81b-541c-4a10-8a1e-0ac75b6a992e)
+
+The critical information you need to glean from this figure is exactly how IP routing will occur in this example. Okay, we'll cheat a bit. I'll give you the answer, but then you should go back over the figure and see if you can answer example 2 without looking at my answers:
+
+1. The destination address of a frame, from HostA, will be the MAC address of the Fa0/0 interface of the RouterA router.
+
+2. The destination address of a packet will be the IP address of the network interface card (NIC) of the HTTP server.
+
+3. The destination port number in the segment header will have a value of 80.
+
+That example was a pretty simple one, and it was also very to the point. One thing to remember is that if multiple hosts are communicating to the server using HTTP, they must all use a different source port number. That is how the server keeps the data separated at the Transport layer.
+
+![image](https://github.com/user-attachments/assets/a8ab0d25-f989-424c-9ea2-3086b4ed352e)
+
+What you want to understand about the IP routing process here is what happens when HostA sends data to the HTTPS server:
+
+1. The destination address of a frame from HostA will be the MAC address of the Fa0/0 interface of the RouterA router.
+
+2. The destination address of a packet will be the IP address of the NIC of the HTTPS server.
+
+3. The destination port number in the segment header will have a value of 443.
+
+Notice that neither switch was used as either a default gateway or another destination. That's because switches have nothing to do with routing. I wonder how many of you chose the switch as the default gateway (destination) MAC address for HostA.
+
+It's very important to remember that the destination MAC address will always be the router's interface—if your packets are destined for outside the LAN, as they were in these last two examples.
+
+#
+
+### Static and Dynamic Routing
+
