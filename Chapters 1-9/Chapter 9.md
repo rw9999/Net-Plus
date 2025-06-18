@@ -298,3 +298,58 @@ It's very important to remember that the destination MAC address will always be 
 
 ### Static and Dynamic Routing
 
+How does a router send packets to remote networks when the only way it can send them is by looking at the routing table to find out how to get to the remote networks? 
+
+And what happens when a router receives a packet for a network that isn't listed in the routing table? 
+
+It doesn't send a broadcast looking for the remote network—the router just discards the packet.
+
+There are several ways to configure the routing tables to include all the networks so that packets will be forwarded.
+
+Understand that what's best for one network isn't necessarily what's best for another. Knowing about and being able to recognize the different types of routing will really help you come up with the best solution for your specific environment and business requirements.
+
+Routing convergence is the time required by the routing protocols to update the routing tables (forwarding tables) on all routers in the network.
+
+![image](https://github.com/user-attachments/assets/649c3a24-6d95-442e-a69e-d8ebad9547a4)
+
+You can see that we can configure a router with either static or dynamic routing. 
+
+If we choose static routing, then we have to go to each router and type in each network and the path that IP will use to send packets. 
+
+However, static routing does not scale well in large networks, but dynamic routing does because network routes are automatically added to the routing table via the routing protocol.
+
+Dynamic routing protocols break up into many different categories or types of protocols.
+
+![image](https://github.com/user-attachments/assets/7d6b83f0-6e4c-45d9-b464-3053ab4a8d51)
+
+An **autonomous system** is a collection of networks or subnets that are in the same administrative domain.
+
+This is another way of saying an administrative domain is within your company's network, and you control or administer all the subnets that are within it.
+
+You control and set the policy for what happens in the network or autonomous system.
+
+You can now see that an IGP operates and routes within an AS and an EGP works outside or between more than one AS.
+
+The most popular protocol for an EGP is Border Gateway Protocol (BGP), which is typically used by ISPs or really large corporations. As an administrator of a small to medium network, you'll probably never use BGP.
+
+Let's talk about all the great things that dynamic routing protocols do for us.
+
+We won't have to go to every single router and define for it, with a static route, what and where every destination network is. Thankfully, we have routing protocols that do much of the work for us.
+
+We still have to know what the routing protocols are going to do and how they will do it, but the protocols will take care of most of the updating and sending information to each other.
+
+That is the end of the EGP branch of the tree, but the IGP branch continues to split out as we go down further.
+
+![image](https://github.com/user-attachments/assets/64bb8f1c-f791-42ad-825e-bceab459350f)
+
+With the IGP split, you can see that there are two primary categories: distance-vector (DV) and link-state (LS) routing protocols.
+
+In the distance-vector category, for example, we have RIP and Interior Gateway Routing Protocol (IGRP).
+
+Under the link-state category are the nonproprietary OSPF and Intermediate System-to-Intermediate System (IS-IS) that were designed to work in larger internetworks.
+
+![image](https://github.com/user-attachments/assets/6a88b53c-a9d0-40c4-ab29-7139c2c71790)
+
+You can see from the diagram that there is a third category: the hybrid protocol category.
+
+The only protocols under this category are EIGRP and BGP. EIGRP is Cisco proprietary (or used to be, but people mostly just run this with Cisco gear) and uses the features of both DV and LS.
