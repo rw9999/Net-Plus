@@ -55,3 +55,16 @@ This means that if you have a static route, a RIP-advertised route, and an EIGRP
 #
 
 ### Classes of Routing Protocols
+
+The three classes of routing protocols:
+
+- Distance Vector The distance-vector protocols find the best path to a remote network by judging—you guessed it—distance. Each time a packet goes through a router, it equals something we call a hop, and the route with the fewest hops to the destination network will be chosen as the best path to it. The vector indicates the direction to the remote network. RIP, RIPv2, and Interior Gateway Routing Protocol (IGRP) are distance-vector routing protocols. These protocols send the entire routing table to all directly connected neighbors.
+  
+- Link State Using link-state protocols, also called shortest path first protocols, the routers each create three separate tables. One of these tables keeps track of directly attached neighbors, one determines the topology of the entire internetwork, and one is used as the actual routing table. Link-state routers know more about the internetwork than any distance-vector routing protocol. OSPF and IS-IS are IP routing protocols that are completely link state. Link-state protocols send updates containing the state of their own links to all other routers on the network.
+  
+- Hybrid A hybrid protocol uses aspects of both distance vector and link state, and formerly, EIGRP was the only one you needed to understand to meet the Network+ objectives. But now, BGP is also listed as a hybrid routing protocol because of its capability to work as an EGP and be used in supersized internetworks internally. When deployed in this way, it's called internal BGP, or iBGP, but understand that it's still most commonly utilized as an EGP.
+
+There's no one set way of configuring routing protocols for use in every situation because this really needs to be done on a case-by-case basis.
+
+## Distance-Vector Routing Protocols
+
