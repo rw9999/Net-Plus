@@ -167,5 +167,8 @@ In a typical classful network design example (RIP or RIPv2 routing protocol), yo
 
 Our subnets would be 0, 16, 32, 48, 64, 80, and so on. This allows us to assign 16 subnets to our internetwork. This allows us to assign 16 subnets to our internetwork.
 
+But how many hosts would be available on each network? Well, as you probably know by now, each subnet provides only 14 hosts. 
+
+This means that with a /28 mask, each LAN can support 14 valid hosts—one LAN requires 25 addresses, so a /28 mask doesn't provide enough addresses for the hosts in that LAN! Moreover, the point-to-point WAN link also would consume 14 addresses when only 2 are required.
 
 
